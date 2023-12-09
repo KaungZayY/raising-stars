@@ -38,6 +38,7 @@ class RegisteredUserController extends Controller
             'address' => ['required', 'string','min:3', 'max:255'],
 
         ]);
+        // dd($request);
 
         $user = User::create([
             'name' => $request->name,
@@ -45,12 +46,22 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($request->password),
             'phone_number' => $request->phone_number,
             'address' => $request->address,
+            'role_id' => $request->role_id ?? 1,
         ]);
 
         event(new Registered($user));
+        $isAlreadyLoggedIn = Auth::check();
 
-        Auth::login($user);
+        if(!$isAlreadyLoggedIn)         //if guest user
+        {
+            Auth::login($user);
 
-        return redirect(RouteServiceProvider::HOME);
+            return redirect(RouteServiceProvider::HOME);
+        }
+        else                            //if already logged in user
+        {
+            return redirect()->route('dashboard');
+        }
+        
     }
 }
