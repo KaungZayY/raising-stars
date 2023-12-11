@@ -18,5 +18,17 @@ class CategorySeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now(),
         ]);
+
+        DB::table('categories')->insert([
+            'category' => 'activity',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        DB::table('categories')->insert([
+            'category' => 'grades',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
     }
 }
