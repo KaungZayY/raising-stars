@@ -15,6 +15,11 @@ class Post extends Model
 
     public function categories()
     {
-        return $this->belongsToMany(Category::class, 'post_category');
+        return $this->belongsToMany(Category::class, 'post_category');//many to many with category class, dummy table is post_category
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }

@@ -10,6 +10,14 @@ use Illuminate\Support\Facades\DB;
 
 class PostController extends Controller
 {
+
+    public function index()
+    {
+        $posts = Post::with('categories')->latest()->paginate(4);
+
+        return view('home',compact('posts'));
+    }
+
     public function create()
     {
         $categories = Category::all();
