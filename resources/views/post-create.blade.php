@@ -42,11 +42,15 @@
                     </div>
 
                     <!-- Submit Button -->
-                    <div class="flex justify-end">
+                    <div class="flex flex-row justify-between">
+                        <x-button-cancel>
+                            {{__('Cancel')}}
+                        </x-button-cancel>
                         <x-button class="ms-4">
                             {{ __('Post') }}
                         </x-button>                                            
                     </div>
+                    
                 </form>
             </div>
         </div>
