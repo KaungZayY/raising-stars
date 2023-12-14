@@ -59,7 +59,7 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::middleware(['auth', 'admin'])->group(function(){
-    Route::get('register', [RegisteredUserController::class, 'create'])
-                ->name('register');
-    Route::post('register', [RegisteredUserController::class, 'store']);
+    Route::get('add-user', [RegisteredUserController::class, 'create'])
+                ->name('add.user');
+    Route::post('add-user', [RegisteredUserController::class, 'store']);
 });
