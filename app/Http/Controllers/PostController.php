@@ -56,4 +56,54 @@ class PostController extends Controller
             return redirect()->back()->with('error','Post Upload Failed');
         }
     }
+
+    public function edit(Post $post)
+    {
+        $categories = Category::all();
+        return view('post-edit',['post'=>$post,'categories'=>$categories]);
+    }
+
+    public function update(Request $request, Post $post)
+    {
+        // dd($request);
+        $request->validate([
+            'title' => 'required',
+            'content' => 'required',
+            'categories' => 'nullable|array',
+            'categories.*' => 'exists:categories,id',
+        ]);
+        DB::beginTransaction();
+        try
+        {
+            $post->title = $request->title;
+            $post->content = $request->content;
+            $posted = $post->save();
+            if(!$posted)
+            {
+                throw new \Exception('Error Updating Post.');
+            }
+            $post->categories()->sync($request->input('categories', []));
+            DB::commit();
+            return redirect()->route('home')->with('success', 'Your Post has Updated');
+        }
+        catch(\Exception $e)
+        {
+            DB::rollBack();
+            return redirect()->back()->with('error','Post Update Failed');
+        }
+    }
+
+    public function destroy(Post $post)
+    {
+        $deleted = $post->delete();
+        if(!$deleted)
+        {
+            return redirect()->route('home')->with('error','Cannot Delete this Post');
+        }
+        else
+        {
+            DB::rollBack();
+            return redirect()->route('home')->with('success', 'You had Deleted the Post'); 
+        }
+    }
 }
