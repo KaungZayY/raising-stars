@@ -35,14 +35,25 @@ class PostController extends Controller
         ]);
         // dd($request);
         DB::beginTransaction();
-        $post = new Post();
-        $post->title = $request->title;
-        $post->content = $request->content;
-        $post->user_id = Auth::user()->id;
-        $post->save();
-        $post->categories()->sync($request->input('categories', []));
-        DB::commit();
-        
-        return redirect()->back();
+        try
+        {
+            $post = new Post();
+            $post->title = $request->title;
+            $post->content = $request->content;
+            $post->user_id = Auth::user()->id;
+            $posted = $post->save();
+            if(!$posted)
+            {
+                throw new \Exception('Error Saving Post.');
+            }
+            $post->categories()->sync($request->input('categories', []));
+            DB::commit();
+            return redirect()->route('home')->with('success', 'Your Post has Uploaded');
+        }
+        catch(\Exception $e)
+        {
+            DB::rollBack();
+            return redirect()->back()->with('error','Post Upload Failed');
+        }
     }
 }

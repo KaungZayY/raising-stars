@@ -11,9 +11,11 @@
             {{ __('Home') }}
         </h2>
     </x-slot>
-
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="flex flex-row justify-end">
+                <button class="bg-red-500 text-white px-2 py-1 mb-6 rounded-md">Create Post</button>
+            </div>
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg p-6">
                 <div id="posts-container" class="text-white scrolling-pagination">
                     @foreach($posts as $post)
