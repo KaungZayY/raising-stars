@@ -20,10 +20,10 @@
                 <div id="posts-container" class="text-white scrolling-pagination">
                     @if ($posts->count())
                         @foreach($posts as $post)
-                            <div class="post flex flex-row justify-between border-b border-dotted border-gray-300 p-4 rounded-md">
+                            <div class="post flex flex-row justify-between border border-dotted border-gray-300 p-4 rounded-md">
                                 <div class="flex flex-col">
+                                    <h2 class="text-xl text-green-400 font-semibold">{{ $post->user->name }}</h2>
                                     <br>
-                                    <h2 class="text-xl font-semibold">{{ $post->user->name }}</h2>
                                     <h3 class="text-lg font-bold mb-2">{{ $post->title }}</h3>
                                     <p class="text-gray-300 mb-4">{{ $post->content }}</p>
                                     <!-- Post Category Tags -->
