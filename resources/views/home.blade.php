@@ -41,22 +41,26 @@
                                 <div class="flex flex-col">
                                     <p class="text-sm text-gray-500" style="margin-left: auto">{{ $post->created_at->diffForHumans() }}</p>
                                     <br>
-                                    <button onclick="toggleDropdownMenu(this)">
-                                        <svg xmlns="http://www.w3.org/2000/svg" height="16" width="4" viewBox="0 0 128 512" style="margin-left: auto">
-                                            <path d="M64 360a56 56 0 1 0 0 112 56 56 0 1 0 0-112zm0-160a56 56 0 1 0 0 112 56 56 0 1 0 0-112zM120 96A56 56 0 1 0 8 96a56 56 0 1 0 112 0z"/>
-                                        </svg>
-                                    </button>
-                                    <div class="hidden flex-row-reverse">
-                                        <br>
-                                        <form action="{{route('post.edit',$post->id)}}" method="GET">
-                                            <button class="bg-green-500 text-white px-2 py-1 mb-2 rounded-md w-full">Edit</button>
-                                        </form>
-                                        <form action="{{route('post.delete',$post->id)}}" method="POST">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button class="bg-red-500 text-white px-2 py-1 mb-2 rounded-md w-full">Delete</button>
-                                        </form>
-                                    </div>
+                                    @can('isOwnerOrAdmin',$post)
+                                        <button onclick="toggleDropdownMenu(this)">
+                                            <svg xmlns="http://www.w3.org/2000/svg" height="16" width="4" viewBox="0 0 128 512" style="margin-left: auto">
+                                                <path d="M64 360a56 56 0 1 0 0 112 56 56 0 1 0 0-112zm0-160a56 56 0 1 0 0 112 56 56 0 1 0 0-112zM120 96A56 56 0 1 0 8 96a56 56 0 1 0 112 0z"/>
+                                            </svg>
+                                        </button>
+                                        <div class="hidden flex-row-reverse">
+                                            <br>
+                                            @can('isOwner', $post)
+                                                <form action="{{route('post.edit',$post->id)}}" method="GET">
+                                                    <button class="bg-green-500 text-white px-2 py-1 mb-2 rounded-md w-full">Edit</button>
+                                                </form>
+                                            @endcan
+                                            <form action="{{route('post.delete',$post->id)}}" method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button class="bg-red-500 text-white px-2 py-1 mb-2 rounded-md w-full">Delete</button>
+                                            </form>
+                                        </div>
+                                    @endcan
                                 </div>
                             </div>
                         @endforeach

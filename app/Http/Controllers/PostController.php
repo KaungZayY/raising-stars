@@ -59,12 +59,14 @@ class PostController extends Controller
 
     public function edit(Post $post)
     {
+        $this->authorize('isOwner',$post);
         $categories = Category::all();
         return view('post-edit',['post'=>$post,'categories'=>$categories]);
     }
 
     public function update(Request $request, Post $post)
     {
+        $this->authorize('isOwner',$post);
         // dd($request);
         $request->validate([
             'title' => 'required',
@@ -95,6 +97,7 @@ class PostController extends Controller
 
     public function destroy(Post $post)
     {
+        $this->authorize('isOwnerOrAdmin',$post);
         $deleted = $post->delete();
         if(!$deleted)
         {
