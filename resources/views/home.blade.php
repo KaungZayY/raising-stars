@@ -20,8 +20,8 @@
                 <div id="posts-container" class="text-white scrolling-pagination">
                     @if ($posts->count())
                         @foreach($posts as $post)
-                        <div class="bg-grey-200 dark:bg-gray-800 shadow-sm sm:rounded-lg">
-                            <div class="post flex flex-row justify-between border border-dotted border-gray-300 p-4 rounded-md">
+                        <div class="post bg-grey-200 dark:bg-gray-800 shadow-sm sm:rounded-lg">
+                            <div class="flex flex-row justify-between border border-dotted border-gray-300 p-4 rounded-md">
                                 <div class="flex flex-col">
                                     <h2 class="text-xl text-green-400 font-semibold">{{ $post->user->name }}</h2>
                                     <br>
@@ -129,6 +129,7 @@
     //like post
     function postLiked(post_id,user_id)
     {
+        const flashMessageContainer = $('#flash-message-container');
         $.ajax({
             url: "{{route('post.like')}}",
             method: 'POST',
@@ -137,15 +138,28 @@
                 'post_id': post_id,
                 'user_id': user_id
             },
+            beforeSend: function() {
+                // Show the flash message container before the request is sent
+                flashMessageContainer.empty();
+                flashMessageContainer.show();
+            },
             success: function() {
                 // Handle the success response, e.g., update the UI
                 $('#flash-message-container').html('<div style="background-color: #48bb78; color: #fff; padding: 0.5rem 1rem;">Post Liked</div>');
                 // console.log('success');
+                setTimeout(function() 
+                {
+                    flashMessageContainer.hide();
+                }, 2000);
             },
             error: function() {
                 // Handle the error response
                 $('#flash-message-container').html('<div style="background-color: #e40f0f; color: #fff; padding: 0.5rem 1rem;">Cannot Do this Action</div>');
                 // console.log("custom error");
+                setTimeout(function() 
+                {
+                    flashMessageContainer.hide();
+                }, 2000);
             }
 
         });
