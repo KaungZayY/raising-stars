@@ -31,4 +31,22 @@ class LikeController extends Controller
         }
         
     }
+
+    //Unlike Post Machenic
+    public function postUnLiked(Request $request)
+    {
+        // dd($request);
+        try 
+        {
+            Like::where('user_id', $request->user_id)
+                ->where('post_id', $request->post_id)
+                ->delete();
+    
+            return response()->json(['message' => 'Remove success']);
+        } 
+        catch (\Exception $e) 
+        {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+    }
 }
