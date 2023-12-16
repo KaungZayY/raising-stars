@@ -38,14 +38,24 @@
                     {{ session('error') }}
                 </div>
             @endif
+            <div id="flash-message-container"></div>
             <script>
                 document.addEventListener("DOMContentLoaded", function() {
                     const flashMessage = document.getElementById('flash-message');
+                    const flashMessageContainer = document.getElementById('flash-message-container');
                     if (flashMessage) {
                         setTimeout(function() {
                             flashMessage.style.opacity = '0';
                             setTimeout(function() {
                                 flashMessage.remove();
+                            }, 1000);
+                        }, 2000);
+                    }
+                    if (flashMessageContainer) {
+                        setTimeout(function() {
+                            flashMessageContainer.style.opacity = '0';
+                            setTimeout(function() {
+                                flashMessageContainer.remove();
                             }, 1000);
                         }, 2000);
                     }

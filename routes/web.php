@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\LikeController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -35,6 +36,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/post-edit{post}', [PostController::class, 'edit'])->name('post.edit');
     Route::post('/post-edit{post}', [PostController::class, 'update'])->name('post.update');
     Route::delete('/post-delete{post}', [PostController::class, 'destroy'])->name('post.delete');
+
+    //like
+    Route::post('/like',[LikeController::class,'postLiked'])->name('post.like');
 });
 
 require __DIR__.'/auth.php';
