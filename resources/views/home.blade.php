@@ -63,7 +63,7 @@
                                     @endcan
                                 </div>
                             </div>
-                            <div class="flex flex-row mt-2 mb-2 ml-2 justify-between">
+                            <div class="flex flex-row mt-2 ml-2 justify-between">
                                 <div class="basis-1/2 mb-4 flex items-center justify-center">
                                     <button id="like-button-{{ $post->id }}" onclick="postLiked({{ $post->id }}, {{ Auth::user()->id }})" @if ($post->liked(auth()->user())) style="display:none" @endif>
                                         <svg xmlns="http://www.w3.org/2000/svg" height="30" width="30" viewBox="0 0 512 512">
@@ -77,12 +77,20 @@
                                     </button>
                                 </div>
                                 <div class="basis-1/2 mb-4 flex items-center justify-center">
-                                    <button>
+                                    <button onclick="">
                                         <svg xmlns="http://www.w3.org/2000/svg" height="30" width="30" viewBox="0 0 512 512">
                                             <path fill="#ffffff" d="M512 240c0 114.9-114.6 208-256 208c-37.1 0-72.3-6.4-104.1-17.9c-11.9 8.7-31.3 20.6-54.3 30.6C73.6 471.1 44.7 480 16 480c-6.5 0-12.3-3.9-14.8-9.9c-2.5-6-1.1-12.8 3.4-17.4l0 0 0 0 0 0 0 0 .3-.3c.3-.3 .7-.7 1.3-1.4c1.1-1.2 2.8-3.1 4.9-5.7c4.1-5 9.6-12.4 15.2-21.6c10-16.6 19.5-38.4 21.4-62.9C17.7 326.8 0 285.1 0 240C0 125.1 114.6 32 256 32s256 93.1 256 208z"/>
                                         </svg>
                                     </button>
                                 </div>
+                            </div>
+                            <div class="flex-row flex">
+                                <textarea name="comment" id="comment" rows="4" class="w-full ml-8 mb-4 px-4 py-2 border rounded-md focus:outline-none focus:border-blue-500 text-black"></textarea>
+                                <button class=" mb-4 mr-2 ml-1 rounded-md">
+                                    <svg xmlns="http://www.w3.org/2000/svg" height="30" width="30" viewBox="0 0 512 512">
+                                        <path fill="#22C55E" d="M498.1 5.6c10.1 7 15.4 19.1 13.5 31.2l-64 416c-1.5 9.7-7.4 18.2-16 23s-18.9 5.4-28 1.6L284 427.7l-68.5 74.1c-8.9 9.7-22.9 12.9-35.2 8.1S160 493.2 160 480V396.4c0-4 1.5-7.8 4.2-10.7L331.8 202.8c5.8-6.3 5.6-16-.4-22s-15.7-6.4-22-.7L106 360.8 17.7 316.6C7.1 311.3 .3 300.7 0 288.9s5.9-22.8 16.1-28.7l448-256c10.7-6.1 23.9-5.5 34 1.4z"/>
+                                    </svg>
+                                </button>
                             </div>
                         </div>
                         @endforeach
