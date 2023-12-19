@@ -98,6 +98,7 @@
                     </div>
                     <div class="flex flex-col mr-2">
                         <p class="text-sm text-gray-500" style="margin-left: auto">{{ $comment->created_at->diffForHumans() }}</p>
+                        <br>
                         @can('isCommentOwner',$comment)
                             <button onclick="toggleDropdownMenu(this)">
                                 <svg xmlns="http://www.w3.org/2000/svg" height="16" width="4" viewBox="0 0 128 512" style="margin-left: auto">
