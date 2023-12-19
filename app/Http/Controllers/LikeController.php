@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Like;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class LikeController extends Controller
@@ -14,7 +15,7 @@ class LikeController extends Controller
             DB::beginTransaction();
             $like = new Like();
             $like->post_id = $request->post_id;
-            $like->user_id = $request->user_id;
+            $like->user_id = Auth::user()->id;
             $liked = $like->save();
 
             if(!$liked){
@@ -38,7 +39,7 @@ class LikeController extends Controller
         // dd($request);
         try 
         {
-            Like::where('user_id', $request->user_id)
+            Like::where('user_id', Auth::user()->id)
                 ->where('post_id', $request->post_id)
                 ->delete();
     

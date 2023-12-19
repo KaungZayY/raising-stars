@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
@@ -40,6 +41,9 @@ Route::middleware('auth')->group(function () {
     //like
     Route::post('/like',[LikeController::class,'postLiked'])->name('post.like');
     Route::delete('/like',[LikeController::class,'postUnLiked'])->name('post.unlike');
+
+    //Comment
+    Route::post('/comment',[CommentController::class,'postCommented'])->name('post.comment');
 });
 
 require __DIR__.'/auth.php';
