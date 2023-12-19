@@ -35,4 +35,19 @@ class CommentController extends Controller
             return response()->json(['error' => $e->getMessage()], 500);
         }
     }
+
+    public function destroy(Comment $comment)
+    {
+        $this->authorize('isCommentOwner',$comment);
+        $deleted = $comment->delete();
+        if(!$deleted)
+        {
+            return redirect()->back()->with('error','Cannot Delete this Comment');
+        }
+        else
+        {
+            DB::rollBack();
+            return redirect()->back()->with('success', 'Your Comment has Removed'); 
+        }
+    }
 }

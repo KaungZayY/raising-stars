@@ -37,6 +37,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/post-edit{post}', [PostController::class, 'edit'])->name('post.edit');
     Route::post('/post-edit{post}', [PostController::class, 'update'])->name('post.update');
     Route::delete('/post-delete{post}', [PostController::class, 'destroy'])->name('post.delete');
+    Route::get('/post-detail{post}', [PostController::class, 'detail'])->name('post.detail');
 
     //like
     Route::post('/like',[LikeController::class,'postLiked'])->name('post.like');
@@ -44,6 +45,7 @@ Route::middleware('auth')->group(function () {
 
     //Comment
     Route::post('/comment',[CommentController::class,'postCommented'])->name('post.comment');
+    Route::delete('/comment-delete{comment}', [CommentController::class, 'destroy'])->name('comment.delete');
 });
 
 require __DIR__.'/auth.php';

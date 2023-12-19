@@ -109,4 +109,10 @@ class PostController extends Controller
             return redirect()->route('home')->with('success', 'You had Deleted the Post'); 
         }
     }
+
+    public function detail(Post $post)
+    {
+        $categories = Category::all();
+        return view('post-detail',['post'=>$post,'categories'=>$categories]);
+    }
 }

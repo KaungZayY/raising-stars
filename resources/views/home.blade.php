@@ -22,7 +22,7 @@
                         @foreach($posts as $post)
                         <div class="post bg-grey-200 dark:bg-gray-800 shadow-sm sm:rounded-lg">
                             <div class="flex flex-row justify-between border border-dotted border-gray-300 p-4 rounded-md">
-                                <div class="flex flex-col">
+                                <div class="flex flex-col flex-grow" onclick="postDetail('{{ route('post.detail', $post) }}')">
                                     <h2 class="text-xl text-green-400 font-semibold">{{ $post->user->name }}</h2>
                                     <br>
                                     <h3 class="text-lg font-bold mb-2">{{ $post->title }}</h3>
@@ -149,6 +149,11 @@
         });
     });
 
+    function postDetail(route_url)
+    {
+        window.location.href = route_url;
+    }
+
     //like post
     function postLiked(post_id)
     {
@@ -230,6 +235,7 @@
     function postCommented(button, post_id)
     {        
         const comment = button.previousElementSibling.value;
+        const commentBoxSection = button.parentNode;
 
         const flashMessageContainer = $('#flash-message-container');
         flashMessageContainer.empty();
@@ -261,6 +267,10 @@
             },
             success: function() {
                 button.previousElementSibling.value = '';
+                //Hide the comment box again
+                setTimeout(() => {
+                    commentBoxSection.classList.add('hidden');
+                }, 500);
                 // Handle the success response, e.g., update the UI
                 $('#flash-message-container').html('<div style="background-color: #48bb78; color: #fff; padding: 0.5rem 1rem;">Comment Posted</div>');
                 setTimeout(function() 
