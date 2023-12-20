@@ -14,6 +14,11 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="flex flex-row justify-start">
+                <a href="{{ route('home') }}" class="bg-red-500 text-white px-2 py-1 mb-6 rounded-md">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="30" width="30" viewBox="0 0 512 512"><path d="M512 256A256 256 0 1 0 0 256a256 256 0 1 0 512 0zM231 127c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-71 71L376 232c13.3 0 24 10.7 24 24s-10.7 24-24 24l-182.1 0 71 71c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0L119 273c-9.4-9.4-9.4-24.6 0-33.9L231 127z"/></svg>
+                </a>
+            </div>
             <div class="post bg-grey-200 dark:bg-gray-800 shadow-sm sm:rounded-lg">
                 <div class="flex flex-row justify-between border border-dotted border-gray-300 p-4 rounded-md">
                     <div class="flex flex-col flex-grow" onclick="postDetail('{{ route('post.detail', $post) }}')">
