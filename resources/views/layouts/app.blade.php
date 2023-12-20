@@ -12,6 +12,7 @@
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
         <!-- Scripts -->
+        @stack('scripts')<!-- fetch cdn scripts if exists in child layout -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="font-sans antialiased">
@@ -27,6 +28,30 @@
                 </header>
             @endif
 
+            @if(session('success'))
+                <div id="flash-message" style="background-color: #48bb78; color: #fff; padding: 0.5rem 1rem; ">
+                    {{ session('success') }}
+                </div>
+            @endif
+            @if(session('error'))
+                <div id="flash-message" style="background-color: #e40f0f; color: #fff; padding: 0.5rem 1rem; ">
+                    {{ session('error') }}
+                </div>
+            @endif
+            <div id="flash-message-container" class="fixed bottom-0 right-0"></div>
+            <script>
+                document.addEventListener("DOMContentLoaded", function() {
+                    const flashMessage = document.getElementById('flash-message');
+                    if (flashMessage) {
+                        setTimeout(function() {
+                            flashMessage.style.opacity = '0';
+                            setTimeout(function() {
+                                flashMessage.remove();
+                            }, 1000);
+                        }, 2000);
+                    }
+                });
+            </script>
             <!-- Page Content -->
             <main>
                 {{ $slot }}

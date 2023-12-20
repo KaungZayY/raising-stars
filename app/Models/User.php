@@ -23,6 +23,7 @@ class User extends Authenticatable
         'password',
         'address',
         'phone_number',
+        'role_id',
     ];
 
     /**
@@ -44,4 +45,14 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
+    }
+
+    public function likes()
+    {
+        return $this->hasMany(Like::class);
+    }
 }
