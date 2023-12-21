@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\DiscussionReportController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
@@ -56,6 +58,19 @@ Route::middleware('admin')->group(function(){
     Route::get('/subject-edit{subject}', [SubjectController::class, 'edit'])->name('subject.edit');
     Route::post('/subject-edit{subject}', [SubjectController::class, 'update'])->name('subject.update');
     Route::delete('/subject-delete{subject}', [SubjectController::class, 'destroy'])->name('subject.delete');
+
+    //Report
+    Route::get('/discussion-report',[DiscussionReportController::class,'index'])->name('discussion.report');
+
+
+    //Category
+    Route::get('/category',[CategoryController::class,'index'])->name('category');
+    Route::get('/category-create',[CategoryController::class,'create'])->name('category.create');
+    Route::post('/category-save',[CategoryController::class,'store'])->name('category.store');
+    Route::get('/category-edit{category}', [CategoryController::class, 'edit'])->name('category.edit');
+    Route::post('/category-edit{category}', [CategoryController::class, 'update'])->name('category.update');
+    Route::delete('/category-delete{category}', [CategoryController::class, 'destroy'])->name('category.delete');
+
     
 });
 

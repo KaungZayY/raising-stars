@@ -22,6 +22,8 @@
                         <x-slot name="children">
                             <a href="#"> Announcements </a>
                             <span class="separator"></span>
+                            <a href="{{route('discussion.report')}}"> Discussion </a>
+                            <span class="separator"></span>
                             <a href="#"> Courses </a>
                             <span class="separator"></span>
                             <a href="#"> Lecturers </a>
