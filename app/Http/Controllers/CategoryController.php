@@ -22,6 +22,7 @@ class CategoryController extends Controller
 
     public function store(Request $request)
     {
+        // dd($request);
         $validator = Validator::make($request->all(),[
             'category' => 'required|unique:categories,category,NULL,NULL,category,' . strtolower($request->category),//case insensitive validation
         ]);
@@ -36,6 +37,7 @@ class CategoryController extends Controller
         {
             $category = new Category();
             $category->category = $request->category;
+            $category->status = $request->status ? 1 : 0;       //If has value, save 1
             $category->created_at = now();
             $category->updated_at = now();
             $saved = $category->save();
@@ -74,6 +76,7 @@ class CategoryController extends Controller
         try
         {
             $category->category = $request->category;
+            $category->status = $request->status ? 1 : 0;       //If has value, save 1
             $category->updated_at = now();
             $updated = $category->save();
             if(!$updated)

@@ -20,7 +20,7 @@ class PostController extends Controller
 
     public function create()
     {
-        $categories = Category::all();
+        $categories = Category::where('status',1)->get();
 
         return view('post-create', ['categories' => $categories]);
     }

@@ -15,6 +15,7 @@ class CategorySeeder extends Seeder
     {
         DB::table('categories')->insert([
             'category' => 'holiday',
+            'status' => 1,
             'created_at' => now(),
             'updated_at' => now(),
         ]);
@@ -27,6 +28,7 @@ class CategorySeeder extends Seeder
 
         DB::table('categories')->insert([
             'category' => 'grades',
+            'status' => 1,
             'created_at' => now(),
             'updated_at' => now(),
         ]);

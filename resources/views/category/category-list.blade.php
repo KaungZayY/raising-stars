@@ -15,6 +15,7 @@
                     <tr>
                         <th class="py-2 px-4 border-b bg-yellow-300">No</th>
                         <th class="py-2 px-4 border-b bg-yellow-300">Category</th>
+                        <th class="py-2 px-4 border-b bg-yellow-300 w-32">Status</th>
                         <th class="py-2 px-4 border-b bg-yellow-300">Action</th>
                     </tr>
                   </thead>
@@ -23,6 +24,13 @@
                     <tr>
                         <td class="py-2 px-4 border-b text-center">{{$loop->iteration}}</td>
                         <td class="py-2 px-4 border-b text-center">{{$category->category}}</td>
+                        <td class="py-2 px-4 border-b text-center">
+                            @if ($category->status == 1)
+                                <p class="bg-green-500 text-white rounded-lg w-24">Active</p>
+                            @else
+                                <p class="bg-red-500 text-white rounded-lg w-24">InActive</p>
+                            @endif
+                        </td>
                         <td class="py-2 px-4 border-b text-center">
                             <div class="inline-block">
                                 <form action="{{route('category.edit',$category->id)}}" method="GET">
