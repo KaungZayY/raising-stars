@@ -15,6 +15,22 @@
                     <x-nav-link :href="route('home')" :active="request()->routeIs('home')">
                         {{ __('Home') }}
                     </x-nav-link>
+
+                    <!-- Admin Control Drop List -->
+                    <x-nav-link-parent :href="'#'" :active="request()->routeIs('padron.*')">
+                        <x-slot name="name">Admin Control</x-slot>
+                        <x-slot name="children">
+                            <a href="#"> Announcements </a>
+                            <span class="separator"></span>
+                            <a href="#"> Courses </a>
+                            <span class="separator"></span>
+                            <a href="#"> Lecturers </a>
+                            <span class="separator"></span>
+                            <a href="{{route('subject')}}"> Subjects </a>
+                            <span class="separator"></span>
+                            <a href="#"> Schedule </a>
+                        </x-slot>
+                    </x-nav-link-parent>
                 </div>
             </div>
 

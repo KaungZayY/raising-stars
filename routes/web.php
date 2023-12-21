@@ -4,6 +4,7 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SubjectController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -46,6 +47,16 @@ Route::middleware('auth')->group(function () {
     //Comment
     Route::post('/comment',[CommentController::class,'postCommented'])->name('post.comment');
     Route::delete('/comment-delete{comment}', [CommentController::class, 'destroy'])->name('comment.delete');
+});
+
+Route::middleware('admin')->group(function(){
+    Route::get('/subject',[SubjectController::class,'index'])->name('subject');
+    Route::get('/subject-create',[SubjectController::class,'create'])->name('subject.create');
+    Route::post('/subject-save',[SubjectController::class,'store'])->name('subject.store');
+    Route::get('/subject-edit{subject}', [SubjectController::class, 'edit'])->name('subject.edit');
+    Route::post('/subject-edit{subject}', [SubjectController::class, 'update'])->name('subject.update');
+    Route::delete('/subject-delete{subject}', [SubjectController::class, 'destroy'])->name('subject.delete');
+    
 });
 
 require __DIR__.'/auth.php';
