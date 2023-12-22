@@ -14,6 +14,7 @@
         <!-- Scripts -->
         @stack('scripts')<!-- fetch cdn scripts if exists in child layout -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
+        <script src="{{asset('javascript/themeToggle.js')}}"></script><!-- custom file under public folder-->
     </head>
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
