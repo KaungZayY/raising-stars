@@ -70,7 +70,9 @@ Route::middleware('admin')->group(function(){
     Route::get('/category-edit{category}', [CategoryController::class, 'edit'])->name('category.edit');
     Route::post('/category-edit{category}', [CategoryController::class, 'update'])->name('category.update');
     Route::delete('/category-delete{category}', [CategoryController::class, 'destroy'])->name('category.delete');
-
+    Route::get('/category-archives',[CategoryController::class,'archives'])->name('category.archives');
+    Route::patch('/category-restore/{category}', [CategoryController::class, 'restore'])->name('category.restore');
+    Route::delete('/category-force-delete{category}', [CategoryController::class, 'forcedelete'])->name('category.forcedelete');
     
 });
 

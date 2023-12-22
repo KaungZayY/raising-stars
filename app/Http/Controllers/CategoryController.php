@@ -107,4 +107,24 @@ class CategoryController extends Controller
             return redirect()->route('category')->with('success', 'You had Removed the Category Tag'); 
         }
     }
+
+    public function archives()
+    {
+        $categories = Category::onlyTrashed()->get();
+        return view('category.category-archives',['categories'=>$categories]);
+    }
+
+    public function restore($id)
+    {
+        $category = Category::withTrashed()->find($id);
+        $category->restore();
+        return redirect()->route('category')->with('success', 'You had Restored the Category Tag'); 
+    }
+
+    public function forcedelete($id)
+    {
+        $category = Category::withTrashed()->find($id);
+        $category->forceDelete();
+        return redirect()->route('category')->with('success', 'Deleted'); 
+    }
 }
