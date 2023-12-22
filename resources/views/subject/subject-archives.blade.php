@@ -1,13 +1,13 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Deleted Categories') }}
+            {{ __('Deleted Subjects') }}
         </h2>
     </x-slot>
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="flex flex-row justify-between">
-                <form action="{{route('category')}}" method="GET">
+                <form action="{{route('subject')}}" method="GET">
                     <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-1 px-4 rounded mb-4">
                         Back
                     </button>
@@ -18,21 +18,21 @@
                   <thead>
                     <tr>
                         <th class="py-2 px-4 border-b bg-gray-300">No</th>
-                        <th class="py-2 px-4 border-b bg-gray-300">Category</th>
+                        <th class="py-2 px-4 border-b bg-gray-300">Subject</th>
                         <th class="py-2 px-4 border-b bg-gray-300">Deleted At</th>
                         <th class="py-2 px-4 border-b bg-gray-300">Action</th>
                     </tr>
                   </thead>
                   <tbody>
-                    @if ($categories->count())
-                        @foreach ($categories as $category)
+                    @if ($subjects->count())
+                        @foreach ($subjects as $subject)
                         <tr>
                             <td class="py-2 px-4 border-b text-center">{{$loop->iteration}}</td>
-                            <td class="py-2 px-4 border-b text-center">{{$category->category}}</td>
-                            <td class="py-2 px-4 border-b text-center">{{$category->deleted_at}}</td>
+                            <td class="py-2 px-4 border-b text-center">{{$subject->subject}}</td>
+                            <td class="py-2 px-4 border-b text-center">{{$subject->deleted_at}}</td>
                             <td class="py-2 px-4 border-b text-center">
                                 <div class="inline-block">
-                                    <form action="{{route('category.restore',$category->id)}}" method="POST">
+                                    <form action="{{route('subject.restore',$subject->id)}}" method="POST">
                                         @csrf
                                         @method('PATCH')
                                         <button>
@@ -44,7 +44,7 @@
                                 </div>
                                 <span class="ml-2 mr-2">|</span>
                                 <div class="inline-block">
-                                    <form action="{{route('category.forcedelete',$category->id)}}" method="POST">
+                                    <form action="{{route('subject.forcedelete',$subject->id)}}" method="POST">
                                         @csrf
                                         @method('DELETE')
                                         <button>
@@ -56,11 +56,7 @@
                                 </div>
                             </td>
                         </tr>
-                        @endforeach<form action="{{route('subject')}}" method="GET">
-                            <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-1 px-4 rounded mb-4">
-                                Back
-                            </button>
-                        </form>
+                        @endforeach
                     @else
                         <tr>
                             <td class="py-2 px-4 text-center" colspan="4">No Data found</td>

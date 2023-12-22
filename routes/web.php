@@ -58,6 +58,9 @@ Route::middleware('admin')->group(function(){
     Route::get('/subject-edit{subject}', [SubjectController::class, 'edit'])->name('subject.edit');
     Route::post('/subject-edit{subject}', [SubjectController::class, 'update'])->name('subject.update');
     Route::delete('/subject-delete{subject}', [SubjectController::class, 'destroy'])->name('subject.delete');
+    Route::get('/subject-archives',[SubjectController::class,'archives'])->name('subject.archives');
+    Route::patch('/subject-restore/{subject}', [SubjectController::class, 'restore'])->name('subject.restore');
+    Route::delete('/subject-force-delete{subject}', [SubjectController::class, 'forcedelete'])->name('subject.forcedelete');
 
     //Report
     Route::get('/discussion-report',[DiscussionReportController::class,'index'])->name('discussion.report');

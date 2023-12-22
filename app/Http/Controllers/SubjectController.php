@@ -104,4 +104,24 @@ class SubjectController extends Controller
             return redirect()->route('subject')->with('success', 'You had Deleted the Subject'); 
         }
     }
+
+    public function archives()
+    {
+        $subjects = Subject::onlyTrashed()->get();
+        return view('subject.subject-archives',['subjects'=>$subjects]);
+    }
+
+    public function restore($id)
+    {
+        $subject = Subject::withTrashed()->find($id);
+        $subject->restore();
+        return redirect()->route('subject')->with('success', 'You had Restored the Subject'); 
+    }
+
+    public function forcedelete($id)
+    {
+        $subject = Subject::withTrashed()->find($id);
+        $subject->forceDelete();
+        return redirect()->route('subject')->with('success', 'Deleted'); 
+    }
 }
