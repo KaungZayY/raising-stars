@@ -56,11 +56,7 @@
                                 </div>
                             </td>
                         </tr>
-                        @endforeach<form action="{{route('subject')}}" method="GET">
-                            <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-1 px-4 rounded mb-4">
-                                Back
-                            </button>
-                        </form>
+                        @endforeach
                     @else
                         <tr>
                             <td class="py-2 px-4 text-center" colspan="4">No Data found</td>

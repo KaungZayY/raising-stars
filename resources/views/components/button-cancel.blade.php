@@ -7,7 +7,7 @@
         display: inline-flex;
         items: center;
         padding: 0.5rem 1rem;
-        background-color: white;
+        background-color: rgb(160, 160, 160);
         border: 1px solid transparent;
         border-radius: 0.375rem; /* Equivalent to rounded-md */
         font-weight: 600; /* Equivalent to font-semibold */
