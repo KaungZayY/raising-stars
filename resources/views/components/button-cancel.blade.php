@@ -1,4 +1,4 @@
-<button {{ $attributes->merge(['type' => 'button', 'class' => 'button-cancel']) }} onclick="cancelAction()">
+<button {{ $attributes->merge(['type' => 'button', 'class' => 'button-cancel', 'onclick' => 'cancelAction("'.$cancelRoute.'")']) }}>
     {{ $slot }}
 </button>
 
@@ -46,8 +46,13 @@
 </style>
 
 <script>
-    function cancelAction()
+    function cancelAction(route)
     {
-        window.history.back();
+        if(route){
+            window.location.href = route;
+        }
+        else{
+            window.history.back();
+        }
     }
 </script>

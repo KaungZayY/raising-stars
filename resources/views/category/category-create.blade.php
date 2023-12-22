@@ -25,7 +25,7 @@
 
                     <!-- Submit Button -->
                     <div class="flex flex-row justify-between">
-                        <x-button-cancel>
+                        <x-button-cancel :cancelRoute="route('category')">
                             {{__('Cancel')}}
                         </x-button-cancel>
                         <x-button class="ms-4">
