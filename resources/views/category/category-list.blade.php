@@ -27,6 +27,7 @@
                     </tr>
                   </thead>
                   <tbody>
+                @if ($categories->count())
                     @foreach ($categories as $category)
                     <tr>
                         <td class="py-2 px-4 border-b text-center">{{$loop->iteration}}</td>
@@ -63,6 +64,11 @@
                         </td>
                     </tr>
                     @endforeach
+                @else
+                    <tr>
+                        <td class="py-2 px-4 text-center" colspan="4">No Data found</td>
+                    </tr>
+                @endif
                   </tbody>
                 </table>
               </div>
