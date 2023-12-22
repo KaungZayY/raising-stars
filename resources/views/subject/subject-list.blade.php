@@ -13,12 +13,13 @@
                 <table class="min-w-full bg-white border border-gray-300 border-separate">
                   <thead>
                     <tr>
-                        <th class="py-2 px-4 border-b bg-gray-300">No</th>
-                        <th class="py-2 px-4 border-b bg-gray-300">Subject</th>
-                        <th class="py-2 px-4 border-b bg-gray-300">Action</th>
+                        <th class="py-2 px-4 border-b bg-cyan-300">No</th>
+                        <th class="py-2 px-4 border-b bg-cyan-300">Subject</th>
+                        <th class="py-2 px-4 border-b bg-cyan-300">Action</th>
                     </tr>
                   </thead>
                   <tbody>
+                @if ($subjects->count())
                     @foreach ($subjects as $subject)
                     <tr>
                         <td class="py-2 px-4 border-b text-center">{{$loop->iteration}}</td>
@@ -48,6 +49,11 @@
                         </td>
                     </tr>
                     @endforeach
+                @else
+                    <tr>
+                        <td class="py-2 px-4 text-center" colspan="4">No Data found</td>
+                    </tr>
+                @endif
                   </tbody>
                 </table>
               </div>
