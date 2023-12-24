@@ -18,7 +18,7 @@ class UserSeeder extends Seeder
         //Student Account
         DB::table('users')->insert([
             'name' => 'Student',
-            'email' => 's@gmail.com',
+            'email' => 'student@gmail.com',
             'email_verified_at' => now(),
             'password' => Hash::make('12345678'),
             'role_id' => 1,
@@ -31,7 +31,7 @@ class UserSeeder extends Seeder
         //Lecturer Account
         DB::table('users')->insert([
             'name' => 'Lecturer',
-            'email' => 'l@gmail.com',
+            'email' => 'lecturer@gmail.com',
             'email_verified_at' => now(),
             'password' => Hash::make('12345678'),
             'role_id' => 2,
@@ -44,7 +44,7 @@ class UserSeeder extends Seeder
         //Moderator Account
         DB::table('users')->insert([
             'name' => 'moderator',
-            'email' => 'm@gmail.com',
+            'email' => 'moderator@gmail.com',
             'email_verified_at' => now(),
             'password' => Hash::make('12345678'),
             'role_id' => 3,
@@ -57,7 +57,7 @@ class UserSeeder extends Seeder
         //Admin Account
         DB::table('users')->insert([
             'name' => 'Admin',
-            'email' => 'a@gmail.com',
+            'email' => 'admin@gmail.com',
             'email_verified_at' => now(),
             'password' => Hash::make('12345678'),
             'role_id' => 4,
