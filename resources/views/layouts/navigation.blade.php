@@ -26,7 +26,7 @@
                             <span class="separator"></span>
                             <a href="#"> Courses </a>
                             <span class="separator"></span>
-                            <a href="#"> Lecturers </a>
+                            <a href="{{route('lecturer')}}"> Lecturers </a>
                             <span class="separator"></span>
                             <a href="{{route('subject')}}"> Subjects </a>
                             <span class="separator"></span>

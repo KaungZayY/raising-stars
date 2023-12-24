@@ -16,6 +16,6 @@ class AdminContent
 
     public function viewAdminContent(User $user)
     {
-        return $user->role_id === 2;
+        return $user->role_id === 4;
     }
 }

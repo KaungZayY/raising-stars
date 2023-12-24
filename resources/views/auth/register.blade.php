@@ -14,8 +14,10 @@
         <div>
             <x-input-label for="role" :value="__('Role')" />
             <select name="role_id" id="role_id" class="block mt-1 w-full form-control" style="border-radius: 0.375rem;">
-                <option value = 1 {{ old('role_id') === 1 ? 'selected' : '' }}>User</option>
-                <option value = 2 {{ old('role_id') === 2 ? 'selected' : '' }}>Admin</option>
+                <option value = 1 {{ old('role_id') === 1 ? 'selected' : '' }}>Student</option>
+                <option value = 2 {{ old('role_id') === 2 ? 'selected' : '' }}>Lecturer</option>
+                <option value = 3 {{ old('role_id') === 3 ? 'selected' : '' }}>Moderator</option>
+                <option value = 4 {{ old('role_id') === 4 ? 'selected' : '' }}>Admin</option>
             </select>
             <x-input-error :messages="$errors->get('role')" class="mt-2" />
         </div>

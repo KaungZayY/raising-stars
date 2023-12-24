@@ -3,6 +3,7 @@
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\DiscussionReportController;
+use App\Http\Controllers\LecturerController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
@@ -78,6 +79,11 @@ Route::middleware('admin')->group(function(){
     Route::patch('/category-restore/{category}', [CategoryController::class, 'restore'])->name('category.restore');
     Route::delete('/category-force-delete{category}', [CategoryController::class, 'forcedelete'])->name('category.forcedelete');
     
+    //Lecturer
+    Route::get('/lecturer',[LecturerController::class,'index'])->name('lecturer');
+    Route::get('/lecturer-create',[LecturerController::class,'create'])->name('lecturer.create');
+    Route::post('/lecturer-save',[LecturerController::class,'store'])->name('lecturer.store');
+
 });
 
 require __DIR__.'/auth.php';
