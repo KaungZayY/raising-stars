@@ -49,6 +49,7 @@ Route::middleware('auth')->group(function () {
     //Comment
     Route::post('/comment',[CommentController::class,'postCommented'])->name('post.comment');
     Route::delete('/comment-delete{comment}', [CommentController::class, 'destroy'])->name('comment.delete');
+    Route::post('/comment-update{comment}',[CommentController::class,'update'])->name('comment.update');
 });
 
 Route::middleware('admin')->group(function(){

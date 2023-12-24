@@ -6,6 +6,7 @@ use App\Models\Comment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 
 class CommentController extends Controller
 {
@@ -38,7 +39,7 @@ class CommentController extends Controller
 
     public function destroy(Comment $comment)
     {
-        $this->authorize('isCommentOwner',$comment);
+        $this->authorize('isHasPrivileges',$comment);
         $deleted = $comment->delete();
         if(!$deleted)
         {
@@ -48,6 +49,38 @@ class CommentController extends Controller
         {
             DB::rollBack();
             return redirect()->back()->with('success', 'Your Comment has Removed'); 
+        }
+    }
+
+    public function update(Request $request, Comment $comment)
+    {
+        // dd($request->update_comment);
+        $this->authorize('isCommentOwner',$comment);
+        $validator = Validator::make($request->all(),[
+            'update_comment' => 'required',
+        ]);
+        if($validator->fails()){
+            return redirect()->back()->with('error','Cannot Edit this Comment');
+            exit();
+        }
+        //Update DB transaction
+        DB::beginTransaction();
+        try
+        {
+            $comment->comment = $request->update_comment;
+            $comment->updated_at = now();
+            $updated = $comment->save();
+            if(!$updated)
+            {
+                throw new \Exception('Error Updating.');
+            }
+            DB::commit();
+            return redirect()->back()->with('success','Comment Updated');
+        }
+        catch(\Exception $e)
+        {
+            DB::rollBack();
+            return redirect()->back()->with('error','Failed');
         }
     }
 }

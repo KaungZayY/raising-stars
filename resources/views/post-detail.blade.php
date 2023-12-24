@@ -100,17 +100,33 @@
                         <p class="text-black mt-4">
                             {{$comment->comment}}
                         </p>
+                        @can('isCommentOwner', $comment)        <!-- Comment Edit Box -->
+                        <form action="{{route('comment.update',$comment->id)}}" method="POST" class="hidden">
+                            @csrf
+                            <div class="flex items-center">
+                                <textarea name="update_comment" id="update_comment" class="text-black mt-4 w-full" rows="2">{{ $comment->comment }}</textarea>
+                                <button class="mt-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" height="24" width="20" viewBox="0 0 512 512">
+                                        <path fill="#22C55E" d="M498.1 5.6c10.1 7 15.4 19.1 13.5 31.2l-64 416c-1.5 9.7-7.4 18.2-16 23s-18.9 5.4-28 1.6L284 427.7l-68.5 74.1c-8.9 9.7-22.9 12.9-35.2 8.1S160 493.2 160 480V396.4c0-4 1.5-7.8 4.2-10.7L331.8 202.8c5.8-6.3 5.6-16-.4-22s-15.7-6.4-22-.7L106 360.8 17.7 316.6C7.1 311.3 .3 300.7 0 288.9s5.9-22.8 16.1-28.7l448-256c10.7-6.1 23.9-5.5 34 1.4z"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </form>
+                        @endcan
                     </div>
                     <div class="flex flex-col mr-2">
                         <p class="text-sm text-gray-500" style="margin-left: auto">{{ $comment->created_at->diffForHumans() }}</p>
                         <br>
-                        @can('isCommentOwner',$comment)
+                        @can('isHasPrivileges',$comment)
                             <button onclick="toggleDropdownMenu(this)">
                                 <svg xmlns="http://www.w3.org/2000/svg" height="16" width="4" viewBox="0 0 128 512" style="margin-left: auto">
                                     <path d="M64 360a56 56 0 1 0 0 112 56 56 0 1 0 0-112zm0-160a56 56 0 1 0 0 112 56 56 0 1 0 0-112zM120 96A56 56 0 1 0 8 96a56 56 0 1 0 112 0z"/>
                                 </svg>
                             </button>
-                            <div class="hidden flex-row-reverse">
+                            <div class="hidden flex-row-reverse mt-2">
+                                @can('isCommentOwner', $comment)
+                                    <button onclick="showEditCommentBox(this)" class="bg-green-500 text-white px-2 py-1 mb-2 rounded-md w-full">Edit</button>
+                                @endcan
                                 <form action="{{route('comment.delete',$comment->id)}}" method="POST">
                                     @csrf
                                     @method('DELETE')
@@ -288,5 +304,13 @@
         });
 
 
+    }
+
+    function showEditCommentBox(button)
+    {
+        const commentDiv = button.parentNode.parentNode.previousElementSibling.children[1];
+        const editCommentBox = button.parentNode.parentNode.previousElementSibling.lastElementChild;
+        commentDiv.classList.toggle('hidden');
+        editCommentBox.classList.toggle('hidden');
     }
 </script>
