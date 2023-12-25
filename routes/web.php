@@ -83,7 +83,8 @@ Route::middleware('admin')->group(function(){
     Route::get('/lecturer',[LecturerController::class,'index'])->name('lecturer');
     Route::get('/lecturer-create',[LecturerController::class,'create'])->name('lecturer.create');
     Route::post('/lecturer-save',[LecturerController::class,'store'])->name('lecturer.store');
-
+    Route::get('/lecturer-edit{user}', [LecturerController::class, 'edit'])->name('lecturer.edit');
+    Route::post('/lecturer-edit{user}', [LecturerController::class, 'update'])->name('lecturer.update');
 });
 
 require __DIR__.'/auth.php';
