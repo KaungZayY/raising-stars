@@ -97,7 +97,10 @@ Route::middleware('admin')->group(function(){
     Route::post('/room-save',[RoomController::class,'store'])->name('room.store');
     Route::get('/room-edit{room}', [RoomController::class, 'edit'])->name('room.edit');
     Route::post('/room-edit{room}', [RoomController::class, 'update'])->name('room.update');
-
+    Route::delete('/room-delete{room}', [RoomController::class, 'destroy'])->name('room.delete');
+    Route::get('/room-archives',[RoomController::class,'archives'])->name('room.archives');
+    Route::patch('/room-restore/{room}', [RoomController::class, 'restore'])->name('room.restore');
+    Route::delete('/room-force-delete{room}', [RoomController::class, 'forcedelete'])->name('room.forcedelete');
 });
 
 require __DIR__.'/auth.php';

@@ -87,4 +87,35 @@ class RoomController extends Controller
         }
         
     }
+
+    public function destroy(Room $room)
+    {
+        // dd($room);
+        $deleted = $room->delete();
+        if(!$deleted)
+        {
+            return redirect()->back()->with('error','Cannot Remove This Room');
+        }
+        return redirect()->route('room')->with('success','Room Archived');
+    }
+
+    public function archives()
+    {
+        $rooms = Room::onlyTrashed()->get();
+        return view('room.room-archives',['rooms'=>$rooms]);
+    }
+
+    public function restore($id)
+    {
+        $room = Room::onlyTrashed()->findOrFail($id);
+        $room->restore();
+        return redirect()->route('room')->with('success','Room Restored');
+    }
+
+    public function forcedelete($id)
+    {
+        $room = Room::withTrashed()->findOrFail($id);
+        $room->forceDelete();
+        return redirect()->route('room')->with('success','Room Deleted Permanently');
+    }
 }
