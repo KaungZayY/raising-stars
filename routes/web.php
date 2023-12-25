@@ -85,6 +85,10 @@ Route::middleware('admin')->group(function(){
     Route::post('/lecturer-save',[LecturerController::class,'store'])->name('lecturer.store');
     Route::get('/lecturer-edit{user}', [LecturerController::class, 'edit'])->name('lecturer.edit');
     Route::post('/lecturer-edit{user}', [LecturerController::class, 'update'])->name('lecturer.update');
+    Route::delete('/lecturer-delete{user}', [LecturerController::class, 'destroy'])->name('lecturer.delete');
+    Route::get('/lecturer-archives',[LecturerController::class,'archives'])->name('lecturer.archives');
+    Route::patch('/lecturer-restore/{user}', [LecturerController::class, 'restore'])->name('lecturer.restore');
+    Route::delete('/lecturer-force-delete{user}', [LecturerController::class, 'forcedelete'])->name('lecturer.forcedelete');
 });
 
 require __DIR__.'/auth.php';

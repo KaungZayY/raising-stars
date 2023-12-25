@@ -87,4 +87,38 @@ class LecturerController extends Controller
         }
         
     }
+
+    public function destroy(User $user)
+    {
+        $deleted = $user->delete();
+        if(!$deleted)
+        {
+            DB::rollBack();
+            return redirect()->route('lecturer')->with('error','Cannot Remove this User');
+        }
+        else
+        {
+            return redirect()->route('lecturer')->with('success','User Archived');
+        }
+    }
+
+    public function archives()
+    {
+        $lecturers = User::onlyTrashed()->where('role_id',2)->get();
+        return view('lecturer.lecturer-archives',['lecturers'=>$lecturers]);
+    }
+
+    public function restore($id)
+    {
+        $lecturer = User::withTrashed()->findOrFail($id);
+        $lecturer->restore();
+        return redirect()->route('lecturer.archives')->with('success','User Restored');
+    }
+
+    public function forcedelete($id)
+    {
+        $lecturer = User::withTrashed()->findOrFail($id);
+        $lecturer->forcedelete();
+        return redirect()->route('lecturer.archives')->with('success','User Removed Permanently');
+    }
 }
