@@ -29,7 +29,7 @@
                             {{__('Cancel')}}
                         </x-button-cancel>
                         <x-button class="ms-4">
-                            {{ __('Add') }}
+                            {{ __('Update') }}
                         </x-button>                                            
                     </div>
                     

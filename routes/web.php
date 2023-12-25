@@ -7,6 +7,7 @@ use App\Http\Controllers\LecturerController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RoomController;
 use App\Http\Controllers\SubjectController;
 use Illuminate\Support\Facades\Route;
 
@@ -89,6 +90,14 @@ Route::middleware('admin')->group(function(){
     Route::get('/lecturer-archives',[LecturerController::class,'archives'])->name('lecturer.archives');
     Route::patch('/lecturer-restore/{user}', [LecturerController::class, 'restore'])->name('lecturer.restore');
     Route::delete('/lecturer-force-delete{user}', [LecturerController::class, 'forcedelete'])->name('lecturer.forcedelete');
+
+    //Room
+    Route::get('/room',[RoomController::class,'index'])->name('room');
+    Route::get('/room-create',[RoomController::class,'create'])->name('room.create');
+    Route::post('/room-save',[RoomController::class,'store'])->name('room.store');
+    Route::get('/room-edit{room}', [RoomController::class, 'edit'])->name('room.edit');
+    Route::post('/room-edit{room}', [RoomController::class, 'update'])->name('room.update');
+
 });
 
 require __DIR__.'/auth.php';

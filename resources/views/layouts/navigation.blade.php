@@ -30,6 +30,8 @@
                             <span class="separator"></span>
                             <a href="{{route('subject')}}"> Subjects </a>
                             <span class="separator"></span>
+                            <a href="{{route('room')}}"> Rooms </a>
+                            <span class="separator"></span>
                             <a href="#"> Schedule </a>
                         </x-slot>
                     </x-nav-link-parent>
