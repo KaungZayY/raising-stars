@@ -17,7 +17,7 @@ $classes = ($active ?? false)
         </div>
     </div>
 
-    <div class="children border border-gray-300" 
+    <div class="children border border-gray-300 z-30" 
     x-show="open"
     x-transition:enter="transition ease-out duration-200"
     x-transition:enter-start="transform opacity-0 scale-95"
