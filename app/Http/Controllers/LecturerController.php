@@ -12,7 +12,7 @@ class LecturerController extends Controller
 {
     public function index()
     {
-        $lecturers = User::where('role_id',2)->get();
+        $lecturers = User::where('role_id',2)->autosort()->get();
         return view('lecturer.lecturer-list',['lecturers'=>$lecturers]);
     }
 

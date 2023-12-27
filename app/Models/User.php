@@ -8,10 +8,11 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use SDamian\Larasort\AutoSortable;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable, SoftDeletes;
+    use HasApiTokens, HasFactory, Notifiable, SoftDeletes, AutoSortable;
 
     /**
      * The attributes that are mass assignable.
@@ -25,6 +26,14 @@ class User extends Authenticatable
         'address',
         'phone_number',
         'role_id',
+    ];
+
+    private array $sortables = [
+        'id',
+        'name',
+        'email',
+        'phone_number',
+        'address',
     ];
 
     /**
