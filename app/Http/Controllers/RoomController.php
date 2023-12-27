@@ -11,7 +11,7 @@ class RoomController extends Controller
 {
     public function index()
     {
-        $rooms = Room::all();
+        $rooms = Room::autosort()->get();
         return view('room.room-list',['rooms'=>$rooms]);
     }
 

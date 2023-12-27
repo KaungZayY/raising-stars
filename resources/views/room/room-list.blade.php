@@ -18,12 +18,12 @@
             </div>
             <div class="overflow-x-auto">
                 <table class="min-w-full bg-white border border-gray-300 border-separate">
-                  <thead>
+                  <thead class="with-larasort">
                     <tr>
                         <th class="py-2 px-4 border-b bg-violet-400">No</th>
-                        <th class="py-2 px-4 border-b bg-violet-400">Room Number</th>
-                        <th class="py-2 px-4 border-b bg-violet-400">Floor Number</th>
-                        <th class="py-2 px-4 border-b bg-violet-400">Seat Capacity</th>
+                        <th class="py-2 px-4 border-b bg-violet-400">@sortableLink('room_number', 'Room Number')</th>
+                        <th class="py-2 px-4 border-b bg-violet-400">@sortableLink('floor_number', 'Floor Number')</th>
+                        <th class="py-2 px-4 border-b bg-violet-400">@sortableLink('seat_capacity', 'Seat Capacity')</th>
                         <th class="py-2 px-4 border-b bg-violet-400">Action</th>
                     </tr>
                   </thead>
