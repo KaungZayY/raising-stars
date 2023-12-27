@@ -11,7 +11,7 @@ class SubjectController extends Controller
 {
     public function index()
     {
-        $subjects = Subject::all();
+        $subjects = Subject::autosort()->get();
         return view('subject.subject-list',['subjects'=>$subjects]);
     }
 

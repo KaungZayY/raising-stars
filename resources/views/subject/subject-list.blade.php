@@ -18,10 +18,10 @@
             </div>
             <div class="overflow-x-auto">
                 <table class="min-w-full bg-white border border-gray-300 border-separate">
-                  <thead>
+                  <thead class="with-larasort">
                     <tr>
                         <th class="py-2 px-4 border-b bg-cyan-300">No</th>
-                        <th class="py-2 px-4 border-b bg-cyan-300">Subject</th>
+                        <th class="py-2 px-4 border-b bg-cyan-300">@sortableLink('subject', 'Subject')</th>
                         <th class="py-2 px-4 border-b bg-cyan-300">Action</th>
                     </tr>
                   </thead>
