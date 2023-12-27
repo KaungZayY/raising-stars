@@ -50,7 +50,7 @@
                                 </div>
                                 <span class="ml-2 mr-2">|</span>
                                 <div class="inline-block">
-                                    <form action="{{route('lecturer.forcedelete',$lecturer->id)}}" method="POST">
+                                    <form action="{{route('lecturer.forcedelete',$lecturer->id)}}" method="POST" onsubmit="return confirm('Are You Sure to Remove this Data?');">
                                         @csrf
                                         @method('DELETE')
                                         <button>

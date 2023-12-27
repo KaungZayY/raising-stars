@@ -43,7 +43,7 @@
                             </div>
                             <span class="ml-2 mr-2">|</span>
                             <div class="inline-block">
-                                <form action="{{route('subject.delete',$subject->id)}}" method="POST">
+                                <form action="{{route('subject.delete',$subject->id)}}" method="POST" onsubmit="return confirm('Move this Data to Archives?');">
                                     @csrf
                                     @method('DELETE')
                                     <button>

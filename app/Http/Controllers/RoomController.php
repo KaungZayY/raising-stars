@@ -116,6 +116,6 @@ class RoomController extends Controller
     {
         $room = Room::withTrashed()->findOrFail($id);
         $room->forceDelete();
-        return redirect()->route('room')->with('success','Room Deleted Permanently');
+        return redirect()->route('room.archives')->with('success','Room Deleted Permanently');
     }
 }

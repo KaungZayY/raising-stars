@@ -122,6 +122,6 @@ class SubjectController extends Controller
     {
         $subject = Subject::withTrashed()->find($id);
         $subject->forceDelete();
-        return redirect()->route('subject')->with('success', 'Deleted'); 
+        return redirect()->route('subject.archives')->with('success', 'Deleted'); 
     }
 }

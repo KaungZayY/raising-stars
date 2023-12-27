@@ -125,6 +125,6 @@ class CategoryController extends Controller
     {
         $category = Category::withTrashed()->find($id);
         $category->forceDelete();
-        return redirect()->route('category')->with('success', 'Deleted'); 
+        return redirect()->route('category.archives')->with('success', 'Deleted'); 
     }
 }
