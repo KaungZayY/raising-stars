@@ -24,7 +24,7 @@
                             <span class="separator"></span>
                             <a href="{{route('discussion.report')}}"> Discussion </a>
                             <span class="separator"></span>
-                            <a href="#"> Modules </a>
+                            <a href="{{route('module')}}"> Modules </a>
                             <span class="separator"></span>
                             <a href="#"> Courses </a>
                             <span class="separator"></span>

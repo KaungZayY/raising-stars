@@ -5,6 +5,7 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\DiscussionReportController;
 use App\Http\Controllers\LecturerController;
 use App\Http\Controllers\LikeController;
+use App\Http\Controllers\ModuleController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RoomController;
@@ -101,6 +102,9 @@ Route::middleware('admin')->group(function(){
     Route::get('/room-archives',[RoomController::class,'archives'])->name('room.archives');
     Route::patch('/room-restore/{room}', [RoomController::class, 'restore'])->name('room.restore');
     Route::delete('/room-force-delete{room}', [RoomController::class, 'forcedelete'])->name('room.forcedelete');
+
+    //Module
+    Route::get('/module',[ModuleController::class,'index'])->name('module');
 });
 
 require __DIR__.'/auth.php';

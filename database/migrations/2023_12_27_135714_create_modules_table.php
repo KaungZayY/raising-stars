@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('module_number');
             $table->foreignId('subject_id')->constrained()->onDelete('cascade');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
