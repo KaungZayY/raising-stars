@@ -11,7 +11,7 @@ class CategoryController extends Controller
 {
     public function index()
     {
-        $categories = Category::all();
+        $categories = Category::autosort()->get();
         return view('category.category-list',['categories'=>$categories]);
     }
 

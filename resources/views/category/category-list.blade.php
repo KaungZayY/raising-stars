@@ -18,11 +18,11 @@
             </div>
             <div class="overflow-x-auto">
                 <table class="min-w-full bg-white border border-gray-300 border-separate">
-                  <thead>
+                  <thead class="with-larasort">
                     <tr>
                         <th class="py-2 px-4 border-b bg-yellow-300">No</th>
-                        <th class="py-2 px-4 border-b bg-yellow-300">Category</th>
-                        <th class="py-2 px-4 border-b bg-yellow-300 w-32">Status</th>
+                        <th class="py-2 px-4 border-b bg-yellow-300">@sortableLink('category', 'Category')</th>
+                        <th class="py-2 px-4 border-b bg-yellow-300 w-32">@sortableLink('status', 'Status')</th>
                         <th class="py-2 px-4 border-b bg-yellow-300">Action</th>
                     </tr>
                   </thead>
