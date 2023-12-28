@@ -107,6 +107,13 @@ Route::middleware('admin')->group(function(){
     Route::get('/module',[ModuleController::class,'index'])->name('module');
     Route::get('/module-create',[ModuleController::class,'create'])->name('module.create');
     Route::post('/module-save',[ModuleController::class,'store'])->name('module.store');
+    Route::get('/module-edit{module}', [ModuleController::class, 'edit'])->name('module.edit');
+    Route::post('/module-edit{module}', [ModuleController::class, 'update'])->name('module.update');
+    Route::delete('/module-delete{module}', [ModuleController::class, 'destroy'])->name('module.delete');
+    Route::get('/module-archives',[ModuleController::class,'archives'])->name('module.archives');
+    Route::patch('/module-restore/{module}', [ModuleController::class, 'restore'])->name('module.restore');
+    Route::delete('/module-force-delete{module}', [ModuleController::class, 'forcedelete'])->name('module.forcedelete');
+
 });
 
 require __DIR__.'/auth.php';
