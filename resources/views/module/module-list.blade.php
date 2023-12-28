@@ -14,7 +14,7 @@
                         </svg>
                     </button>
                 </form>
-                <a href="#" class="bg-green-500 text-white px-2 py-1 mb-6 rounded-md">Add New Module</a>
+                <a href="{{route('module.create')}}" class="bg-green-500 text-white px-2 py-1 mb-6 rounded-md">Add New Module</a>
             </div>
             <div class="overflow-x-auto">
                 <table class="min-w-full bg-white border border-gray-300 border-separate">

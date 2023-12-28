@@ -11,6 +11,11 @@ class Module extends Model
 {
     use HasFactory,AutoSortable,SoftDeletes;
 
+    protected $fillable = [
+        'module_number',
+        'subject_id',
+    ];
+
     private array $sortables = [
         'id',
         'module_number',

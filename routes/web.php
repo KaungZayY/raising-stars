@@ -105,6 +105,8 @@ Route::middleware('admin')->group(function(){
 
     //Module
     Route::get('/module',[ModuleController::class,'index'])->name('module');
+    Route::get('/module-create',[ModuleController::class,'create'])->name('module.create');
+    Route::post('/module-save',[ModuleController::class,'store'])->name('module.store');
 });
 
 require __DIR__.'/auth.php';
