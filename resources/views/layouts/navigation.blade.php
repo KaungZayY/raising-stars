@@ -17,6 +17,7 @@
                     </x-nav-link>
 
                     <!-- Admin Control Drop List -->
+                    @can('viewAdminContent', App\Models\User::class)
                     <x-nav-link-parent :href="'#'" :active="request()->routeIs('padron.*')">
                         <x-slot name="name">Admin Control</x-slot>
                         <x-slot name="children">
@@ -37,6 +38,7 @@
                             <a href="#"> Schedule </a>
                         </x-slot>
                     </x-nav-link-parent>
+                    @endcan
                 </div>
             </div>
 
