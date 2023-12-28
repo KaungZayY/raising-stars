@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\CourseController;
 use App\Http\Controllers\DiscussionReportController;
 use App\Http\Controllers\LecturerController;
 use App\Http\Controllers\LikeController;
@@ -113,6 +114,9 @@ Route::middleware('admin')->group(function(){
     Route::get('/module-archives',[ModuleController::class,'archives'])->name('module.archives');
     Route::patch('/module-restore/{module}', [ModuleController::class, 'restore'])->name('module.restore');
     Route::delete('/module-force-delete{module}', [ModuleController::class, 'forcedelete'])->name('module.forcedelete');
+
+    //Course
+    Route::get('/course',[CourseController::class,'index'])->name('course');
 
 });
 

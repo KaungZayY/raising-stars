@@ -27,7 +27,7 @@
                             <span class="separator"></span>
                             <a href="{{route('module')}}"> Modules </a>
                             <span class="separator"></span>
-                            <a href="#"> Courses </a>
+                            <a href="{{route('course')}}"> Courses </a>
                             <span class="separator"></span>
                             <a href="{{route('lecturer')}}"> Lecturers </a>
                             <span class="separator"></span>
