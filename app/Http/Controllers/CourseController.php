@@ -111,4 +111,10 @@ class CourseController extends Controller
         $course->forceDelete();
         return redirect()->route('course.archives')->with('success','Course Deleted Permanently');
     }
+
+    public function module($id)
+    {
+        $course = Course::with('modules')->findOrFail($id);
+        return view('course.module-course-list',compact('course'));
+    }
 }

@@ -125,6 +125,9 @@ Route::middleware('admin')->group(function(){
     Route::get('/course-archives',[CourseController::class,'archives'])->name('course.archives');
     Route::patch('/course-restore/{course}', [CourseController::class, 'restore'])->name('course.restore');
     Route::delete('/course-force-delete{course}', [CourseController::class, 'forcedelete'])->name('course.forcedelete');
+
+    //Assign Module to Course
+    Route::get('/module-add{course}', [CourseController::class, 'module'])->name('course.module');
 });
 
 require __DIR__.'/auth.php';

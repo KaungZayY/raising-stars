@@ -31,4 +31,9 @@ class Module extends Model
     {
         return $this->belongsToMany(User::class,'module_lecturer');
     }
+
+    public function courses()
+    {
+        return $this->belongsToMany(Course::class,'module_course');
+    }
 }

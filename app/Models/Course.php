@@ -22,4 +22,9 @@ class Course extends Model
         'from_age',
         'to_age',
     ];
+
+    public function modules()
+    {
+        return $this->belongsToMany(Module::class,'module_course');
+    }
 }
