@@ -119,10 +119,43 @@ class CourseController extends Controller
         return view('course.module-course-list',compact('course'));
     }
 
-    public function module_add($id)
+    public function moduleAdd($id)
     {
         $course = Course::findOrFail($id);
         $unassignedModules = Module::whereNotIn('id',$course->modules->pluck('id'))->get();
         return view('course.module-course-add',compact('course','unassignedModules'));
+    }
+
+    public function moduleRemove(Request $request,$id)
+    {
+        $course = Course::findOrFail($id);
+        $removed = $course->modules()->detach($request->module_id);
+        if(!$removed)
+        {
+            return redirect()->route('course.module',$id)->with('error','Cannot Remove this Module');
+        }
+        return redirect()->route('course.module',$id)->with('success','Module was Removed');
+    }
+
+    public function assign(Request $request)
+    {
+        $course = Course::findOrFail($request->input('course_id'));
+        $assigned = $course->modules()->attach($request->input('module_id'));
+        if(!$assigned)
+        {
+            return response()->json(['error' => 'You have already Assigned this Module or Action Failed']);
+        }
+        return response()->json(['success' => 'Module Added to the Course']);
+    }
+
+    public function unassign(Request $request)
+    {
+        $course = Course::findOrFail($request->input('course_id'));
+        $unassigned = $course->modules()->detach($request->input('module_id'));
+        if(!$unassigned)
+        {
+            return response()->json(['error' => 'Action Failed']);
+        }
+        return response()->json(['success' => 'Action Success']);
     }
 }

@@ -127,8 +127,11 @@ Route::middleware('admin')->group(function(){
     Route::delete('/course-force-delete{course}', [CourseController::class, 'forcedelete'])->name('course.forcedelete');
 
     //Assign Module to Course
-    Route::get('/module-assign{course}', [CourseController::class, 'module'])->name('course.module');
-    Route::get('/module-add{course}', [CourseController::class, 'module_add'])->name('course.moduleadd');
+    Route::get('/module/course{course}', [CourseController::class, 'module'])->name('course.module');
+    Route::get('/module/course{course}/add', [CourseController::class, 'moduleAdd'])->name('course.moduleadd');
+    Route::delete('/module/course{course}/remove',[CourseController::class,'moduleRemove'])->name('course.moduleremove');
+    Route::post('/module-assign',[CourseController::class,'assign'])->name('course.moduleassign');
+    Route::delete('/module-unassign',[CourseController::class,'unassign'])->name('course.moduleunassign');
 });
 
 require __DIR__.'/auth.php';
