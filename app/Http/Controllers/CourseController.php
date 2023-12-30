@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Course;
+use App\Models\Module;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -116,5 +117,12 @@ class CourseController extends Controller
     {
         $course = Course::with('modules')->findOrFail($id);
         return view('course.module-course-list',compact('course'));
+    }
+
+    public function module_add($id)
+    {
+        $course = Course::findOrFail($id);
+        $unassignedModules = Module::whereNotIn('id',$course->modules->pluck('id'))->get();
+        return view('course.module-course-add',compact('course','unassignedModules'));
     }
 }

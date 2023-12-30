@@ -7,7 +7,7 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="flex flex-row justify-end">
-                <form action="#" method="GET">
+                <form action="{{route('course.moduleadd',$course->id)}}" method="GET">
                     <button class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-lg mb-2">
                         <div class="flex items-center">
                             <svg xmlns="http://www.w3.org/2000/svg" height="20" width="16" viewBox="0 0 448 512" class="mr-2">
@@ -22,10 +22,10 @@
                 <table class="min-w-full bg-white border border-gray-300 border-separate">
                   <thead class="with-larasort">
                     <tr>
-                        <th class="py-2 px-4 border-b bg-rose-300">No</th>
-                        <th class="py-2 px-4 border-b bg-rose-300">Module Number</th>
-                        <th class="py-2 px-4 border-b bg-rose-300">Subject</th>
-                        <th class="py-2 px-4 border-b bg-rose-300">Action</th>
+                        <th class="py-2 px-4 border-b bg-teal-300">No</th>
+                        <th class="py-2 px-4 border-b bg-teal-300">Module Number</th>
+                        <th class="py-2 px-4 border-b bg-teal-300">Subject</th>
+                        <th class="py-2 px-4 border-b bg-teal-300">Action</th>
                     </tr>
                   </thead>
                   <tbody>

@@ -27,4 +27,9 @@ class Course extends Model
     {
         return $this->belongsToMany(Module::class,'module_course');
     }
+
+    public function moduleAssigned(Module $module)
+    {
+        return $this->modules->contains('module_id',$module->id);
+    }
 }
