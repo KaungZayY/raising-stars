@@ -117,7 +117,14 @@ Route::middleware('admin')->group(function(){
 
     //Course
     Route::get('/course',[CourseController::class,'index'])->name('course');
-
+    Route::get('/course-create',[CourseController::class,'create'])->name('course.create');
+    Route::post('/course-save',[CourseController::class,'store'])->name('course.store');
+    Route::get('/course-edit{course}', [CourseController::class, 'edit'])->name('course.edit');
+    Route::post('/course-edit{course}', [CourseController::class, 'update'])->name('course.update');
+    Route::delete('/course-delete{course}', [CourseController::class, 'destroy'])->name('course.delete');
+    Route::get('/course-archives',[CourseController::class,'archives'])->name('course.archives');
+    Route::patch('/course-restore/{course}', [CourseController::class, 'restore'])->name('course.restore');
+    Route::delete('/course-force-delete{course}', [CourseController::class, 'forcedelete'])->name('course.forcedelete');
 });
 
 require __DIR__.'/auth.php';

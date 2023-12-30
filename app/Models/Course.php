@@ -16,4 +16,10 @@ class Course extends Model
         'course',
         'from_age',
     ];
+
+    protected $fillable = [
+        'course',
+        'from_age',
+        'to_age',
+    ];
 }
