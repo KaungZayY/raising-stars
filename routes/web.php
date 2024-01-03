@@ -106,7 +106,7 @@ Route::middleware('admin')->group(function(){
 
     //Module
     Route::get('/module',[ModuleController::class,'index'])->name('module');
-    Route::get('/module-create',[ModuleController::class,'create'])->name('module.create');
+    Route::get('/module-create/{course_id?}',[ModuleController::class,'create'])->name('module.create');
     Route::post('/module-save',[ModuleController::class,'store'])->name('module.store');
     Route::get('/module-edit{module}', [ModuleController::class, 'edit'])->name('module.edit');
     Route::post('/module-edit{module}', [ModuleController::class, 'update'])->name('module.update');

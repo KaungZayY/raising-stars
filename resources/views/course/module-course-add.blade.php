@@ -8,15 +8,20 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-yellow-500 leading-tight">
-            {{ __('Assign Course to ') }}{{$course->course}}
+            {{ __('Assign Module to ') }}{{$course->course}}
         </h2>
     </x-slot>
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="flex flex-row justify-start">
+            <div class="flex flex-row justify-between">
                 <form action="{{route('course.module',$course->id)}}" method="GET">
                     <button class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-lg mb-2">
                         Back
+                    </button>
+                </form>
+                <form action="{{route('module.create',$course->id)}}" method="GET">
+                    <button class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-lg mb-2">
+                        Create New Module
                     </button>
                 </form>
             </div>

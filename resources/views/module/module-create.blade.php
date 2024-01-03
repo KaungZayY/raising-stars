@@ -47,14 +47,20 @@
 
                     <!-- Submit Button -->
                     <div class="flex flex-row justify-between">
-                        <x-button-cancel :cancelRoute="route('module')">
-                            {{__('Cancel')}}
-                        </x-button-cancel>
+                        @if ($course_id)
+                            <input type="hidden" name="course_id" value="{{$course_id}}" readonly>
+                            <x-button-cancel :cancelRoute="route('course.moduleadd',$course_id)">
+                                {{__('Cancel')}}
+                            </x-button-cancel>
+                        @else
+                            <x-button-cancel :cancelRoute="route('module')">
+                                {{__('Cancel')}}
+                            </x-button-cancel>
+                        @endif
                         <x-button class="ms-4">
                             {{ __('Post') }}
                         </x-button>                                            
                     </div>
-                    
                 </form>
             </div>
         </div>

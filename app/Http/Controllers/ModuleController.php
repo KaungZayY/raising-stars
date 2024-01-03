@@ -17,11 +17,11 @@ class ModuleController extends Controller
         return view('module.module-list',['modules'=>$modules]);
     }
 
-    public function create()
+    public function create($course_id = null)
     {
         $subjects = Subject::all();
         $lecturers = User::where('role_id',2)->get();
-        return view('module.module-create',['subjects'=>$subjects,'lecturers'=>$lecturers]);
+        return view('module.module-create',['subjects'=>$subjects,'lecturers'=>$lecturers, 'course_id'=>$course_id]);
     }
 
     public function store(Request $request)
@@ -48,6 +48,10 @@ class ModuleController extends Controller
         }
 
         $module->lecturers()->sync($request->input('lecturers', []));       //add data to many-to-many relationship tbl
+        if($request->course_id != null)
+        {
+            return redirect()->route('course.moduleadd',$request->course_id)->with('success','New Module Added');
+        }
         return redirect()->route('module')->with('success','New Module Added');
     }
 
