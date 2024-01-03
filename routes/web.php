@@ -10,6 +10,7 @@ use App\Http\Controllers\ModuleController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RoomController;
+use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\SubjectController;
 use Illuminate\Support\Facades\Route;
 
@@ -132,6 +133,9 @@ Route::middleware('admin')->group(function(){
     Route::delete('/module/course{course}/remove',[CourseController::class,'moduleRemove'])->name('course.moduleremove');
     Route::post('/module-assign',[CourseController::class,'assign'])->name('course.moduleassign');
     Route::delete('/module-unassign',[CourseController::class,'unassign'])->name('course.moduleunassign');
+
+    //Schedule
+    Route::get('/schedule',[ScheduleController::class,'index'])->name('schedule');
 });
 
 require __DIR__.'/auth.php';
