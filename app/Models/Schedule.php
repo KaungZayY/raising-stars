@@ -14,6 +14,7 @@ class Schedule extends Model
     protected $fillable = [
         'start_date',
         'end_date',
+        'course_id',
     ];
 
     protected array $sortables = [

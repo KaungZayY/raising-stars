@@ -136,6 +136,9 @@ Route::middleware('admin')->group(function(){
 
     //Schedule
     Route::get('/schedule',[ScheduleController::class,'index'])->name('schedule');
+    Route::get('/schedule-create',[ScheduleController::class,'create'])->name('schedule.create');
+    Route::post('/schedule-save',[ScheduleController::class,'store'])->name('schedule.store');
+
 });
 
 require __DIR__.'/auth.php';

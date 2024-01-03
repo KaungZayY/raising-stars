@@ -14,7 +14,7 @@
                         </svg>
                     </button>
                 </form>
-                <a href="#" class="bg-green-500 text-white px-2 py-1 mb-6 rounded-md">Schedule New Course</a>
+                <a href="{{route('schedule.create')}}" class="bg-green-500 text-white px-2 py-1 mb-6 rounded-md">Schedule New Course</a>
             </div>
             <div class="overflow-x-auto">
                 <table class="min-w-full bg-white border border-gray-300 border-separate">
@@ -74,7 +74,7 @@
                     @endforeach
                 @else
                     <tr>
-                        <td class="py-2 px-4 text-center" colspan="5">No Data found</td>
+                        <td class="py-2 px-4 text-center" colspan="6">No Data found</td>
                     </tr>
                 @endif
                   </tbody>
