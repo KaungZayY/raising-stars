@@ -6,7 +6,12 @@
     </x-slot>
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="flex flex-row justify-end">
+            <div class="flex flex-row justify-between">
+                <form action="{{route('course')}}" method="GET">
+                    <button class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-lg mb-2">
+                        Back
+                    </button>
+                </form>
                 <form action="{{route('course.moduleadd',$course->id)}}" method="GET">
                     <button class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-lg mb-2">
                         <div class="flex items-center">
