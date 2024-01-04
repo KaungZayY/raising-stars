@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\LecturersExport;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
+use Maatwebsite\Excel\Facades\Excel;
 
 class LecturerController extends Controller
 {
@@ -120,5 +122,10 @@ class LecturerController extends Controller
         $lecturer = User::withTrashed()->findOrFail($id);
         $lecturer->forcedelete();
         return redirect()->route('lecturer.archives')->with('success','User Removed Permanently');
+    }
+
+    public function export()
+    {
+        return (new LecturersExport)->download('lecturers.xlsx');
     }
 }

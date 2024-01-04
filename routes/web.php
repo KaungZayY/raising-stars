@@ -93,6 +93,7 @@ Route::middleware('admin')->group(function(){
     Route::get('/lecturer/archives',[LecturerController::class,'archives'])->name('lecturer.archives');
     Route::patch('/lecturer/restore/{user}', [LecturerController::class, 'restore'])->name('lecturer.restore');
     Route::delete('/lecturer/force-delete{user}', [LecturerController::class, 'forcedelete'])->name('lecturer.forcedelete');
+    Route::get('/lecturer/export',[LecturerController::class,'export'])->name('lecturer.export');
 
     //Room
     Route::get('/room',[RoomController::class,'index'])->name('room');
