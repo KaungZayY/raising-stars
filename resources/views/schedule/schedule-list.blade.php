@@ -35,7 +35,25 @@
                         <td class="py-2 px-4 border-b text-center">{{$loop->iteration}}</td>
                         <td class="py-2 px-4 border-b text-center">{{$schedule->start_date}}</td>
                         <td class="py-2 px-4 border-b text-center">{{$schedule->end_date}}</td>
-                        <td class="py-2 px-4 border-b text-center">{{ date_diff(new \DateTime($schedule->start_date), new \DateTime($schedule->end_date))->format("%m months"); }}</td>
+                        <!-- Duration Calculation -->
+                        <td class="py-2 px-4 border-b text-center">
+                            @php
+                                $startDate = new \DateTime($schedule->start_date);
+                                $endDate = new \DateTime($schedule->end_date);
+                                $dateDiff = date_diff($startDate,$endDate);
+                            @endphp
+                            @if ($dateDiff->y > 0)
+                                {{ $dateDiff->format('%y year' . ($dateDiff->y > 1 ? 's' : '')) }}
+                                @if ($dateDiff->m > 0)
+                                    {{ $dateDiff->format(', %m month' . ($dateDiff->m > 1 ? 's' : '')) }}
+                                @endif
+                            @elseif ($dateDiff->m > 0)
+                                {{ $dateDiff->format('%m month' . ($dateDiff->m > 1 ? 's' : '')) }}
+                            @else
+                                {{ $dateDiff->format('%d day' . ($dateDiff->d > 1 ? 's' : '')) }}
+                            @endif
+                        </td>
+                        <!-- Duration Calculation Ends-->
                         <td class="py-2 px-4 border-b text-center">{{$schedule->course->course}}</td>
                         <td class="py-2 px-4 border-b text-center">
                             <div class="inline-block">
