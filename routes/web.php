@@ -138,6 +138,8 @@ Route::middleware('admin')->group(function(){
     Route::get('/schedule',[ScheduleController::class,'index'])->name('schedule');
     Route::get('/schedule-create',[ScheduleController::class,'create'])->name('schedule.create');
     Route::post('/schedule-save',[ScheduleController::class,'store'])->name('schedule.store');
+    Route::get('/schedule-edit{schedule}', [ScheduleController::class, 'edit'])->name('schedule.edit');
+    Route::post('/schedule-edit{schedule}', [ScheduleController::class, 'update'])->name('schedule.update');
 
 });
 
