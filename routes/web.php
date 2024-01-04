@@ -140,7 +140,10 @@ Route::middleware('admin')->group(function(){
     Route::post('/schedule-save',[ScheduleController::class,'store'])->name('schedule.store');
     Route::get('/schedule-edit{schedule}', [ScheduleController::class, 'edit'])->name('schedule.edit');
     Route::post('/schedule-edit{schedule}', [ScheduleController::class, 'update'])->name('schedule.update');
-
+    Route::delete('/schedule-delete{schedule}', [ScheduleController::class, 'destroy'])->name('schedule.delete');
+    Route::get('/schedule-archives',[ScheduleController::class,'archives'])->name('schedule.archives');
+    Route::patch('/schedule-restore/{schedule}', [ScheduleController::class, 'restore'])->name('schedule.restore');
+    Route::delete('/schedule-force-delete{schedule}', [ScheduleController::class, 'forcedelete'])->name('schedule.forcedelete');
 });
 
 require __DIR__.'/auth.php';

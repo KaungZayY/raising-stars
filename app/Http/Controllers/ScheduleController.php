@@ -77,4 +77,42 @@ class ScheduleController extends Controller
 
         return redirect()->route('schedule')->with('success','You have Schedule the Course');
     }
+
+    public function destroy(Schedule $schedule)
+    {
+        $deleted = $schedule->delete();
+        if(!$deleted)
+        {
+            return redirect()->back()->with('error','Cannot Archive this Schedule');
+        }
+        return redirect()->route('schedule')->with('success','Schedule Archived');
+    }
+
+    public function archives()
+    {
+        $schedules = Schedule::onlyTrashed()->with('course')->get();
+        return view('schedule.schedule-archives',compact('schedules'));
+    }
+
+    public function restore($id)
+    {
+        $schedule = Schedule::onlyTrashed()->findOrFail($id);
+        $restored = $schedule->restore();
+        if(!$restored)
+        {
+            return redirect()->back()->with('error','Cannot Restore this Schedule');
+        }
+        return redirect()->route('schedule')->with('success','Data Restored');
+    }
+
+    public function forcedelete($id)
+    {
+        $schedule = Schedule::onlyTrashed()->findOrFail($id);
+        $deleted = $schedule->forceDelete();
+        if(!$deleted)
+        {
+            return redirect()->back()->with('error','Cannot Force Delete this Schedule');
+        }
+        return redirect()->route('schedule.archives')->with('success','Data Deleted Permanently');
+    }
 }
