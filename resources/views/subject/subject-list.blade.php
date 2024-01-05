@@ -12,7 +12,9 @@
     </x-slot>
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            {{-- <input type="text" name="search" id="search"> --}}
+            <div class="mb-3 flex flex-row justify-end">
+                <input type="text" name="search" id="search" class="w-1/3 px-4 py-2 border rounded-md focus:outline-none focus:border-blue-500" placeholder="Search...&#x1F50E;&#xFE0F; "/>
+            </div>
             <div class="flex flex-row justify-between">
                 <form action="{{route('subject.archives')}}" method="GET">
                     <button>
