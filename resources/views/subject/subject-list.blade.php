@@ -1,3 +1,9 @@
+@push('scripts')
+    <!-- JQuery Ajax -->
+    <!-- '@'push to push to master layout, '@'stack('scripts')in master to fetch this script -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+@endpush
+
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
@@ -6,6 +12,7 @@
     </x-slot>
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            {{-- <input type="text" name="search" id="search"> --}}
             <div class="flex flex-row justify-between">
                 <form action="{{route('subject.archives')}}" method="GET">
                     <button>
@@ -68,3 +75,19 @@
         </div>
     </div>
 </x-app-layout>
+<script>
+    $('#search').on('keyup',function(){
+        $value = $(this).val();
+        $.ajax({
+            url: "{{route('subject.search')}}",
+            method: 'GET',
+            data: {
+                '_token': '{{ csrf_token() }}',
+                'search': $value,
+            },
+            success: function(data) {
+                $('tbody').html(data);
+            },
+        });
+    });
+</script>

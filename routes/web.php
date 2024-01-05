@@ -58,6 +58,7 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::middleware('admin')->group(function(){
+    //Subject
     Route::get('/subject',[SubjectController::class,'index'])->name('subject');
     Route::get('/subject/create',[SubjectController::class,'create'])->name('subject.create');
     Route::post('/subject/save',[SubjectController::class,'store'])->name('subject.store');
@@ -67,6 +68,8 @@ Route::middleware('admin')->group(function(){
     Route::get('/subject/archives',[SubjectController::class,'archives'])->name('subject.archives');
     Route::patch('/subject/restore/{subject}', [SubjectController::class, 'restore'])->name('subject.restore');
     Route::delete('/subject/force-delete{subject}', [SubjectController::class, 'forcedelete'])->name('subject.forcedelete');
+    //Subject Search
+    Route::get('/subject/search',[SubjectController::class,'search'])->name('subject.search');
 
     //Report
     Route::get('/discussion/report',[DiscussionReportController::class,'index'])->name('discussion.report');
