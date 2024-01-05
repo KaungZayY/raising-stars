@@ -132,6 +132,8 @@ Route::middleware('admin')->group(function(){
     Route::get('/course/archives',[CourseController::class,'archives'])->name('course.archives');
     Route::patch('/course/restore/{course}', [CourseController::class, 'restore'])->name('course.restore');
     Route::delete('/course/force-delete{course}', [CourseController::class, 'forcedelete'])->name('course.forcedelete');
+    //Course Search
+    Route::get('/course/search',[CourseController::class,'search'])->name('course.search');
 
     //Assign Module to Course
     Route::get('/course{course}/modules', [CourseController::class, 'module'])->name('course.module');
