@@ -97,6 +97,8 @@ Route::middleware('admin')->group(function(){
     Route::patch('/lecturer/restore/{user}', [LecturerController::class, 'restore'])->name('lecturer.restore');
     Route::delete('/lecturer/force-delete{user}', [LecturerController::class, 'forcedelete'])->name('lecturer.forcedelete');
     Route::get('/lecturer/export',[LecturerController::class,'export'])->name('lecturer.export');
+    //Lecturer Search
+    Route::get('/lecturer/search',[LecturerController::class,'search'])->name('lecturer.search');
 
     //Room
     Route::get('/room',[RoomController::class,'index'])->name('room');
