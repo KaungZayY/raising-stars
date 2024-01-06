@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('course');
             $table->integer('from_age')->nullable();
             $table->integer('to_age')->nullable();
+            $table->integer('fees');
             $table->softDeletes();
             $table->timestamps();
         });

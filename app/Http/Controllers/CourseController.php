@@ -28,6 +28,7 @@ class CourseController extends Controller
             'course' => 'required|unique:courses,course',
             'from_age' => 'required|numeric',
             'to_age' => 'required|numeric',
+            'fees' => 'required|numeric',
         ]);
         
         if($validator->fails())
@@ -39,6 +40,7 @@ class CourseController extends Controller
             'course' => $request->course,
             'from_age' => $request->from_age,
             'to_age' => $request->to_age,
+            'fees' => $request->fees,
         ]);
 
         if(!$course)
@@ -60,6 +62,7 @@ class CourseController extends Controller
             'course' => 'required|unique:courses,course,'.$course->id,
             'from_age' => 'required|numeric',
             'to_age' => 'required|numeric',
+            'fees' => 'required|numeric',
         ]);
 
         if($validator->fails())
@@ -71,6 +74,7 @@ class CourseController extends Controller
             'course' => $request->course,
             'from_age' => $request->from_age,
             'to_age' => $request->to_age,
+            'fees' => $request->fees,
         ]);
 
         if(!$updated)

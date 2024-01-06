@@ -32,6 +32,7 @@
                         <th class="py-2 px-4 border-b bg-teal-300">No</th>
                         <th class="py-2 px-4 border-b bg-teal-300">@sortableLink('course', 'Course Name')</th>
                         <th class="py-2 px-4 border-b bg-teal-300">@sortableLink('from_age', 'Age')</th>
+                        <th class="py-2 px-4 border-b bg-teal-300">@sortableLink('fees', 'Course Fees')</th>
                         <th class="py-2 px-4 border-b bg-teal-300">Action</th>
                     </tr>
                   </thead>
@@ -42,6 +43,7 @@
                         <td class="py-2 px-4 border-b text-center">{{$loop->iteration}}</td>
                         <td class="py-2 px-4 border-b text-center">{{$course->course}}</td>
                         <td class="py-2 px-4 border-b text-center">{{$course->from_age}} - {{$course->to_age}}</td>
+                        <td class="py-2 px-4 border-b text-center">{{$course->fees}}</td>
                         <td class="py-2 px-4 border-b text-center">
                             <div class="inline-block">
                                 <form action="{{route('course.module',$course->id)}}" method="GET">
@@ -79,7 +81,7 @@
                     @endforeach
                 @else
                     <tr>
-                        <td class="py-2 px-4 text-center" colspan="4">No Data found</td>
+                        <td class="py-2 px-4 text-center" colspan="5">No Data found</td>
                     </tr>
                 @endif
                   </tbody>

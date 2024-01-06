@@ -29,13 +29,19 @@
                         <input type="number" name="to_age" id="to_age" value="{{$course->to_age}}" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-blue-500">
                     </div>
 
+                    <!-- Fees -->
+                    <div class="mb-4">
+                        <label for="fees" class="block dark:text-white text-lg font-bold mb-2">To Age</label>
+                        <input type="number" name="fees" id="fees" value="{{$course->fees}}" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-blue-500">
+                    </div>
+
                     <!-- Submit Button -->
                     <div class="flex flex-row justify-between">
                         <x-button-cancel :cancelRoute="route('course')">
                             {{__('Cancel')}}
                         </x-button-cancel>
                         <x-button class="ms-4">
-                            {{ __('Add') }}
+                            {{ __('Update') }}
                         </x-button>                                            
                     </div>
                     

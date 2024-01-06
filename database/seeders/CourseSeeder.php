@@ -17,6 +17,7 @@ class CourseSeeder extends Seeder
             'course' => 'Grade - 9',
             'from_age' => 14,
             'to_age' => 16,
+            'fees' => 4000000,
             'created_at' => now(),
             'updated_at' => now(),
         ]);

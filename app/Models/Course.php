@@ -15,12 +15,14 @@ class Course extends Model
         'id',
         'course',
         'from_age',
+        'fees',
     ];
 
     protected $fillable = [
         'course',
         'from_age',
         'to_age',
+        'fees',
     ];
 
     public function modules()
