@@ -15,12 +15,14 @@ class Schedule extends Model
         'start_date',
         'end_date',
         'course_id',
+        'session',
     ];
 
     protected array $sortables = [
         'id',
         'start_date',
         'end_date',
+        'session',
     ];
 
     public function course()

@@ -33,6 +33,16 @@
                         </select>
                     </div>
 
+                    <!-- Session -->
+                    <div class="mb-4">
+                        <label for="session" class="block dark:text-white text-lg font-bold mb-2">Session</label>
+                        <select name="session" id="session" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-blue-500" required>
+                                <option value="">--choose-one--</option>
+                                <option value="weekdays" {{$schedule->session == 'weekdays' ? 'selected':''}}>Weekdays</option>
+                                <option value="weekend" {{$schedule->session == 'weekend' ? 'selected':''}}>Weekend</option>
+                        </select>
+                    </div>
+
                     <!-- Submit Button -->
                     <div class="flex flex-row justify-between">
                         <x-button-cancel :cancelRoute="route('schedule')">

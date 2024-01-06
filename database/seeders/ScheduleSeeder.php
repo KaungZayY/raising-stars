@@ -17,6 +17,7 @@ class ScheduleSeeder extends Seeder
         DB::table('schedules')->insert([
             'start_date' => Carbon::parse('2024-01-19'),//Year, Month, Day
             'end_date' => Carbon::parse('2024-04-20'),
+            'session' => 'weekdays',
             'course_id' => 1,
             'created_at' => now(),
             'updated_at' => now(),

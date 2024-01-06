@@ -26,10 +26,20 @@
                     <!-- Subject -->
                     <div class="mb-4">
                         <label for="course_id" class="block dark:text-white text-lg font-bold mb-2">Course</label>
-                        <select name="course_id" id="course_id" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-blue-500">
+                        <select name="course_id" id="course_id" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-blue-500" required>
                             @foreach($courses as $course)
                                 <option value="{{ $course->id }}">{{ $course->course }}</option>
                             @endforeach
+                        </select>
+                    </div>
+
+                    <!-- Session -->
+                    <div class="mb-4">
+                        <label for="session" class="block dark:text-white text-lg font-bold mb-2">Session</label>
+                        <select name="session" id="session" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-blue-500" required>
+                                <option value="">--choose-one--</option>
+                                <option value="weekdays">Weekdays</option>
+                                <option value="weekend">Weekend</option>
                         </select>
                     </div>
 

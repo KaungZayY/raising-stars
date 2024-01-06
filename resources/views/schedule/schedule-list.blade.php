@@ -25,6 +25,7 @@
                         <th class="py-2 px-4 border-b bg-orange-400">@sortableLink('end_date', 'End Date')</th>
                         <th class="py-2 px-4 border-b bg-orange-400">@sortableLink('duration', 'Duration')</th>
                         <th class="py-2 px-4 border-b bg-orange-400">Course</th>
+                        <th class="py-2 px-4 border-b bg-orange-400">@sortableLink('session', 'Session')</th>
                         <th class="py-2 px-4 border-b bg-orange-400">Action</th>
                     </tr>
                   </thead>
@@ -55,6 +56,7 @@
                         </td>
                         <!-- Duration Calculation Ends-->
                         <td class="py-2 px-4 border-b text-center">{{$schedule->course->course}}</td>
+                        <td class="py-2 px-4 border-b text-center">{{$schedule->session}}</td>
                         <td class="py-2 px-4 border-b text-center">
                             <div class="inline-block">
                                 <form action="#" method="GET">
@@ -92,7 +94,7 @@
                     @endforeach
                 @else
                     <tr>
-                        <td class="py-2 px-4 text-center" colspan="6">No Data found</td>
+                        <td class="py-2 px-4 text-center" colspan="7">No Data found</td>
                     </tr>
                 @endif
                   </tbody>
