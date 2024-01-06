@@ -123,6 +123,8 @@ Route::middleware('admin')->group(function(){
     Route::get('/module/archives',[ModuleController::class,'archives'])->name('module.archives');
     Route::patch('/module/restore/{module}', [ModuleController::class, 'restore'])->name('module.restore');
     Route::delete('/module/force-delete{module}', [ModuleController::class, 'forcedelete'])->name('module.forcedelete');
+    //Room Search
+    Route::get('/module/search',[ModuleController::class,'search'])->name('module.search');
 
     //Course
     Route::get('/course',[CourseController::class,'index'])->name('course');
