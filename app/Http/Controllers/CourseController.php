@@ -217,4 +217,9 @@ class CourseController extends Controller
             
         }
     }
+
+    public function availableCourses()
+    {
+        return view('courses-view.courses-list');
+    }
 }

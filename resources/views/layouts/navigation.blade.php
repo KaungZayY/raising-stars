@@ -16,6 +16,10 @@
                         {{ __('Home') }}
                     </x-nav-link>
 
+                    <x-nav-link :href="route('courses')" :active="request()->routeIs('courses')">
+                        {{ __('Available Courses') }}
+                    </x-nav-link>
+
                     <!-- Admin Control Drop List -->
                     @can('viewAdminContent', App\Models\User::class)
                     <x-nav-link-parent :href="'#'" :active="request()->routeIs('padron.*')">
