@@ -127,7 +127,7 @@ class ModuleController extends Controller
         if($request->ajax())
         {
             $output="";
-            $modules = Module::autosort()->with('subject')->with('lecturers')->get();
+            $modules = Module::where('module_number','LIKE','%'.$request->search.'%')->with('subject')->with('lecturers')->get();
 
             if($modules)
             {
