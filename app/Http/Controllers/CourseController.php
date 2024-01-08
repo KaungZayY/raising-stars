@@ -224,6 +224,7 @@ class CourseController extends Controller
 
     public function availableCourses()
     {
-        return view('courses-view.courses-list');
+        $courses = Course::all();
+        return view('courses-view.courses-list',compact('courses'));
     }
 }
