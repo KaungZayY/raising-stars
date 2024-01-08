@@ -43,6 +43,18 @@
                         </select>
                     </div>
 
+                    <!-- Student Limit -->
+                    <div class="mb-4">
+                        <label for="student_limit" class="block dark:text-white text-lg font-bold mb-2">Student Limit</label>
+                        <input type="number" name="student_limit" id="student_limit" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-blue-500" required value="{{$schedule->student_limit}}">
+                    </div>
+
+                    <!-- Schedule Description -->
+                    <div class="mb-4">
+                        <label for="schedule_description" class="block dark:text-white text-lg font-bold mb-2">Schedule Description</label>
+                        <textarea name="schedule_description" id="schedule_description" rows="4" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-blue-500" required>{{$schedule->schedule_description}}</textarea>
+                    </div>
+
                     <!-- Submit Button -->
                     <div class="flex flex-row justify-between">
                         <x-button-cancel :cancelRoute="route('schedule')">

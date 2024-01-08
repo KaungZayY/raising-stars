@@ -17,6 +17,8 @@ return new class extends Migration
             $table->date('start_date');
             $table->date('end_date');
             $table->string('session');
+            $table->string('schedule_description');
+            $table->integer('student_limit');
             $table->timestamps();
             $table->softDeletes();
         });

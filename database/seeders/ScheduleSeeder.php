@@ -18,6 +18,8 @@ class ScheduleSeeder extends Seeder
             'start_date' => Carbon::parse('2024-01-19'),//Year, Month, Day
             'end_date' => Carbon::parse('2024-04-20'),
             'session' => 'weekdays',
+            'schedule_description' => '2024 Grade - 9 Monday - Friday Course',
+            'student_limit' => 50,
             'course_id' => 1,
             'created_at' => now(),
             'updated_at' => now(),

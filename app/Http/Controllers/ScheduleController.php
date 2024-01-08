@@ -29,6 +29,8 @@ class ScheduleController extends Controller
             'end_date' => 'required|date',
             'course_id' => 'required|exists:courses,id',
             'session' => 'required',
+            'schedule_description' => 'required',
+            'student_limit' => 'required|numeric',
         ]);
         if($validator->fails())
         {
@@ -39,6 +41,8 @@ class ScheduleController extends Controller
             'end_date' => $request->end_date,
             'course_id' => $request->course_id,
             'session' => $request->session,
+            'schedule_description' => $request->schedule_description,
+            'student_limit' => $request->student_limit,
         ]);
 
         if(!$schedule)
@@ -62,6 +66,8 @@ class ScheduleController extends Controller
             'end_date' => 'required|date',
             'course_id' => 'required|exists:courses,id',
             'session' => 'required',
+            'schedule_description' => 'required',
+            'student_limit' => 'required|numeric',
         ]);
         if($validator->fails())
         {
@@ -72,6 +78,8 @@ class ScheduleController extends Controller
             'end_date' => $request->end_date,
             'course_id' => $request->course_id,
             'session' => $request->session,
+            'schedule_description' => $request->schedule_description,
+            'student_limit' => $request->student_limit,
         ]);
 
         if(!$updated)

@@ -16,6 +16,8 @@ class Schedule extends Model
         'end_date',
         'course_id',
         'session',
+        'schedule_description',
+        'student_limit',
     ];
 
     protected array $sortables = [
