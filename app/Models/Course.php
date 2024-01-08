@@ -23,6 +23,7 @@ class Course extends Model
         'from_age',
         'to_age',
         'fees',
+        'description',
     ];
 
     public function modules()

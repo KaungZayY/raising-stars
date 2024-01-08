@@ -35,6 +35,12 @@
                         <input type="number" name="fees" id="fees" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-blue-500">
                     </div>
 
+                    <!-- Description -->
+                    <div class="mb-4">
+                        <label for="description" class="block dark:text-white text-lg font-bold mb-2">Description</label>
+                        <textarea name="description" id="description" rows="4" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-blue-500" required></textarea>
+                    </div>
+
                     <!-- Submit Button -->
                     <div class="flex flex-row justify-between">
                         <x-button-cancel :cancelRoute="route('course')">

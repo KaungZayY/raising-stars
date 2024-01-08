@@ -29,6 +29,7 @@ class CourseController extends Controller
             'from_age' => 'required|numeric',
             'to_age' => 'required|numeric',
             'fees' => 'required|numeric',
+            'description' => 'required',
         ]);
         
         if($validator->fails())
@@ -41,6 +42,7 @@ class CourseController extends Controller
             'from_age' => $request->from_age,
             'to_age' => $request->to_age,
             'fees' => $request->fees,
+            'description' => $request->description,
         ]);
 
         if(!$course)
@@ -63,6 +65,7 @@ class CourseController extends Controller
             'from_age' => 'required|numeric',
             'to_age' => 'required|numeric',
             'fees' => 'required|numeric',
+            'description' => 'required',
         ]);
 
         if($validator->fails())
@@ -75,6 +78,7 @@ class CourseController extends Controller
             'from_age' => $request->from_age,
             'to_age' => $request->to_age,
             'fees' => $request->fees,
+            'description' => $request->description,
         ]);
 
         if(!$updated)
