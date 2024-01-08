@@ -116,14 +116,22 @@
                                 <td class="py-2 px-4 border-b text-center">{{$schedule->course->course}}</td>
                                 <td class="py-2 px-4 border-b text-center">{{$schedule->session}}</td>
                                 <td class="py-2 px-4 border-b text-center">
-                                        <div class="inline-block">
+                                    <div class="inline-block">
+                                        <!-- Disable if User is not Student -->
+                                        @if (auth()->user()->role_id == 1)
                                             <form action="#" method="GET">
                                                 <button class="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600">
                                                     Apply
                                                 </button>                                                
                                             </form>
-                                        </div>
-                                    </td>
+                                        @else
+                                            <button class="px-4 py-2 bg-gray-500 text-white rounded-md" disabled>
+                                                Apply
+                                            </button>  
+                                        @endif
+                                        <!-- Disable if not Student Ends -->
+                                    </div>
+                                </td>
                             </tr>
                             @endforeach
                         @else
