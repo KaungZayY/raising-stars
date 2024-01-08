@@ -231,4 +231,10 @@ class CourseController extends Controller
         $courses = Course::all();
         return view('courses-view.courses-list',compact('courses'));
     }
+
+    public function courseSession(Course $course)
+    {
+        $sessions = $course->schedules->pluck('session')->unique();
+        return view('courses-view.course-session',compact('sessions','course'));
+    }
 }

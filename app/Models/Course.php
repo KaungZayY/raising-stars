@@ -35,4 +35,9 @@ class Course extends Model
     {
         return $this->modules->contains('module_id',$module->id);
     }
+
+    public function schedules()
+    {
+        return $this->hasMany(Schedule::class);
+    }
 }
