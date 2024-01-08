@@ -6,7 +6,14 @@
     </x-slot>
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="flex flex-wrap mx-auto w-3/4 mt-9">
+            <div class="flex flex-wrap mx-auto justify-between">
+                <form action="{{route('courses')}}" method="GET">
+                    <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-1 px-4 rounded mb-4">
+                        Back
+                    </button>
+                </form>
+            </div>
+            <div class="flex flex-wrap mx-auto w-3/4 mt-5">
                 @if ($sessions->count())
                     @foreach ($sessions as $session)
                         <div class="w-1/2 text-center">

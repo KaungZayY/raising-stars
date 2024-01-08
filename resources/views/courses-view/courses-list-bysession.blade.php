@@ -4,13 +4,20 @@
             {{ __('Schedules for ') }}{{$course->course}} ({{$session}})
         </h2>
     </x-slot>
-    <div class="py-12">
+    <div class="max-w-7xl mx-auto py-8">
+        <form action="{{route('course.session',$course->id)}}" method="GET">
+            <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-1 px-4 rounded mb-4">
+                Back
+            </button>
+        </form>
+    </div>
+    <div>
         <div class="max-w-5xl mx-auto sm:px-6 lg:px-8">
             <div class="mx-auto">
                 @if ($schedules->count())
                 <div class="flex flex-row justify-between">
                     <div class="flex flex-col">
-                        <h1 class="text-black dark:text-white mb-4 text-xl text-center">Course Information</h1>
+                        <h1 class="text-black dark:text-white mb-4 text-xl">Course Information</h1>
                         <h1 class="text-gray-700 dark:text-gray-300 mb-2">Age between</h1>
                         <p class="text-green-600 dark:text-green-400 mb-2">{{$course->from_age}} - {{$course->to_age}}</p>
 
