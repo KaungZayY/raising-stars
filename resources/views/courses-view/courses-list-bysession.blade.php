@@ -5,12 +5,127 @@
         </h2>
     </x-slot>
     <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="flex flex-wrap mx-auto w-3/4">
+        <div class="max-w-5xl mx-auto sm:px-6 lg:px-8">
+            <div class="mx-auto">
                 @if ($schedules->count())
-                    @foreach ($schedules as $schedule)
-                        
-                    @endforeach
+                <div class="flex flex-row justify-between">
+                    <div class="flex flex-col">
+                        <h1 class="text-black dark:text-white mb-2">Age between</h1>
+                        <p class="text-green-600 dark:text-green-400 mb-2">{{$course->from_age}} - {{$course->to_age}}</p>
+
+                        <h1 class="text-black dark:text-white mb-2">Course Fees</h1>
+                        <p class="text-green-600 dark:text-green-400 mb-2">{{$course->fees}}</p>
+
+                        <h1 class="text-black dark:text-white mb-2">Course Description</h1>
+                        <p class="text-green-600 dark:text-green-400 mb-2">{{$course->description}}</p>
+                    </div>
+
+                    <!-- Modules -->
+                    <div class="flex flex-col">
+                        <h1 class="text-black dark:text-white mb-2">Modules</h1>
+                        <table class="min-w-full bg-white border border-gray-300 border-separate">
+                          <thead class="with-larasort">
+                            <tr>
+                                <th class="py-2 px-4 border-b bg-pink-300">No</th>
+                                <th class="py-2 px-4 border-b bg-pink-300">Module Number</th>
+                                <th class="py-2 px-4 border-b bg-pink-300">Subject</th>
+                                <th class="py-2 px-4 border-b bg-pink-300">Lecturers</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                        @if ($course->modules->count())
+                            @foreach ($course->modules as $module)
+                            <tr>
+                                <td class="py-2 px-4 border-b text-center">{{$loop->iteration}}</td>
+                                <td class="py-2 px-4 border-b text-center">{{$module->module_number}}</td>
+                                <td class="py-2 px-4 border-b text-center">{{$module->subject->subject}}</td>
+                                <!-- Lecturers -->
+                                <td class="py-2 px-4 border-b text-center">
+                                    <p>
+                                        @foreach ($module->lecturers as $lecturer)
+                                            {{$lecturer->name}}
+                                            @unless ($loop->last), @endunless
+                                            <br>
+                                        @endforeach
+                                    </p>
+                                </td>
+                            </tr>
+                            @endforeach
+                        @else
+                            <tr>
+                                <td class="py-2 px-4 text-center" colspan="3">No Data found</td>
+                            </tr>
+                        @endif
+                          </tbody>
+                        </table>
+                    </div>
+                    <!-- Module Ends -->
+                </div>
+                <!-- Course Info and Modules Ends -->
+
+                <div class="mt-5">
+                    <h1 class="text-black dark:text-white mb-2">Schedules for {{$course->course}} {{$session}}</h1>
+                    <div class="flex flex-row">
+                        <table class="min-w-full bg-white border border-gray-300 border-separate">
+                            <thead class="with-larasort">
+                            <tr>
+                                <th class="py-2 px-4 border-b bg-orange-400">No</th>
+                                <th class="py-2 px-4 border-b bg-orange-400">Start Date</th>
+                                <th class="py-2 px-4 border-b bg-orange-400">End Date</th>
+                                <th class="py-2 px-4 border-b bg-orange-400">Duration</th>
+                                <th class="py-2 px-4 border-b bg-orange-400">Course</th>
+                                <th class="py-2 px-4 border-b bg-orange-400">Session</th>
+                                <th class="py-2 px-4 border-b bg-orange-400">Action</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                        @if ($schedules->count())
+                            @foreach ($schedules as $schedule)
+                            <tr>
+                                <td class="py-2 px-4 border-b text-center">{{$loop->iteration}}</td>
+                                <td class="py-2 px-4 border-b text-center">{{$schedule->start_date}}</td>
+                                <td class="py-2 px-4 border-b text-center">{{$schedule->end_date}}</td>
+                                <!-- Duration Calculation -->
+                                <td class="py-2 px-4 border-b text-center">
+                                    @php
+                                        $startDate = new \DateTime($schedule->start_date);
+                                        $endDate = new \DateTime($schedule->end_date);
+                                        $dateDiff = date_diff($startDate,$endDate);
+                                    @endphp
+                                    @if ($dateDiff->y > 0)
+                                        {{ $dateDiff->format('%y year' . ($dateDiff->y > 1 ? 's' : '')) }}
+                                        @if ($dateDiff->m > 0)
+                                            {{ $dateDiff->format(', %m month' . ($dateDiff->m > 1 ? 's' : '')) }}
+                                        @endif
+                                    @elseif ($dateDiff->m > 0)
+                                        {{ $dateDiff->format('%m month' . ($dateDiff->m > 1 ? 's' : '')) }}
+                                    @else
+                                        {{ $dateDiff->format('%d day' . ($dateDiff->d > 1 ? 's' : '')) }}
+                                    @endif
+                                </td>
+                                <!-- Duration Calculation Ends-->
+                                <td class="py-2 px-4 border-b text-center">{{$schedule->course->course}}</td>
+                                <td class="py-2 px-4 border-b text-center">{{$schedule->session}}</td>
+                                <td class="py-2 px-4 border-b text-center">
+                                        <div class="inline-block">
+                                            <form action="#" method="GET">
+                                                <button class="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600">
+                                                    Apply
+                                                </button>                                                
+                                            </form>
+                                        </div>
+                                    </td>
+                            </tr>
+                            @endforeach
+                        @else
+                            <tr>
+                                <td class="py-2 px-4 text-center" colspan="7">No Data found</td>
+                            </tr>
+                        @endif
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
                 @else
                     <div class="flex mx-auto justify-center">
                         <p class="text-lg text-center text-black dark:text-white">No Available Courses</p>
