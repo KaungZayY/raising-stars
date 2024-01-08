@@ -59,6 +59,7 @@ Route::middleware('auth')->group(function () {
     //Available Courses
     Route::get('/courses',[CourseController::class,'availableCourses'])->name('courses');
     Route::get('/courses{course}/sessions',[CourseController::class,'courseSession'])->name('course.session');
+    Route::get('/courses{course}/{session}/schedules',[CourseController::class,'courseBySession'])->name('courses.bysession');
 });
 
 Route::middleware('admin')->group(function(){

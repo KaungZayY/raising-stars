@@ -10,7 +10,7 @@
                 @if ($sessions->count())
                     @foreach ($sessions as $session)
                         <div class="w-1/2 text-center">
-                            <div class="flex flex-col justify-center m-6 bg-green-400 dark:bg-green-200 rounded-lg border border-gray-200">
+                            <div class="flex flex-col justify-center m-6 bg-green-400 dark:bg-green-200 rounded-lg border border-gray-200 flex-grow" onclick="viewCourses('{{route('courses.bysession',['course'=>$course->id,'session'=>$session])}}')">
                                 <h2 class="font-bold mt-5 mb-5 text-xl">{{$session}}</h2>
                             </div>
                         </div>
@@ -24,3 +24,10 @@
         </div>
     </div>
 </x-app-layout>
+
+<script>
+    function viewCourses(route_url)
+    {
+        window.location.href = route_url;
+    }
+</script>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Course;
 use App\Models\Module;
+use App\Models\Schedule;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
@@ -236,5 +237,12 @@ class CourseController extends Controller
     {
         $sessions = $course->schedules->pluck('session')->unique();
         return view('courses-view.course-session',compact('sessions','course'));
+    }
+
+    public function courseBySession($course_id, $session)
+    {
+        $course = Course::findOrFail($course_id);
+        $schedules = $course->schedules->where('session',$session);
+        return view('courses-view.courses-list-bysession',compact('schedules','session','course'));
     }
 }
