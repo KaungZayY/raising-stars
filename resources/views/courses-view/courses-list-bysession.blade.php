@@ -119,7 +119,7 @@
                                     <div class="inline-block">
                                         <!-- Disable if User is not Student -->
                                         @if (auth()->user()->role_id == 1)
-                                            <form action="#" method="GET">
+                                            <form action="{{route('schedule.apply',$schedule->id)}}" method="GET">
                                                 <button class="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600">
                                                     Apply
                                                 </button>                                                
