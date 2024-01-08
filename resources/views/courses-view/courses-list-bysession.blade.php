@@ -10,19 +10,20 @@
                 @if ($schedules->count())
                 <div class="flex flex-row justify-between">
                     <div class="flex flex-col">
-                        <h1 class="text-black dark:text-white mb-2">Age between</h1>
+                        <h1 class="text-black dark:text-white mb-4 text-xl text-center">Course Information</h1>
+                        <h1 class="text-gray-700 dark:text-gray-300 mb-2">Age between</h1>
                         <p class="text-green-600 dark:text-green-400 mb-2">{{$course->from_age}} - {{$course->to_age}}</p>
 
-                        <h1 class="text-black dark:text-white mb-2">Course Fees</h1>
+                        <h1 class="text-gray-700 dark:text-gray-300 mb-2">Course Fees</h1>
                         <p class="text-green-600 dark:text-green-400 mb-2">{{$course->fees}}</p>
 
-                        <h1 class="text-black dark:text-white mb-2">Course Description</h1>
+                        <h1 class="text-gray-700 dark:text-gray-300 mb-2">Course Description</h1>
                         <p class="text-green-600 dark:text-green-400 mb-2">{{$course->description}}</p>
                     </div>
 
                     <!-- Modules -->
                     <div class="flex flex-col">
-                        <h1 class="text-black dark:text-white mb-2">Modules</h1>
+                        <h1 class="text-black dark:text-white mb-4 text-xl text-center">Modules</h1>
                         <table class="min-w-full bg-white border border-gray-300 border-separate">
                           <thead class="with-larasort">
                             <tr>
@@ -53,7 +54,7 @@
                             @endforeach
                         @else
                             <tr>
-                                <td class="py-2 px-4 text-center" colspan="3">No Data found</td>
+                                <td class="py-2 px-4 text-center" colspan="4">No Data found</td>
                             </tr>
                         @endif
                           </tbody>
@@ -63,8 +64,9 @@
                 </div>
                 <!-- Course Info and Modules Ends -->
 
-                <div class="mt-5">
-                    <h1 class="text-black dark:text-white mb-2">Schedules for {{$course->course}} {{$session}}</h1>
+                <!-- Schedule Info Start -->
+                <div class="mt-12">
+                    <h1 class="text-black dark:text-white mb-4 text-xl">Schedules for {{$course->course}} {{$session}}</h1>
                     <div class="flex flex-row">
                         <table class="min-w-full bg-white border border-gray-300 border-separate">
                             <thead class="with-larasort">
@@ -126,6 +128,8 @@
                         </table>
                     </div>
                 </div>
+                <!-- Schedule Info Ends -->
+
                 @else
                     <div class="flex mx-auto justify-center">
                         <p class="text-lg text-center text-black dark:text-white">No Available Courses</p>

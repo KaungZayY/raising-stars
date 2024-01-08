@@ -17,7 +17,7 @@
                     @endforeach
                 @else
                     <div class="flex mx-auto justify-center">
-                        <p class="text-lg text-center text-black dark:text-white">No Sessions Available Right Now</p>
+                        <p class="text-lg text-center text-black dark:text-white">No Schedule Available for this Course Right Now</p>
                     </div>                
                 @endif
             </div>
