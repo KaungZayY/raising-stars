@@ -70,4 +70,9 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Module::class,'module_lecturer');      //Many to Many Lecturers-Subjects
     }
+
+    public function studentInfo()
+    {
+        return $this->hasOne(StudentInfo::class);
+    }
 }
