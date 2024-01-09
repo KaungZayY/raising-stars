@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('mother_name');
             $table->string('parent_phone');
             $table->string('parent_email');
+            $table->string('parent_occupation');
             $table->string('race');
             $table->string('nationality');
             $table->date('date_of_birth');

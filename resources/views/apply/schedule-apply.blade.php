@@ -77,4 +77,16 @@
             </div>
         </div>
     </div>
+    <!-- Course Over View Ends -->
+    <div class="text-center">
+        <h1 class="text-black dark:text-white mb-4 text-2xl">Student Information</h1>
+    </div>
+    <!-- Apply Form -->
+    <form action="#" method="POST">
+        @csrf
+        @method('POST')
+        <x-student-info>
+        </x-student-info>
+    </form>
+    <!-- Apply Form Ends -->
 </x-app-layout>
