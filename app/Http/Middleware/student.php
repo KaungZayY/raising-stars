@@ -20,6 +20,6 @@ class student
         {
             return $next($request);
         }
-        return redirect()->back()->with('error','Unthorized Access');
+        return redirect()->back()->with('error','Unauthorized Access');
     }
 }

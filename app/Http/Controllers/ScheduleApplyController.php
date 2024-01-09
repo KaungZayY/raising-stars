@@ -11,4 +11,9 @@ class ScheduleApplyController extends Controller
     {
         return view('apply.schedule-apply',compact('schedule'));
     }
+
+    public function store(Request $request, Schedule $schedule)
+    {
+        dd($request);
+    }
 }

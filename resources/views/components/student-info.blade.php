@@ -105,7 +105,7 @@
                 </div>
                 <span class="text-lg text-gray-700 dark:text-gray-300 mt-1">:</span>
                 <div class="w-3/5 text-center">
-                    <input type="text" name="parent_email" id="parent_email"
+                    <input type="email" name="parent_email" id="parent_email"
                         class="w-4/5 border rounded-sm focus:outline-none focus:border-blue-500" required
                         placeholder="eg. david@gmail.com">
                 </div>

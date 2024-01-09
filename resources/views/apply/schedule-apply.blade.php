@@ -82,9 +82,8 @@
         <h1 class="text-black dark:text-white mb-4 text-2xl">Student Information</h1>
     </div>
     <!-- Apply Form -->
-    <form action="#" method="POST">
+    <form action="{{ route('schedule.apply', $schedule->id) }}" method="POST">
         @csrf
-        @method('POST')
         <x-student-info>
         </x-student-info>
         <div class="max-w-5xl mx-auto sm:px-6 lg:px-8 bg-gray-200 dark:bg-gray-700 rounded-lg mt-8">
@@ -97,12 +96,8 @@
                                 Screenshot</label>
                         </div>
                         <div class="w-1/2 text-left ml-4">
-                            <label for="receipt"
-                                class="cursor-pointer bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md inline-block">
-                                Choose File
-                            </label>
-                            <input type="file" name="receipt" id="receipt" class="hidden" required>
-                            <span id="selectedFileName" class="ml-2 text-gray-700"></span>
+                            <input type="file" name="receipt" id="receipt"
+                                class="w-3/5 border rounded-sm focus:outline-none focus:border-blue-500" required>
                         </div>
                     </div>
                 </div>

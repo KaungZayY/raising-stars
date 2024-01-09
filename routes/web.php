@@ -65,6 +65,7 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware('student')->group(function(){
     Route::get('/schedule{schedule}/apply',[ScheduleApplyController::class,'index'])->name('schedule.apply');
+    Route::post('/schedule{schedule}/apply',[ScheduleApplyController::class,'store']);
 });
 
 Route::middleware('admin')->group(function(){
