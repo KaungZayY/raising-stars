@@ -90,14 +90,19 @@
         <div class="max-w-5xl mx-auto sm:px-6 lg:px-8 bg-gray-200 dark:bg-gray-700 rounded-lg mt-8">
             <div class="flex flex-col">
                 <!-- Receipt -->
-                <div class="flex flex-row">
-                    <div class="flex flex-row flex-grow w-full mb-2 mt-2 items-center">
-                        <div class="w-1/2 text-center mt-2">
-                            <label for="email" class="block dark:text-white text-lg font-bold">Receipt Screenshot</label>
+                <div class="flex flex-row border border-gray-400 dark:border-gray-600">
+                    <div class="flex flex-row w-full mb-2 mt-2 items-center">
+                        <div class="w-1/2 text-right mt-2 mb-2 mr-4">
+                            <label for="receipt" class="block dark:text-white text-lg font-bold">Receipt
+                                Screenshot</label>
                         </div>
-                        <div class="w-1/2 text-center">
-                            <input type="file" name="email" id="email"
-                                class="w-full border rounded-sm focus:outline-none focus:border-blue-500" required>
+                        <div class="w-1/2 text-left ml-4">
+                            <label for="receipt"
+                                class="cursor-pointer bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md inline-block">
+                                Choose File
+                            </label>
+                            <input type="file" name="receipt" id="receipt" class="hidden" required>
+                            <span id="selectedFileName" class="ml-2 text-gray-700"></span>
                         </div>
                     </div>
                 </div>
@@ -105,19 +110,23 @@
                 <div class="flex flex-row">
                     <div class="flex flex-row flex-grow w-full mb-2 mt-2 items-center">
                         <div class="w-1/2 text-center mt-2">
-                            <x-button-cancel :cancelRoute="route('courses.bysession',['course'=>$schedule->course->id,'session'=>$schedule->session])">
-                                {{__('Cancel')}}
+                            <x-button-cancel :cancelRoute="route('courses.bysession', [
+                                'course' => $schedule->course->id,
+                                'session' => $schedule->session,
+                            ])">
+                                {{ __('Cancel') }}
                             </x-button-cancel>
                         </div>
                         <div class="w-1/2 text-center">
                             <x-button class="ms-4">
                                 {{ __('Register') }}
-                            </x-button>  
+                            </x-button>
                         </div>
-                    </div>                                            
+                    </div>
                 </div>
             </div>
         </div>
     </form>
+    <br>
     <!-- Apply Form Ends -->
 </x-app-layout>
