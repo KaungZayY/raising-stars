@@ -141,15 +141,15 @@
         </div>
         <!-- Row Student DoB & Parent Occupation Ends -->
 
-        <!-- Genter Only -->
+        <!-- gender Only -->
         <div class="flex flex-row">
             <div class="flex flex-row w-1/2 mb-2 mt-2 border-r items">
                 <div class="w-2/5 text-center mt-2">
-                    <label for="genter" class="block dark:text-white text-lg font-bold">Genter</label>
+                    <label for="gender" class="block dark:text-white text-lg font-bold">gender</label>
                 </div>
                 <span class="text-lg text-gray-700 dark:text-gray-300 mt-1">:</span>
                 <div class="w-3/5 text-center">
-                    <select name="genter" id="genter" required class="w-4/5">
+                    <select name="gender" id="gender" required class="w-4/5">
                         <option value="">--- Select One ---</option>
                         <option value="male">Male</option>
                         <option value="female">Female</option>
@@ -162,7 +162,7 @@
                 -->
             </div>
         </div>
-        <!-- Genter Ends -->
+        <!-- gender Ends -->
 
         <!-- Race -->
         <div class="flex flex-row">

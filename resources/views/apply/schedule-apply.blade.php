@@ -82,7 +82,7 @@
         <h1 class="text-black dark:text-white mb-4 text-2xl">Student Information</h1>
     </div>
     <!-- Apply Form -->
-    <form action="{{ route('schedule.apply', $schedule->id) }}" method="POST">
+    <form action="{{ route('schedule.apply', $schedule->id) }}" method="POST" enctype="multipart/form-data">
         @csrf
         <x-student-info>
         </x-student-info>
@@ -94,10 +94,16 @@
                         <div class="w-1/2 text-right mt-2 mb-2 mr-4">
                             <label for="receipt" class="block dark:text-white text-lg font-bold">Receipt
                                 Screenshot</label>
+                                @error('receipt')
+                                    <br>
+                                @enderror
                         </div>
                         <div class="w-1/2 text-left ml-4">
                             <input type="file" name="receipt" id="receipt"
                                 class="w-3/5 border rounded-sm focus:outline-none focus:border-blue-500" required>
+                                @error('receipt')
+                                    <p class="text-red-500">{{ $message }}</p>
+                                @enderror
                         </div>
                     </div>
                 </div>

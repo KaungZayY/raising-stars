@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('race');
             $table->string('nationality');
             $table->date('date_of_birth');
-            $table->string('genter');
+            $table->string('gender');
             $table->timestamps();
         });
     }
