@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Schedule;
 use Illuminate\Http\Request;
 
 class ScheduleApplyController extends Controller
 {
-    public function scheduleView()
+    public function index(Schedule $schedule)
     {
-        return view('apply.schedule-apply');
+        return view('apply.schedule-apply',compact('schedule'));
     }
 }

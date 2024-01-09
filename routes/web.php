@@ -64,7 +64,7 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::middleware('student')->group(function(){
-    Route::get('/schedule{schedule}/apply',[ScheduleApplyController::class,'scheduleView'])->name('schedule.apply');
+    Route::get('/schedule{schedule}/apply',[ScheduleApplyController::class,'index'])->name('schedule.apply');
 });
 
 Route::middleware('admin')->group(function(){
