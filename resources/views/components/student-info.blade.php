@@ -23,6 +23,9 @@
                     <input type="text" name="father_name" id="father_name"
                         class="w-4/5 border rounded-sm focus:outline-none focus:border-blue-500" required
                         placeholder="eg. Mr David">
+                        @error('father_name')
+                            <p class="text-red-500">{{ $message }}</p>
+                        @enderror
                 </div>
             </div>
         </div>
@@ -50,6 +53,9 @@
                     <input type="text" name="mother_name" id="mother_name"
                         class="w-4/5 border rounded-sm focus:outline-none focus:border-blue-500" required
                         placeholder="eg. Mrs Rose">
+                        @error('mother_name')
+                            <p class="text-red-500">{{ $message }}</p>
+                        @enderror
                 </div>
             </div>
         </div>
@@ -79,6 +85,9 @@
                     <input type="text" name="parent_phone" id="parent_phone"
                         class="w-4/5 border rounded-sm focus:outline-none focus:border-blue-500" required
                         placeholder="eg. 09791234567">
+                        @error('parent_phone')
+                            <p class="text-red-500">{{ $message }}</p>
+                        @enderror
                 </div>
             </div>
         </div>
@@ -108,6 +117,9 @@
                     <input type="email" name="parent_email" id="parent_email"
                         class="w-4/5 border rounded-sm focus:outline-none focus:border-blue-500" required
                         placeholder="eg. david@gmail.com">
+                        @error('parent_email')
+                            <p class="text-red-500">{{ $message }}</p>
+                        @enderror
                 </div>
             </div>
         </div>
@@ -124,6 +136,9 @@
                 <div class="w-3/5 text-center">
                     <input type="date" name="date_of_birth" id="date_of_birth"
                         class="w-4/5 border rounded-sm focus:outline-none focus:border-blue-500" required>
+                        @error('date_of_birth')
+                            <p class="text-red-500">{{ $message }}</p>
+                        @enderror
                 </div>
             </div>
             <div class="flex flex-row flex-grow w-1/2 mb-2 mt-2">
@@ -136,6 +151,9 @@
                     <input type="text" name="parent_occupation" id="parent_occupation"
                         class="w-4/5 border rounded-sm focus:outline-none focus:border-blue-500" required
                         placeholder="eg. Teacher">
+                        @error('parent_occupation')
+                            <p class="text-red-500">{{ $message }}</p>
+                        @enderror
                 </div>
             </div>
         </div>
@@ -154,6 +172,9 @@
                         <option value="male">Male</option>
                         <option value="female">Female</option>
                     </select>
+                    @error('gender')
+                            <p class="text-red-500">{{ $message }}</p>
+                    @enderror
                 </div>
                 <!--
                 <div class="flex flex-row flex-grow 1/2 mb-2 mt-2">
@@ -175,6 +196,9 @@
                     <input type="text" name="race" id="race"
                         class="w-4/5 border rounded-sm focus:outline-none focus:border-blue-500" required
                         placeholder="eg. Asian">
+                        @error('race')
+                            <p class="text-red-500">{{ $message }}</p>
+                        @enderror
                 </div>
             </div>
         </div>
@@ -192,6 +216,9 @@
                     <input type="text" name="nationality" id="nationality"
                         class="w-4/5 border rounded-sm focus:outline-none focus:border-blue-500" required
                         placeholder="eg. Japanese">
+                        @error('nationality')
+                            <p class="text-red-500">{{ $message }}</p>
+                        @enderror
                 </div>
             </div>
         </div>
