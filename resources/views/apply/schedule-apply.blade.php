@@ -87,6 +87,37 @@
         @method('POST')
         <x-student-info>
         </x-student-info>
+        <div class="max-w-5xl mx-auto sm:px-6 lg:px-8 bg-gray-200 dark:bg-gray-700 rounded-lg mt-8">
+            <div class="flex flex-col">
+                <!-- Receipt -->
+                <div class="flex flex-row">
+                    <div class="flex flex-row flex-grow w-full mb-2 mt-2 items-center">
+                        <div class="w-1/2 text-center mt-2">
+                            <label for="email" class="block dark:text-white text-lg font-bold">Receipt Screenshot</label>
+                        </div>
+                        <div class="w-1/2 text-center">
+                            <input type="file" name="email" id="email"
+                                class="w-full border rounded-sm focus:outline-none focus:border-blue-500" required>
+                        </div>
+                    </div>
+                </div>
+                <!-- Receipt Ends -->
+                <div class="flex flex-row">
+                    <div class="flex flex-row flex-grow w-full mb-2 mt-2 items-center">
+                        <div class="w-1/2 text-center mt-2">
+                            <x-button-cancel :cancelRoute="route('courses.bysession',['course'=>$schedule->course->id,'session'=>$schedule->session])">
+                                {{__('Cancel')}}
+                            </x-button-cancel>
+                        </div>
+                        <div class="w-1/2 text-center">
+                            <x-button class="ms-4">
+                                {{ __('Register') }}
+                            </x-button>  
+                        </div>
+                    </div>                                            
+                </div>
+            </div>
+        </div>
     </form>
     <!-- Apply Form Ends -->
 </x-app-layout>
