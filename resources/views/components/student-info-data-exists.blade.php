@@ -169,11 +169,9 @@
                 </div>
                 <span class="text-lg text-gray-700 dark:text-gray-300 mt-1">:</span>
                 <div class="w-3/5 text-center">
-                    <select name="gender" id="gender" disabled required class="w-4/5">
-                        <option value="">--- Select One ---</option>
-                        <option value="male" {{$studentInfo->gender === 'male' ? 'selected':''}}>Male</option>
-                        <option value="female" {{$studentInfo->gender === 'female' ? 'selected':''}}>Female</option>
-                    </select>
+                    <input type="text" name="gender" id="gender"
+                        class="w-4/5 border rounded-sm focus:outline-none focus:border-blue-500" required
+                        readonly value="{{ $studentInfo->gender }}">
                     @error('gender')
                             <p class="text-red-500">{{ $message }}</p>
                     @enderror

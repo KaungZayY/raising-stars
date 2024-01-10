@@ -13,8 +13,8 @@ class ScheduleApplyController extends Controller
 {
     public function index(Schedule $schedule)
     {
-        $studentInfo = StudentInfo::where('user_id',Auth::user()->id)->first();
-        return view('apply.schedule-apply', compact('schedule','studentInfo'));
+        $studentInfo = StudentInfo::where('user_id', Auth::user()->id)->first();
+        return view('apply.schedule-apply', compact('schedule', 'studentInfo'));
     }
 
     public function store(Request $request, Schedule $schedule)
@@ -41,9 +41,8 @@ class ScheduleApplyController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
-        $studentDataExists = StudentInfo::where('user_id',Auth::user()->id)->exists();
-        if(!$studentDataExists)
-        {
+        $studentDataExists = StudentInfo::where('user_id', Auth::user()->id)->exists();
+        if (!$studentDataExists) {
             //If Not Already Exists -> Store to StudentInfo tbl
             $recordInfo = $request->user()->studentInfo()->create([
                 'father_name' => $request->father_name,
@@ -60,20 +59,34 @@ class ScheduleApplyController extends Controller
                 return redirect()->back()->with('error', 'Info Action Failed');
             }
         }
-        
 
-        //Store to Schedule_student tbl
-        try {
-            $schedule->users()->attach(Auth::user()->id, ['receipt' => '-']);
-        } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Action Failed');
+
+        $courseId = $schedule->course->id;
+        $userId = Auth::user()->id;
+        $courseAlreadyApplied = Schedule::where('course_id', $courseId)
+            ->whereHas('users', function ($query) use ($userId) {
+                $query->where('users.id', $userId);
+            })->exists(); //Check if User is Applying for Same Course;
+
+        if (!$courseAlreadyApplied) 
+        {
+            //Store to Schedule_student tbl
+            try {
+                $schedule->users()->attach(Auth::user()->id, ['receipt' => '-']);
+            } catch (\Exception $e) {
+                return redirect()->back()->with('error', 'Action Failed');
+            }
+            $imagePath = $request->file('receipt')->store('images/receipts', 'public');
+            $schedule->users()->updateExistingPivot(Auth::user()->id, ['receipt' => $imagePath]);
+
+            return redirect()->route('courses.bysession', [
+                'course' => $schedule->course->id,
+                'session' => $schedule->session,
+            ])->with('success', 'You have Enrolled the Course, Wait for an admin to Approve.');
         }
-        $imagePath = $request->file('receipt')->store('images/receipts', 'public');
-        $schedule->users()->updateExistingPivot(Auth::user()->id, ['receipt' => $imagePath]);
-
         return redirect()->route('courses.bysession', [
             'course' => $schedule->course->id,
             'session' => $schedule->session,
-        ])->with('success', 'You have Enrolled the Course, Wait for an admin to Approve.');
+        ])->with('error', 'You have Already Enrolled the Course');
     }
 }

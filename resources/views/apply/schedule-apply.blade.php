@@ -77,10 +77,31 @@
             </div>
         </div>
     </div>
+    @php
+        $courseId = $schedule->course->id;
+        $userId = Auth::user()->id;
+        $courseAlreadyApplied = \App\Models\Schedule::where('course_id', $courseId)
+            ->whereHas('users', function ($query) use ($userId) {
+                $query->where('users.id', $userId);
+            })
+            ->exists();
+    @endphp
     <!-- Course Over View Ends -->
     @if (Auth::user()->schedules()->where('schedule_id', $schedule->id)->exists())
         <div class="text-center">
-            <h1 class="text-yellow-500 mb-4 text-2xl">You Have Applied for this Course</h1>
+            <h1 class="text-yellow-500 mb-4 text-2xl">You already Have Applied for {{$schedule->course->course}} {{$schedule->session}} Course</h1>
+        </div>
+        <div class="max-w-3xl mx-auto sm:px-6 lg:px-8 mt-20">
+            <x-button-cancel :cancelRoute="route('courses.bysession', [
+                'course' => $schedule->course->id,
+                'session' => $schedule->session,
+            ])">
+                {{ __('Cancel') }}
+            </x-button-cancel>
+        </div>
+    @elseif($courseAlreadyApplied)
+        <div class="text-center">
+            <h1 class="text-red-500 mb-4 text-2xl">You already Have Applied for {{$schedule->course->course}} Course</h1>
         </div>
         <div class="max-w-3xl mx-auto sm:px-6 lg:px-8 mt-20">
             <x-button-cancel :cancelRoute="route('courses.bysession', [
