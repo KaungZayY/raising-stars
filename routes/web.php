@@ -7,6 +7,7 @@ use App\Http\Controllers\DiscussionReportController;
 use App\Http\Controllers\LecturerController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\ModuleController;
+use App\Http\Controllers\PendingController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RoomController;
@@ -167,6 +168,10 @@ Route::middleware('admin')->group(function(){
     Route::get('/schedule-archives',[ScheduleController::class,'archives'])->name('schedule.archives');
     Route::patch('/schedule-restore/{schedule}', [ScheduleController::class, 'restore'])->name('schedule.restore');
     Route::delete('/schedule-force-delete{schedule}', [ScheduleController::class, 'forcedelete'])->name('schedule.forcedelete');
+
+    //Pendings
+    Route::get('/pendings',[PendingController::class,'index'])->name('pending');
+
 });
 
 require __DIR__.'/auth.php';
