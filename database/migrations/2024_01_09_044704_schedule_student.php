@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('receipt')->nullable(false);
             $table->string('status')->default('pending');
             $table->timestamps();
+            $table->unique(['schedule_id','user_id']);
         });
     }
 

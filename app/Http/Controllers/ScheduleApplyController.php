@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Schedule;
+use App\Models\StudentInfo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -12,7 +13,8 @@ class ScheduleApplyController extends Controller
 {
     public function index(Schedule $schedule)
     {
-        return view('apply.schedule-apply', compact('schedule'));
+        $studentInfo = StudentInfo::where('user_id',Auth::user()->id)->first();
+        return view('apply.schedule-apply', compact('schedule','studentInfo'));
     }
 
     public function store(Request $request, Schedule $schedule)
@@ -39,22 +41,26 @@ class ScheduleApplyController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
-        //Store to StudentInfo tbl
-        $recordInfo = $request->user()->studentInfo()->create([
-            'father_name' => $request->father_name,
-            'mother_name' => $request->mother_name,
-            'parent_phone' => $request->parent_phone,
-            'parent_email' => $request->parent_email,
-            'parent_occupation' => $request->parent_occupation,
-            'race' => $request->race,
-            'nationality' => $request->nationality,
-            'date_of_birth' => $request->date_of_birth,
-            'gender' => $request->gender,
-        ]);
-
-        if (!$recordInfo) {
-            return redirect()->back()->with('error', 'Info Action Failed');
+        $studentDataExists = StudentInfo::where('user_id',Auth::user()->id)->exists();
+        if(!$studentDataExists)
+        {
+            //If Not Already Exists -> Store to StudentInfo tbl
+            $recordInfo = $request->user()->studentInfo()->create([
+                'father_name' => $request->father_name,
+                'mother_name' => $request->mother_name,
+                'parent_phone' => $request->parent_phone,
+                'parent_email' => $request->parent_email,
+                'parent_occupation' => $request->parent_occupation,
+                'race' => $request->race,
+                'nationality' => $request->nationality,
+                'date_of_birth' => $request->date_of_birth,
+                'gender' => $request->gender,
+            ]);
+            if (!$recordInfo) {
+                return redirect()->back()->with('error', 'Info Action Failed');
+            }
         }
+        
 
         //Store to Schedule_student tbl
         try {

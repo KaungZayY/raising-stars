@@ -78,56 +78,80 @@
         </div>
     </div>
     <!-- Course Over View Ends -->
-    <div class="text-center">
-        <h1 class="text-black dark:text-white mb-4 text-2xl">Student Information</h1>
-    </div>
-    <!-- Apply Form -->
-    <form action="{{ route('schedule.apply', $schedule->id) }}" method="POST" enctype="multipart/form-data">
-        @csrf
-        <x-student-info>
-        </x-student-info>
-        <div class="max-w-5xl mx-auto sm:px-6 lg:px-8 bg-gray-200 dark:bg-gray-700 rounded-lg mt-8">
-            <div class="flex flex-col">
-                <!-- Receipt -->
-                <div class="flex flex-row border border-gray-400 dark:border-gray-600">
-                    <div class="flex flex-row w-full mb-2 mt-2 items-center">
-                        <div class="w-1/2 text-right mt-2 mb-2 mr-4">
-                            <label for="receipt" class="block dark:text-white text-lg font-bold">Receipt
-                                Screenshot</label>
+    @if (Auth::user()->schedules()->where('schedule_id', $schedule->id)->exists())
+        <div class="text-center">
+            <h1 class="text-yellow-500 mb-4 text-2xl">You Have Applied for this Course</h1>
+        </div>
+        <div class="max-w-3xl mx-auto sm:px-6 lg:px-8 mt-20">
+            <x-button-cancel :cancelRoute="route('courses.bysession', [
+                'course' => $schedule->course->id,
+                'session' => $schedule->session,
+            ])">
+                {{ __('Cancel') }}
+            </x-button-cancel>
+        </div>
+    @else
+        <div class="text-center">
+            <h1 class="text-black dark:text-white mb-4 text-2xl">Student Information</h1>
+        </div>
+
+        <!-- Apply Form -->
+        <form action="{{ route('schedule.apply', $schedule->id) }}" method="POST" enctype="multipart/form-data">
+            @csrf
+
+            @if (Auth::user()->studentInfo()->exists())
+                <x-student-info-data-exists :studentInfo="$studentInfo">
+                </x-student-info-data-exists>
+            @else
+                <x-student-info>
+                </x-student-info>
+            @endif
+
+            <div class="max-w-5xl mx-auto sm:px-6 lg:px-8 bg-gray-200 dark:bg-gray-700 rounded-lg mt-8">
+                <div class="flex flex-col">
+                    <!-- Receipt -->
+                    <div class="flex flex-row border border-gray-400 dark:border-gray-600">
+                        <div class="flex flex-row w-full mb-2 mt-2 items-center">
+                            <div class="w-1/2 text-right mt-2 mb-2 mr-4">
+                                <label for="receipt" class="block dark:text-white text-lg font-bold">Receipt
+                                    Screenshot</label>
                                 @error('receipt')
                                     <br>
                                 @enderror
-                        </div>
-                        <div class="w-1/2 text-left ml-4">
-                            <input type="file" name="receipt" id="receipt"
-                                class="w-3/5 border rounded-sm focus:outline-none focus:border-blue-500" required>
+                            </div>
+                            <div class="w-1/2 text-left ml-4">
+                                <input type="file" name="receipt" id="receipt"
+                                    class="w-3/5 border rounded-sm focus:outline-none focus:border-blue-500" required>
                                 @error('receipt')
                                     <p class="text-red-500">{{ $message }}</p>
                                 @enderror
+                            </div>
                         </div>
                     </div>
-                </div>
-                <!-- Receipt Ends -->
-                <div class="flex flex-row">
-                    <div class="flex flex-row flex-grow w-full mb-2 mt-2 items-center">
-                        <div class="w-1/2 text-center mt-2">
-                            <x-button-cancel :cancelRoute="route('courses.bysession', [
-                                'course' => $schedule->course->id,
-                                'session' => $schedule->session,
-                            ])">
-                                {{ __('Cancel') }}
-                            </x-button-cancel>
-                        </div>
-                        <div class="w-1/2 text-center">
-                            <x-button class="ms-4">
-                                {{ __('Register') }}
-                            </x-button>
+                    <!-- Receipt Ends -->
+                    <div class="flex flex-row">
+                        <div class="flex flex-row flex-grow w-full mb-2 mt-2 items-center">
+                            <div class="w-1/2 text-center mt-2">
+                                <x-button-cancel :cancelRoute="route('courses.bysession', [
+                                    'course' => $schedule->course->id,
+                                    'session' => $schedule->session,
+                                ])">
+                                    {{ __('Cancel') }}
+                                </x-button-cancel>
+                            </div>
+                            <div class="w-1/2 text-center">
+                                <x-button class="ms-4">
+                                    {{ __('Register') }}
+                                </x-button>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </form>
-    <br>
-    <!-- Apply Form Ends -->
+        </form>
+        <br>
+        <!-- Apply Form Ends -->
+    @endif
+
+
 </x-app-layout>
