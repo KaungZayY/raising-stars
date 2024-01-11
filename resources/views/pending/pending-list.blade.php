@@ -1,3 +1,9 @@
+@push('scripts')
+    <!-- JQuery Ajax -->
+    <!-- '@'push to push to master layout, '@'stack('scripts')in master to fetch this script -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+@endpush
+
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
@@ -6,9 +12,9 @@
     </x-slot>
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            {{-- <div class="mb-3 flex flex-row justify-center">
-                <input type="text" name="search" id="search" class="w-1/3 px-4 py-2 border rounded-md focus:outline-none focus:border-blue-500" placeholder="Search...&#x1F50E;&#xFE0F; "/>
-            </div> --}}
+            <div class="mb-3 flex flex-row justify-center">
+                <input type="text" name="search" id="search" class="w-1/3 px-4 py-2 border rounded-md focus:outline-none focus:border-blue-500" placeholder="Search by Student Name..&#x1F50E;&#xFE0F; "/>
+            </div>
             <div class="overflow-x-auto">
                 <table class="min-w-full bg-white border border-gray-300 border-separate">
                   <thead>
@@ -20,6 +26,7 @@
                         <th class="py-2 px-4 border-b bg-gray-300">End Date</th>
                         <th class="py-2 px-4 border-b bg-gray-300">Student Name</th>
                         <th class="py-2 px-4 border-b bg-gray-300">Email</th>
+                        <th class="py-2 px-4 border-b bg-gray-300">Status</th>
                         <th class="py-2 px-4 border-b bg-gray-300">Action</th>
                     </tr>
                   </thead>
@@ -33,6 +40,7 @@
                         <td class="py-2 px-4 border-b text-center">{{$pending->start_date}}</td>
                         <td class="py-2 px-4 border-b text-center">{{$pending->end_date}}</td>
                         <td class="py-2 px-4 border-b text-center">{{$pending->name}}</td>
+                        <td class="py-2 px-4 border-b text-center text-yellow-700">{{$pending->status}}</td>
                         <td class="py-2 px-4 border-b text-center">{{$pending->email}}</td>
                         <td class="py-2 px-4 border-b text-center">
                             <div class="inline-block">
@@ -49,7 +57,7 @@
                     @endforeach
                 @else
                     <tr>
-                        <td class="py-2 px-4 text-center" colspan="8">No New Pending Lists</td>
+                        <td class="py-2 px-4 text-center" colspan="9">No New Pending Lists</td>
                     </tr>
                 @endif
                   </tbody>
@@ -59,3 +67,20 @@
         </div>
     </div>
 </x-app-layout>
+
+<script>
+    $('#search').on('keyup',function(){
+        $value = $(this).val();
+        $.ajax({
+            url: "{{route('pending.search')}}",
+            method: 'GET',
+            data: {
+                '_token': '{{ csrf_token() }}',
+                'search': $value,
+            },
+            success: function(data) {
+                $('tbody').html(data);
+            },
+        });
+    });
+</script>
