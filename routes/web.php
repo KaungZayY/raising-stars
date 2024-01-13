@@ -71,6 +71,7 @@ Route::middleware('student')->group(function(){
 
     //Pendings
     Route::get('/request',[StudentViewController::class,'formRequest'])->name('request');
+    Route::get('/request/search',[StudentViewController::class,'search'])->name('request.search');
     
 });
 
