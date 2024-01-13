@@ -73,4 +73,17 @@ class StudentViewController extends Controller
         }
     }
 
+    public function myCourses()
+    {
+        $user_id = Auth()->user()->id;
+        $courses = DB::table('schedule_student')->where('user_id', $user_id)
+        ->join('schedules', 'schedule_student.schedule_id', '=', 'schedules.id')
+        ->join('courses', 'schedules.course_id', '=', 'courses.id')
+        ->where('schedule_student.status','approved')
+        ->select('courses.course','schedules.start_date','schedules.end_date','schedules.session')
+        ->get();
+        // dd($courses);
+        return view('student-view.my-courses',compact('courses'));
+    }
+
 }

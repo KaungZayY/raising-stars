@@ -73,6 +73,8 @@ Route::middleware('student')->group(function(){
     Route::get('/request',[StudentViewController::class,'formRequest'])->name('request');
     Route::get('/request/search',[StudentViewController::class,'search'])->name('request.search');
     
+    //View Courses
+    Route::get('/my-courses',[StudentViewController::class,'myCourses'])->name('myCourses');
 });
 
 Route::middleware('admin')->group(function(){

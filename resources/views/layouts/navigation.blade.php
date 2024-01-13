@@ -43,6 +43,11 @@
                         </x-slot>
                     </x-nav-link-parent>
                     @endcan
+                    @can('viewStudentContent', App\Models\User::class)
+                    <x-nav-link :href="route('myCourses')" :active="request()->routeIs('myCourses')">
+                        {{ __('My Courses') }}
+                    </x-nav-link>
+                    @endcan
                 </div>
             </div>
 
