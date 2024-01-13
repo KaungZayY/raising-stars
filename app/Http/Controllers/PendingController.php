@@ -14,7 +14,7 @@ class PendingController extends Controller
         ->join('schedules', 'schedule_student.schedule_id', '=', 'schedules.id')
         ->join('users', 'schedule_student.user_id', '=', 'users.id')
         ->join('courses', 'schedules.course_id', '=', 'courses.id')
-        ->select('courses.course','schedules.*','users.name','users.email','schedule_student.status')
+        ->select('courses.course','schedules.*','users.name','users.email','schedule_student.status','schedule_student.id')
         ->get();
         // dd($pendings);
         return view('pending.pending-list',compact('pendings'));
@@ -65,5 +65,21 @@ class PendingController extends Controller
             }
             
         }
+    }
+
+    public function detail($id)
+    {
+        $pending = DB::table('schedule_student')->where('schedule_student.id',$id)
+        ->join('schedules','schedule_student.schedule_id','=','schedules.id')
+        ->join('users', 'schedule_student.user_id', '=', 'users.id')
+        ->join('courses', 'schedules.course_id', '=', 'courses.id')
+        ->join('student_infos', 'users.id', '=', 'student_infos.user_id')
+        ->select('courses.course','courses.fees','schedules.start_date','schedules.end_date','schedules.schedule_description',
+        'schedules.session','schedules.student_limit','users.name','users.email','users.phone_number','users.address',
+        'student_infos.*','schedule_student.receipt','schedule_student.created_at as submit_date')
+        ->get();
+        // dd($pending);
+
+        return view('pending.pending-detail',compact('pending'));
     }
 }

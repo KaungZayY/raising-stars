@@ -54,6 +54,7 @@ class ScheduleApplyController extends Controller
                 'nationality' => $request->nationality,
                 'date_of_birth' => $request->date_of_birth,
                 'gender' => $request->gender,
+                'created_at' => now(),
             ]);
             if (!$recordInfo) {
                 return redirect()->back()->with('error', 'Info Action Failed');
@@ -72,7 +73,7 @@ class ScheduleApplyController extends Controller
         {
             //Store to Schedule_student tbl
             try {
-                $schedule->users()->attach(Auth::user()->id, ['receipt' => '-']);
+                $schedule->users()->attach(Auth::user()->id, ['receipt' => '-','created_at' => now()]);
             } catch (\Exception $e) {
                 return redirect()->back()->with('error', 'Action Failed');
             }
