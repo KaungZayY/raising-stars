@@ -76,10 +76,32 @@ class PendingController extends Controller
         ->join('student_infos', 'users.id', '=', 'student_infos.user_id')
         ->select('courses.course','courses.fees','schedules.start_date','schedules.end_date','schedules.schedule_description',
         'schedules.session','schedules.student_limit','users.name','users.email','users.phone_number','users.address',
-        'student_infos.*','schedule_student.receipt','schedule_student.created_at as submit_date')
+        'student_infos.*','schedule_student.receipt','schedule_student.created_at as submit_date','schedule_student.id as pending_id')
         ->get();
         // dd($pending);
 
         return view('pending.pending-detail',compact('pending'));
+    }
+
+    public function approve($id)
+    {
+        $update = DB::table('schedule_student')->where('id', $id)->update(array('status' => 'approved','updated_at' => now()));
+        //$update return 'how many rows effected', so need to check the condition as below
+        if($update <= 0)
+        {
+            return redirect()->back()->with('error','Cannot Approve');
+        }
+        return redirect()->route('pending')->with('success','Approved');
+    }
+
+    public function reject($id)
+    {
+        $update = DB::table('schedule_student')->where('id', $id)->update(array('status' => 'rejected','updated_at' => now()));
+        //$update return 'how many rows effected', so need to check the condition as below
+        if($update <= 0)
+        {
+            return redirect()->back()->with('error','Cannot Reject');
+        }
+        return redirect()->route('pending')->with('success','Rejected');
     }
 }

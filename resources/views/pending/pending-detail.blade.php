@@ -97,16 +97,15 @@
         <div class="flex flex-row">
             <div class="flex flex-row flex-grow w-full mb-2 mt-2 items-center">
                 <div class="w-1/2 text-center mt-2">
-                    <form action="#" method="POST">
+                    <form action="{{route('pending.reject',$pending[0]->pending_id)}}" method="POST" onsubmit="return confirm('Reject this form?');">
                         @csrf
-                        @method('DELETE')
                         <x-button-reject class="ms-4">
                             {{ __('Reject') }}
                         </x-button-reject>
                     </form>
                 </div>
                 <div class="w-1/2 text-center">
-                    <form action="#" method="POST">
+                    <form action="{{route('pending.approve',$pending[0]->pending_id)}}" method="POST" onsubmit="return confirm('Approve this form?');">
                         @csrf
                         <x-button class="ms-4">
                             {{ __('Approve') }}

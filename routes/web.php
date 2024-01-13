@@ -173,6 +173,8 @@ Route::middleware('admin')->group(function(){
     Route::get('/pendings',[PendingController::class,'index'])->name('pending');
     Route::get('/pendings/search',[PendingController::class,'search'])->name('pending.search');
     Route::get('/pending/{id}/detail',[PendingController::class,'detail'])->name('pending.detail');
+    Route::post('/pending/{id}/approve',[PendingController::class,'approve'])->name('pending.approve');
+    Route::post('/pending/{id}/reject',[PendingController::class,'reject'])->name('pending.reject');
 
 });
 
