@@ -13,6 +13,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\ScheduleApplyController;
 use App\Http\Controllers\ScheduleController;
+use App\Http\Controllers\StudentViewController;
 use App\Http\Controllers\SubjectController;
 use Illuminate\Support\Facades\Route;
 
@@ -67,6 +68,10 @@ Route::middleware('auth')->group(function () {
 Route::middleware('student')->group(function(){
     Route::get('/schedule{schedule}/apply',[ScheduleApplyController::class,'index'])->name('schedule.apply');
     Route::post('/schedule{schedule}/apply',[ScheduleApplyController::class,'store']);
+
+    //Pendings
+    Route::get('/request',[StudentViewController::class,'formRequest'])->name('request');
+    
 });
 
 Route::middleware('admin')->group(function(){
