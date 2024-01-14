@@ -75,6 +75,7 @@ Route::middleware('student')->group(function(){
     
     //View Courses
     Route::get('/my-courses',[StudentViewController::class,'myCourses'])->name('myCourses');
+    Route::get('/course{id}/detail',[StudentViewController::class,'courseDetail'])->name('course.detail');
 });
 
 Route::middleware('admin')->group(function(){

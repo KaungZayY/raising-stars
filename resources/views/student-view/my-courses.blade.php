@@ -11,7 +11,7 @@
                     @foreach ($courses as $course)
                         <div class="w-1/2 text-center">
                             <div class="flex flex-col justify-center m-3 bg-green-400 dark:bg-green-200 rounded-lg border border-gray-200"
-                                onclick="">
+                                onclick="courseDetail('{{route('course.detail',$course->schedule_id)}}')">
                                 <h2 class="font-bold mt-2 mb-2">{{ $course->course }}</h2>
                                 <p class="mb-2 font-semibold">{{$course->session}} Session</p>
                                 <p class="mb-2 font-semibold"><i>{{ $course->start_date }}</i> -To-
@@ -46,10 +46,9 @@
     </div>
 </x-app-layout>
 
-{{-- <script>
-    //Update On Click Function
+<script>
     function courseDetail(route_url)
     {
         window.location.href = route_url;
     }
-</script> --}}
+</script>

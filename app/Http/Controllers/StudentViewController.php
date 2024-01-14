@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Schedule;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -80,10 +81,17 @@ class StudentViewController extends Controller
         ->join('schedules', 'schedule_student.schedule_id', '=', 'schedules.id')
         ->join('courses', 'schedules.course_id', '=', 'courses.id')
         ->where('schedule_student.status','approved')
-        ->select('courses.course','schedules.start_date','schedules.end_date','schedules.session')
+        ->select('courses.course','schedules.start_date','schedules.end_date','schedules.session','schedules.id as schedule_id')
         ->get();
         // dd($courses);
         return view('student-view.my-courses',compact('courses'));
+    }
+
+    public function courseDetail($id)
+    {
+        $schedule = Schedule::findOrFail($id);
+        $course = $schedule->course;
+        return view('student-view.my-course-detail',compact('schedule','course'));
     }
 
 }
