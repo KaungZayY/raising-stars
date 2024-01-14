@@ -39,8 +39,15 @@
                         <td class="py-2 px-4 border-b text-center">{{$course->start_date}}</td>
                         <td class="py-2 px-4 border-b text-center">{{$course->end_date}}</td>
                         <td class="py-2 px-4 border-b text-center">{{$course->session}}</td>
-                        <td class="py-2 px-4 border-b text-center">{{$course->created_at}}</td>
-                        <td class="py-2 px-4 border-b text-center">{{$course->updated_at}}</td>
+                        <td class="py-2 px-4 border-b text-center">{{\Carbon\Carbon::parse($course->created_at)->diffForHumans()}}</td>
+                        <td class="py-2 px-4 border-b text-center">
+                            @php
+                                if ($course->updated_at != '') 
+                                {
+                                    echo \Carbon\Carbon::parse($course->updated_at)->diffForHumans();
+                                }
+                            @endphp
+                        </td>
                         <td class="py-2 px-4 border-b text-center text-white" style="background-color: {{$course->status === 'rejected' ? 'red' : ($course->status === 'approved' ? 'green' : 'yellow')}}">{{$course->status}}</td>
                         <td class="py-2 px-4 border-b text-center">
                             <div class="inline-block">
