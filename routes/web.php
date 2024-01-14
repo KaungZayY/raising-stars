@@ -6,6 +6,7 @@ use App\Http\Controllers\CourseController;
 use App\Http\Controllers\DiscussionReportController;
 use App\Http\Controllers\LecturerController;
 use App\Http\Controllers\LikeController;
+use App\Http\Controllers\ModeratorController;
 use App\Http\Controllers\ModuleController;
 use App\Http\Controllers\PendingController;
 use App\Http\Controllers\PostController;
@@ -120,6 +121,21 @@ Route::middleware('admin')->group(function(){
     Route::get('/lecturer/export',[LecturerController::class,'export'])->name('lecturer.export');
     //Lecturer Search
     Route::get('/lecturer/search',[LecturerController::class,'search'])->name('lecturer.search');
+
+    //Moderator
+    Route::get('/moderator',[ModeratorController::class,'index'])->name('moderator');
+    Route::get('/moderator/create',[ModeratorController::class,'create'])->name('moderator.create');
+    Route::post('/moderator/save',[ModeratorController::class,'store'])->name('moderator.store');
+    Route::get('/moderator/edit{user}', [ModeratorController::class, 'edit'])->name('moderator.edit');
+    Route::post('/moderator/edit{user}', [ModeratorController::class, 'update'])->name('moderator.update');
+    Route::delete('/moderator/delete{user}', [ModeratorController::class, 'destroy'])->name('moderator.delete');
+    Route::get('/moderator/archives',[ModeratorController::class,'archives'])->name('moderator.archives');
+    Route::patch('/moderator/restore/{user}', [ModeratorController::class, 'restore'])->name('moderator.restore');
+    Route::delete('/moderator/force-delete{user}', [ModeratorController::class, 'forcedelete'])->name('moderator.forcedelete');
+    Route::get('/moderator/export',[ModeratorController::class,'export'])->name('moderator.export');
+    //Moderator Search
+    Route::get('/moderator/search',[ModeratorController::class,'search'])->name('moderator.search');
+
 
     //Room
     Route::get('/room',[RoomController::class,'index'])->name('room');
