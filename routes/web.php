@@ -133,6 +133,8 @@ Route::middleware('admin')->group(function(){
     Route::patch('/moderator/restore/{user}', [ModeratorController::class, 'restore'])->name('moderator.restore');
     Route::delete('/moderator/force-delete{user}', [ModeratorController::class, 'forcedelete'])->name('moderator.forcedelete');
     Route::get('/moderator/export',[ModeratorController::class,'export'])->name('moderator.export');
+    Route::get('/moderator/{id}/role',[ModeratorController::class,'role'])->name('moderator.role');
+    Route::post('/moderator/{id}/role',[ModeratorController::class,'roleUpdate']);
     //Moderator Search
     Route::get('/moderator/search',[ModeratorController::class,'search'])->name('moderator.search');
 
