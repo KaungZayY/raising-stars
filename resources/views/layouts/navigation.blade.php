@@ -37,6 +37,8 @@
                             <span class="separator"></span>
                             <a href="{{route('moderator')}}"> Moderators </a>
                             <span class="separator"></span>
+                            <a href="{{route('student')}}"> Students </a>
+                            <span class="separator"></span>
                             <a href="{{route('subject')}}"> Subjects </a>
                             <span class="separator"></span>
                             <a href="{{route('room')}}"> Rooms </a>

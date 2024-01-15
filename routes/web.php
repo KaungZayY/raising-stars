@@ -14,6 +14,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\ScheduleApplyController;
 use App\Http\Controllers\ScheduleController;
+use App\Http\Controllers\StudentController;
 use App\Http\Controllers\StudentViewController;
 use App\Http\Controllers\SubjectController;
 use Illuminate\Support\Facades\Route;
@@ -138,6 +139,18 @@ Route::middleware('admin')->group(function(){
     //Moderator Search
     Route::get('/moderator/search',[ModeratorController::class,'search'])->name('moderator.search');
 
+    //Student
+    Route::get('/student',[StudentController::class,'index'])->name('student');
+    Route::get('/student/edit{user}', [StudentController::class, 'edit'])->name('student.edit');
+    Route::post('/student/edit{user}', [StudentController::class, 'update'])->name('student.update');
+    Route::delete('/student/delete{user}', [StudentController::class, 'destroy'])->name('student.delete');
+    Route::get('/student/archives',[StudentController::class,'archives'])->name('student.archives');
+    Route::patch('/student/restore/{user}', [StudentController::class, 'restore'])->name('student.restore');
+    Route::delete('/student/force-delete{user}', [StudentController::class, 'forcedelete'])->name('student.forcedelete');
+    Route::get('/student/{id}/info',[StudentController::class,'info'])->name('student.info');
+    // Route::get('/student/export',[StudentController::class,'export'])->name('student.export');
+    //Lecturer Search
+    Route::get('/student/search',[StudentController::class,'search'])->name('student.search');
 
     //Room
     Route::get('/room',[RoomController::class,'index'])->name('room');
