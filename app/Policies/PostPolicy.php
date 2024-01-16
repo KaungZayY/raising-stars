@@ -17,7 +17,7 @@ class PostPolicy
 
     public function isOwnerOrAdmin(User $user, Post $post)
     {
-        if($user->role_id ===2 )
+        if($user->role_id > 2 )     //Mods and Admins
         {
             return true;
             //if current user is admin, return true

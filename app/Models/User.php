@@ -4,13 +4,15 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use SDamian\Larasort\AutoSortable;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, SoftDeletes, AutoSortable;
 
     /**
      * The attributes that are mass assignable.
@@ -24,6 +26,14 @@ class User extends Authenticatable
         'address',
         'phone_number',
         'role_id',
+    ];
+
+    private array $sortables = [
+        'id',
+        'name',
+        'email',
+        'phone_number',
+        'address',
     ];
 
     /**
@@ -54,5 +64,20 @@ class User extends Authenticatable
     public function likes()
     {
         return $this->hasMany(Like::class);
+    }
+
+    public function modules()
+    {
+        return $this->belongsToMany(Module::class,'module_lecturer');      //Many to Many Lecturers-Subjects
+    }
+
+    public function studentInfo()
+    {
+        return $this->hasOne(StudentInfo::class);
+    }
+
+    public function schedules()
+    {
+        return $this->belongsToMany(Schedule::class,'schedule_student');
     }
 }

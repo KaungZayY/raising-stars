@@ -20,7 +20,7 @@ class PostController extends Controller
 
     public function create()
     {
-        $categories = Category::all();
+        $categories = Category::where('status',1)->get();
 
         return view('post-create', ['categories' => $categories]);
     }
@@ -101,11 +101,11 @@ class PostController extends Controller
         $deleted = $post->delete();
         if(!$deleted)
         {
+            DB::rollBack();
             return redirect()->route('home')->with('error','Cannot Delete this Post');
         }
         else
         {
-            DB::rollBack();
             return redirect()->route('home')->with('success', 'You had Deleted the Post'); 
         }
     }

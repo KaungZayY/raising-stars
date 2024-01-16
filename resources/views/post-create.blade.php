@@ -21,19 +21,19 @@
 
                     <!-- Title -->
                     <div class="mb-4">
-                        <label for="title" class="block text-white text-lg font-bold mb-2">Title</label>
+                        <label for="title" class="block dark:text-white text-lg font-bold mb-2">Title</label>
                         <input type="text" name="title" id="title" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-blue-500" required>
                     </div>
 
                     <!-- Content -->
                     <div class="mb-4">
-                        <label for="content" class="block text-white text-lg font-bold mb-2">Content</label>
+                        <label for="content" class="block dark:text-white text-lg font-bold mb-2">Content</label>
                         <textarea name="content" id="content" rows="4" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-blue-500" required></textarea>
                     </div>
 
                     <!-- Category -->
                     <div class="mb-4">
-                        <label for="categories" class="block text-white text-lg font-bold mb-2">Category</label>
+                        <label for="categories" class="block dark:text-white text-lg font-bold mb-2">Category</label>
                         <select name="categories[]" id="categories" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-blue-500" multiple>
                             @foreach($categories as $category)
                                 <option value="{{ $category->id }}">{{ $category->category }}</option>
@@ -43,7 +43,7 @@
 
                     <!-- Submit Button -->
                     <div class="flex flex-row justify-between">
-                        <x-button-cancel>
+                        <x-button-cancel :cancelRoute="route('home')">
                             {{__('Cancel')}}
                         </x-button-cancel>
                         <x-button class="ms-4">
