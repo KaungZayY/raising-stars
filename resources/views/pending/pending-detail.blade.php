@@ -92,8 +92,33 @@
         <div class="text-center">
             <h1 class="text-black dark:text-white mb-4 text-2xl">Student Information</h1>
         </div>
-        <x-student-info-admin-view :pending="$pending">
+        <x-student-info-admin-view :studentData="$pending">
         </x-student-info-admin-view>
+        <!-- Receipt -->
+        <div class="text-center mt-2">
+            <h1 class="text-black dark:text-white mb-4 text-2xl">Receipt</h1>
+        </div>
+        <div class="max-w-5xl mx-auto sm:px-6 lg:px-8 bg-gray-200 dark:bg-gray-700 rounded-lg">
+            <div class="flex flex-row flex-grow justify-center">
+                <img src="{{ url('/storage/' . $pending[0]->receipt) }}" class="mt-4 mb-4 w-auto" alt="receipt vouncher">
+                <!-- Since working with sail, needed to run sail artisan storage:link, then implement as above -->
+            </div>
+            <div class="flex flex-row">
+                <div class="flex flex-row flex-grow mb-2 mt-2 items">
+                    <div class="w-1/2 text-center mt-2">
+                        <label for="submit_date"
+                            class="block dark:text-white text-lg font-bold">Submitted At</label>
+                    </div>
+                    <span class="text-lg text-gray-700 dark:text-gray-300 mt-1">:</span>
+                    <div class="w-1/2 text-center">
+                        <input type="text" name="submit_date" id="submit_date"
+                                class="w-1/2 border rounded-sm focus:outline-none focus:border-blue-500" required 
+                                readonly value="{{ $pending[0]->submit_date }}">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Receipt End -->
         <div class="flex flex-row">
             <div class="flex flex-row flex-grow w-full mb-2 mt-2 items-center">
                 <div class="w-1/2 text-center mt-2">

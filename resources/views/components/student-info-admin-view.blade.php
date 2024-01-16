@@ -11,7 +11,7 @@
                 <div class="w-3/5 text-center">
                     <input type="text" name="student_name" id="student_name"
                         class="w-4/5 border rounded-sm focus:outline-none focus:border-blue-500" required
-                        readonly value="{{ $pending[0]->name }}">
+                        readonly value="{{ $studentData[0]->name }}">
                 </div>
             </div>
             <div class="flex flex-row flex-grow w-1/2 mb-2 mt-4">
@@ -22,7 +22,7 @@
                 <div class="w-3/5 text-center">
                     <input type="text" name="father_name" id="father_name"
                         class="w-4/5 border rounded-sm focus:outline-none focus:border-blue-500" required
-                        readonly value="{{ $pending[0]->father_name }}">
+                        readonly value="{{ $studentData[0]->father_name }}">
                         @error('father_name')
                             <p class="text-red-500">{{ $message }}</p>
                         @enderror
@@ -41,7 +41,7 @@
                 <div class="w-3/5 text-center">
                     <input type="text" name="email" id="email"
                         class="w-4/5 border rounded-sm focus:outline-none focus:border-blue-500" required
-                        readonly value="{{ $pending[0]->email }}">
+                        readonly value="{{ $studentData[0]->email }}">
                 </div>
             </div>
             <div class="flex flex-row flex-grow w-1/2 mb-2 mt-2">
@@ -52,7 +52,7 @@
                 <div class="w-3/5 text-center">
                     <input type="text" name="mother_name" id="mother_name"
                         class="w-4/5 border rounded-sm focus:outline-none focus:border-blue-500" required
-                        readonly value="{{ $pending[0]->mother_name }}">
+                        readonly value="{{ $studentData[0]->mother_name }}">
                         @error('mother_name')
                             <p class="text-red-500">{{ $message }}</p>
                         @enderror
@@ -72,7 +72,7 @@
                 <div class="w-3/5 text-center">
                     <input type="text" name="phone_number" id="phone_number"
                         class="w-4/5 border rounded-sm focus:outline-none focus:border-blue-500" required
-                        readonly value="{{ $pending[0]->phone_number }}">
+                        readonly value="{{ $studentData[0]->phone_number }}">
                 </div>
             </div>
             <div class="flex flex-row flex-grow w-1/2 mb-2 mt-2">
@@ -84,7 +84,7 @@
                 <div class="w-3/5 text-center">
                     <input type="text" name="parent_phone" id="parent_phone"
                         class="w-4/5 border rounded-sm focus:outline-none focus:border-blue-500" required
-                        readonly value="{{ $pending[0]->parent_phone }}">
+                        readonly value="{{ $studentData[0]->parent_phone }}">
                         @error('parent_phone')
                             <p class="text-red-500">{{ $message }}</p>
                         @enderror
@@ -104,7 +104,7 @@
                 <div class="w-3/5 text-center">
                     <input type="text" name="address" id="address"
                         class="w-4/5 border rounded-sm focus:outline-none focus:border-blue-500" required
-                        readonly value="{{ $pending[0]->address }}">
+                        readonly value="{{ $studentData[0]->address }}">
                 </div>
             </div>
             <div class="flex flex-row flex-grow w-1/2 mb-2 mt-2">
@@ -116,7 +116,7 @@
                 <div class="w-3/5 text-center">
                     <input type="email" name="parent_email" id="parent_email"
                         class="w-4/5 border rounded-sm focus:outline-none focus:border-blue-500" required
-                        readonly value="{{ $pending[0]->parent_email }}">
+                        readonly value="{{ $studentData[0]->parent_email }}">
                         @error('parent_email')
                             <p class="text-red-500">{{ $message }}</p>
                         @enderror
@@ -137,7 +137,7 @@
                 <span class="text-lg text-gray-700 dark:text-gray-300 mt-1">:</span>
                 <div class="w-3/5 text-center">
                     <input type="date" name="date_of_birth" id="date_of_birth"
-                        class="w-4/5 border rounded-sm focus:outline-none focus:border-blue-500" required readonly value="{{ $pending[0]->date_of_birth }}">
+                        class="w-4/5 border rounded-sm focus:outline-none focus:border-blue-500" required readonly value="{{ $studentData[0]->date_of_birth }}">
                         @error('date_of_birth')
                             <p class="text-red-500">{{ $message }}</p>
                         @enderror
@@ -152,7 +152,7 @@
                 <div class="w-3/5 text-center">
                     <input type="text" name="parent_occupation" id="parent_occupation"
                         class="w-4/5 border rounded-sm focus:outline-none focus:border-blue-500" required
-                        readonly value="{{ $pending[0]->parent_occupation }}">
+                        readonly value="{{ $studentData[0]->parent_occupation }}">
                         @error('parent_occupation')
                             <p class="text-red-500">{{ $message }}</p>
                         @enderror
@@ -171,7 +171,7 @@
                 <div class="w-3/5 text-center">
                     <input type="text" name="gender" id="gender"
                         class="w-4/5 border rounded-sm focus:outline-none focus:border-blue-500" required
-                        readonly value="{{ $pending[0]->gender }}">
+                        readonly value="{{ $studentData[0]->gender }}">
                     @error('gender')
                             <p class="text-red-500">{{ $message }}</p>
                     @enderror
@@ -195,7 +195,7 @@
                 <div class="w-3/5 text-center">
                     <input type="text" name="race" id="race"
                         class="w-4/5 border rounded-sm focus:outline-none focus:border-blue-500" required
-                        readonly value="{{ $pending[0]->race }}">
+                        readonly value="{{ $studentData[0]->race }}">
                         @error('race')
                             <p class="text-red-500">{{ $message }}</p>
                         @enderror
@@ -215,7 +215,7 @@
                 <div class="w-3/5 text-center">
                     <input type="text" name="nationality" id="nationality"
                         class="w-4/5 border rounded-sm focus:outline-none focus:border-blue-500" required
-                        readonly value="{{ $pending[0]->nationality }}">
+                        readonly value="{{ $studentData[0]->nationality }}">
                         @error('nationality')
                             <p class="text-red-500">{{ $message }}</p>
                         @enderror
@@ -226,29 +226,3 @@
     
     </div>
 </div>
-
-<!-- Receipt -->
-<div class="text-center">
-    <h1 class="text-black dark:text-white mb-4 text-2xl">Receipt</h1>
-</div>
-<div class="max-w-5xl mx-auto sm:px-6 lg:px-8 bg-gray-200 dark:bg-gray-700 rounded-lg">
-    <div class="flex flex-row flex-grow justify-center">
-        <img src="{{ url('/storage/' . $pending[0]->receipt) }}" class="mt-4 mb-4 w-auto" alt="receipt vouncher">
-        <!-- Since working with sail, needed to run sail artisan storage:link, then implement as above -->
-    </div>
-    <div class="flex flex-row">
-        <div class="flex flex-row flex-grow mb-2 mt-2 items">
-            <div class="w-1/2 text-center mt-2">
-                <label for="submit_date"
-                    class="block dark:text-white text-lg font-bold">Submitted At</label>
-            </div>
-            <span class="text-lg text-gray-700 dark:text-gray-300 mt-1">:</span>
-            <div class="w-1/2 text-center">
-                <input type="text" name="submit_date" id="submit_date"
-                        class="w-1/2 border rounded-sm focus:outline-none focus:border-blue-500" required 
-                        readonly value="{{ $pending[0]->submit_date }}">
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Receipt End -->
