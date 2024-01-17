@@ -4,6 +4,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\DiscussionReportController;
+use App\Http\Controllers\GroupController;
 use App\Http\Controllers\LecturerController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\ModeratorController;
@@ -216,6 +217,10 @@ Route::middleware('admin')->group(function(){
     Route::post('/pending/{id}/approve',[PendingController::class,'approve'])->name('pending.approve');
     Route::post('/pending/{id}/reject',[PendingController::class,'reject'])->name('pending.reject');
 
+});
+
+Route::middleware('moderator')->group(function(){
+    Route::get('/groups',[GroupController::class,'index'])->name('group');
 });
 
 require __DIR__.'/auth.php';
