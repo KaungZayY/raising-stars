@@ -15,6 +15,7 @@ class GroupSeeder extends Seeder
     {
         DB::table('groups')->insert([
             'name' => 'Grade 9 Jan-2024',
+            'description' => 'Group for Grade 9 Jan 2024 Students'
         ]);
     }
 }

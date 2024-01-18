@@ -221,6 +221,17 @@ Route::middleware('admin')->group(function(){
 
 Route::middleware('moderator')->group(function(){
     Route::get('/groups',[GroupController::class,'index'])->name('group');
+    Route::get('/group/create',[GroupController::class,'create'])->name('group.create');
+    Route::post('/group/save',[GroupController::class,'store'])->name('group.store');
+    Route::get('/group/edit{group}', [GroupController::class, 'edit'])->name('group.edit');
+    Route::post('/group/edit{group}', [GroupController::class, 'update'])->name('group.update');
+    Route::delete('/group/delete{group}', [GroupController::class, 'destroy'])->name('group.delete');
+    Route::get('/group/archives',[GroupController::class,'archives'])->name('group.archives');
+    Route::patch('/group/restore/{group}', [GroupController::class, 'restore'])->name('group.restore');
+    Route::delete('/group/force-delete{group}', [GroupController::class, 'forcedelete'])->name('group.forcedelete');
+    Route::get('/group/{group}/members',[GroupController::class,'members'])->name('group.members');
+    //Course Search
+    Route::get('/group/search',[GroupController::class,'search'])->name('group.search');
 });
 
 require __DIR__.'/auth.php';
