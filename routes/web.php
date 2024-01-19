@@ -220,6 +220,8 @@ Route::middleware('admin')->group(function(){
 });
 
 Route::middleware('moderator')->group(function(){
+    
+    //Group
     Route::get('/groups',[GroupController::class,'index'])->name('group');
     Route::get('/group/create',[GroupController::class,'create'])->name('group.create');
     Route::post('/group/save',[GroupController::class,'store'])->name('group.store');
@@ -229,8 +231,10 @@ Route::middleware('moderator')->group(function(){
     Route::get('/group/archives',[GroupController::class,'archives'])->name('group.archives');
     Route::patch('/group/restore/{group}', [GroupController::class, 'restore'])->name('group.restore');
     Route::delete('/group/force-delete{group}', [GroupController::class, 'forcedelete'])->name('group.forcedelete');
+    //Group Members
     Route::get('/group/{group}/members',[GroupController::class,'members'])->name('group.members');
-    //Course Search
+    Route::delete('/group/{groupId}/member/{userId}/remove', [GroupController::class, 'removeMember'])->name('group.removeMember');
+    //Group Search
     Route::get('/group/search',[GroupController::class,'search'])->name('group.search');
 });
 

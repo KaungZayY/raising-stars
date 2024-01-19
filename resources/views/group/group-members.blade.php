@@ -44,7 +44,7 @@
                         <td class="py-2 px-4 border-b text-center bg-gray-200">{{$user->pivot->created_at->diffForHumans()}}</td>
                         <td class="py-2 px-4 border-b text-center bg-gray-200">
                             <div class="inline-block">
-                                <form action="#" method="POST" onsubmit="return confirm('Remove this member from the group?');">
+                                <form action="{{route('group.removeMember',['groupId'=>$group->id,'userId'=>$user->id])}}" method="POST" onsubmit="return confirm('Remove this member from the group?');">
                                     @csrf
                                     @method('DELETE')
                                     <button>
@@ -59,7 +59,7 @@
                     @endforeach
                 @else
                     <tr>
-                        <td class="py-2 px-4 text-center" colspan="4">No Data found</td>
+                        <td class="py-2 px-4 text-center" colspan="5">No Data found</td>
                     </tr>
                 @endif
                   </tbody>

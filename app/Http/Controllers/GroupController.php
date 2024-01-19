@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Group;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
@@ -181,5 +182,19 @@ class GroupController extends Controller
         $group = Group::findOrFail($id);
         $group->load('users');
         return view('group.group-members',compact('group'));
+    }
+
+    public function removeMember($groupId, $userId)
+    {
+        $group = Group::findOrFail($groupId);
+        $user = User::findOrFail($userId);
+
+        $removed = $group->users()->detach($user->id);
+
+        if(!$removed)
+        {
+            return redirect()->back()->with('error','Cannot Remove this User form the Group');
+        }
+        return redirect()->route('group.members',$group->id)->with('success','Member Removed');
     }
 }
