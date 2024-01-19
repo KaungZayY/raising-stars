@@ -11,7 +11,7 @@ class GroupController extends Controller
 {
     public function index()
     {
-        $groups = Group::autosort()->get();
+        $groups = Group::autosort()->withCount('users')->get();
         return view('group.group-list',['groups'=>$groups]);
     }
 

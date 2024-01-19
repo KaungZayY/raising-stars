@@ -42,7 +42,7 @@
                     <tr>
                         <td class="py-2 px-4 border-b text-center">{{$loop->iteration}}</td>
                         <td class="py-2 px-4 border-b text-center">{{$group->name}}</td>
-                        <td class="py-2 px-4 border-b text-center">{{$group->users->count()}}</td>
+                        <td class="py-2 px-4 border-b text-center">{{$group->users_count}}</td>
                         <td class="py-2 px-4 border-b text-center">{{$group->description}}</td>
                         <td class="py-2 px-4 border-b text-center">
                             <div class="inline-block">
