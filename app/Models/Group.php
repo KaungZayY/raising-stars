@@ -24,6 +24,6 @@ class Group extends Model
 
     public function users()
     {
-        return $this->belongsToMany(User::class,'user_group');
+        return $this->belongsToMany(User::class,'user_group')->withPivot('created_at');
     }
 }

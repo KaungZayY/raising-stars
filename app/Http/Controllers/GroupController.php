@@ -178,6 +178,8 @@ class GroupController extends Controller
 
     public function members($id)
     {
-        return view('group.group-members');
+        $group = Group::findOrFail($id);
+        $group->load('users');
+        return view('group.group-members',compact('group'));
     }
 }
