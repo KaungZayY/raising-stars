@@ -12,7 +12,7 @@
                         Back
                     </button>
                 </form>
-                <form action="#" method="GET">
+                <form action="{{route('group.addMember',$group->id)}}" method="GET">
                     <button class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-lg mb-2">
                         <div class="flex items-center">
                             <svg xmlns="http://www.w3.org/2000/svg" height="20" width="16" viewBox="0 0 448 512" class="mr-2">

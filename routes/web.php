@@ -233,6 +233,9 @@ Route::middleware('moderator')->group(function(){
     Route::delete('/group/force-delete{group}', [GroupController::class, 'forcedelete'])->name('group.forcedelete');
     //Group Members
     Route::get('/group/{group}/members',[GroupController::class,'members'])->name('group.members');
+    Route::get('/group/{group}/member/add',[GroupController::class,'addMember'])->name('group.addMember');
+    Route::post('/group/member/add',[GroupController::class,'ajaxAdd'])->name('group.ajaxAdd');
+    Route::delete('/group/member/add',[GroupController::class,'ajaxRemove'])->name('group.ajaxRemove');
     Route::delete('/group/{groupId}/member/{userId}/remove', [GroupController::class, 'removeMember'])->name('group.removeMember');
     //Group Search
     Route::get('/group/search',[GroupController::class,'search'])->name('group.search');

@@ -184,6 +184,35 @@ class GroupController extends Controller
         return view('group.group-members',compact('group'));
     }
 
+    public function addMember($id)
+    {
+        $group = Group::findOrFail($id);
+        $nonMembers = User::whereNotIn('id',$group->users->pluck('id'))->get();
+        return view('group.group-members-add',compact('nonMembers','group'));
+    }
+
+    public function ajaxAdd(Request $request)
+    {
+        $group = Group::findOrFail($request->input('group_id'));
+        $added = $group->users()->attach($request->input('user_id'));
+        if(!$added)
+        {
+            return response()->json(['error' => 'Member Already Exists in the Group or Action Failed']);
+        }
+        return response()->json(['success' => 'Member Added to the Group']);
+    }
+
+    public function ajaxRemove(Request $request)
+    {
+        $group = Group::findOrFail($request->input('group_id'));
+        $added = $group->users()->detach($request->input('user_id'));
+        if(!$added)
+        {
+            return response()->json(['error' => 'Cannot Remove this Member']);
+        }
+        return response()->json(['success' => 'Member Removed from the Group']);
+    }
+
     public function removeMember($groupId, $userId)
     {
         $group = Group::findOrFail($groupId);
