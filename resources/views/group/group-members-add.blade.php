@@ -13,6 +13,10 @@
     </x-slot>
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="mb-3 flex flex-row justify-center">
+                <input type="text" name="search" id="search" class="w-1/3 px-4 py-2 border rounded-md focus:outline-none focus:border-blue-500" placeholder="Search Member..&#x1F50E;&#xFE0F; "/>
+                <input type="hidden" name="groupId" id="groupId" value="{{$group->id}}" />
+            </div>
             <div class="flex flex-row justify-start">
                 <form action="{{route('group.members',$group->id)}}" method="GET">
                     <button class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-lg mb-2">
@@ -141,4 +145,23 @@
             }
         });
     }
+
+    //Search Ajax
+    $('#search').on('keyup',function(){
+        $value = $(this).val();
+        var groupId = $('#groupId').val();
+        var url = "{{route('group.searchNonMember',":id")}}";
+        url = url.replace(':id',groupId);
+        $.ajax({
+            url: url,
+            method: 'GET',
+            data: {
+                '_token': '{{ csrf_token() }}',
+                'search': $value,
+            },
+            success: function(data) {
+                $('tbody').html(data);
+            },
+        });
+    });
 </script>

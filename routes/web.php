@@ -240,6 +240,7 @@ Route::middleware('moderator')->group(function(){
     //Group Search
     Route::get('/group/search',[GroupController::class,'search'])->name('group.search');
     Route::get('/group/{group}/members/search',[GroupController::class,'searchMember'])->name('group.searchMember');
+    Route::get('/group/{group}/member/add/search',[GroupController::class,'searchNonMember'])->name('group.searchNonMember');
 });
 
 require __DIR__.'/auth.php';
