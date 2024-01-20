@@ -347,6 +347,10 @@ class GroupController extends Controller
 
     public function myGroups()
     {
-        
+        $groups = Group::whereHas('users', function ($query) {
+            $query->where('user_id', Auth::id());
+        })->withCount('users')
+        ->get();
+        return view('universal-view.my-groups',compact('groups'));
     }
 }
