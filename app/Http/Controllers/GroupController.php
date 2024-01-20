@@ -6,6 +6,7 @@ use App\Models\Group;
 use App\Models\User;
 use GuzzleHttp\Psr7\Response;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
@@ -342,5 +343,10 @@ class GroupController extends Controller
             }
 
         }
+    }
+
+    public function myGroups()
+    {
+        
     }
 }

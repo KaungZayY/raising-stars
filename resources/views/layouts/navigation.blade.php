@@ -20,6 +20,10 @@
                         {{ __('Available Courses') }}
                     </x-nav-link>
 
+                    <x-nav-link :href="route('groups')" :active="request()->routeIs('groups')">
+                        {{ __('My Groups') }}
+                    </x-nav-link>
+
                     <!-- Admin Control Drop List -->
                     @can('viewAdminContent', App\Models\User::class)
                     <x-nav-link-parent :href="'#'" :active="request()->routeIs('padron.*')">

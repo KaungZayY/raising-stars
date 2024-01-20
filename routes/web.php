@@ -66,6 +66,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/courses',[CourseController::class,'availableCourses'])->name('courses');
     Route::get('/courses{course}/sessions',[CourseController::class,'courseSession'])->name('course.session');
     Route::get('/courses{course}/{session}/schedules',[CourseController::class,'courseBySession'])->name('courses.bysession');
+
+    //View My Groups
+    Route::get('/my-groups',[GroupController::class,'myGroups'])->name('groups');
 });
 
 Route::middleware('student')->group(function(){
