@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Group;
 use App\Models\User;
+use GuzzleHttp\Psr7\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
@@ -225,5 +226,63 @@ class GroupController extends Controller
             return redirect()->back()->with('error','Cannot Remove this User form the Group');
         }
         return redirect()->route('group.members',$group->id)->with('success','Member Removed');
+    }
+
+    public function searchMember(Request $request, $id)
+    {
+        if($request->ajax())
+        {
+            $output = "";
+            $members = DB::table('user_group')->where('user_group.group_id',$id)
+                    ->leftJoin('users','user_group.user_id','=','users.id')
+                    ->whereNull('users.deleted_at')
+                    ->where('users.name','LIKE','%'.$request->search.'%')
+                    ->select('users.name','users.email','users.role_id','user_group.created_at','users.id as uid','user_group.group_id as gid')
+                    ->get();
+            // return response()->json(['debug'=>$members]);
+            if($members)
+            {
+                $counter = 1;
+                foreach($members as $user)
+                {
+                    $output .= '<tr>'.
+                        '<td class="py-2 px-4 border-b text-center">'.$counter.'</td>'.
+                        '<td class="py-2 px-4 border-b text-center">'.$user->name.'</td>'.
+                        '<td class="py-2 px-4 border-b text-center">'.$user->email.'</td>'.
+                        '<td class="py-2 px-4 border-b text-center">';
+                        // Role
+                        if($user->role_id == 1) {
+                            $output .= 'Student';
+                        } elseif($user->role_id == 2) {
+                            $output .= 'Lecturer';
+                        } elseif($user->role_id == 3) {
+                            $output .= 'Moderator';
+                        } elseif($user->role_id == 4) {
+                            $output .= 'Admin';
+                        } else {
+                            $output .= 'Unknown Role';
+                        }
+                    $output .= '</td>'.
+                        '<td class="py-2 px-4 border-b text-center">'.\Carbon\Carbon::parse($user->created_at)->diffForHumans().'</td>'.
+                        '<td class="py-2 px-4 border-b text-center">'.
+                            '<div class="inline-block">'.
+                                '<form action="'.route('group.removeMember',['groupId'=>$user->gid,'userId'=>$user->uid]).'" method="POST" onsubmit="return confirm(\'Remove this member from the group?\');">'.
+                                    '<input type="hidden" name="_token" value="' . csrf_token() . '">' .
+                                    '<input type="hidden" name="_method" value="DELETE">' .
+                                    '<button>'.
+                                        '<svg xmlns="http://www.w3.org/2000/svg" height="22" width="20" viewBox="0 0 640 512">'.
+                                            '<path fill="#EF4444" d="M96 128a128 128 0 1 1 256 0A128 128 0 1 1 96 128zM0 482.3C0 383.8 79.8 304 178.3 304h91.4C368.2 304 448 383.8 448 482.3c0 16.4-13.3 29.7-29.7 29.7H29.7C13.3 512 0 498.7 0 482.3zM472 200H616c13.3 0 24 10.7 24 24s-10.7 24-24 24H472c-13.3 0-24-10.7-24-24s10.7-24 24-24z"/>'.
+                                        '</svg>'.
+                                    '</button>'.
+                                '</form>'.
+                            '</div>'.
+                        '</td>'.
+                    '</tr>';
+
+                    $counter++;
+                }
+                return Response ($output);
+            }
+        }
     }
 }

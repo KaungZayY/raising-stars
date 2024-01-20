@@ -239,6 +239,7 @@ Route::middleware('moderator')->group(function(){
     Route::delete('/group/{groupId}/member/{userId}/remove', [GroupController::class, 'removeMember'])->name('group.removeMember');
     //Group Search
     Route::get('/group/search',[GroupController::class,'search'])->name('group.search');
+    Route::get('/group/{group}/members/search',[GroupController::class,'searchMember'])->name('group.searchMember');
 });
 
 require __DIR__.'/auth.php';

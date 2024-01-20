@@ -1,3 +1,9 @@
+@push('scripts')
+    <!-- JQuery Ajax -->
+    <!-- '@'push to push to master layout, '@'stack('scripts')in master to fetch this script -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+@endpush
+
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-green-500 leading-tight">
@@ -6,6 +12,10 @@
     </x-slot>
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="mb-3 flex flex-row justify-center">
+                <input type="text" name="search" id="search" class="w-1/3 px-4 py-2 border rounded-md focus:outline-none focus:border-blue-500" placeholder="Search Member..&#x1F50E;&#xFE0F; "/>
+                <input type="hidden" name="groupId" id="groupId" value="{{$group->id}}" />
+            </div>
             <div class="flex flex-row justify-between">
                 <form action="{{route('group')}}" method="GET">
                     <button class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-lg mb-2">
@@ -30,6 +40,7 @@
                         <th class="py-2 px-4 border-b bg-cyan-300">No</th>
                         <th class="py-2 px-4 border-b bg-cyan-300">Member Name</th>
                         <th class="py-2 px-4 border-b bg-cyan-300">Email</th>
+                        <th class="py-2 px-4 border-b bg-cyan-300">Role</th>
                         <th class="py-2 px-4 border-b bg-cyan-300">Member Since</th>
                         <th class="py-2 px-4 border-b bg-cyan-300">Action</th>
                     </tr>
@@ -41,6 +52,20 @@
                         <td class="py-2 px-4 border-b text-center bg-gray-200">{{$loop->iteration}}</td>
                         <td class="py-2 px-4 border-b text-center bg-gray-200">{{$user->name}}</td>
                         <td class="py-2 px-4 border-b text-center bg-gray-200">{{$user->email}}</td>
+                        <!-- Role -->
+                        <td class="py-2 px-4 border-b text-center bg-gray-200">
+                            @if($user->role_id == 1)
+                                Student
+                            @elseif($user->role_id == 2)
+                                Lecturer
+                            @elseif($user->role_id == 3)
+                                Moderator
+                            @elseif($user->role_id == 4)
+                                Admin
+                            @else
+                                Unknown Role
+                            @endif
+                        </td>
                         <td class="py-2 px-4 border-b text-center bg-gray-200">{{$user->pivot->created_at->diffForHumans()}}</td>
                         <td class="py-2 px-4 border-b text-center bg-gray-200">
                             <div class="inline-block">
@@ -59,7 +84,7 @@
                     @endforeach
                 @else
                     <tr>
-                        <td class="py-2 px-4 text-center" colspan="5">No Data found</td>
+                        <td class="py-2 px-4 text-center" colspan="6">No Data found</td>
                     </tr>
                 @endif
                   </tbody>
@@ -69,3 +94,26 @@
         </div>
     </div>
 </x-app-layout>
+
+<script>
+    $('#search').on('keyup',function(){
+        $value = $(this).val();
+        var groupId = $('#groupId').val();
+        var url = "{{route('group.searchMember',":id")}}";
+        url = url.replace(':id',groupId);
+        $.ajax({
+            url: url,
+            method: 'GET',
+            data: {
+                '_token': '{{ csrf_token() }}',
+                'search': $value,
+            },
+            success: function(data) {
+                $('tbody').html(data);
+            },
+            // debug: function(data){
+            //     console.log(data);
+            // },
+        });
+    });
+</script>
