@@ -353,4 +353,9 @@ class GroupController extends Controller
         ->get();
         return view('universal-view.my-groups',compact('groups'));
     }
+
+    public function viewGroup(Group $group)
+    {
+        dd($group);
+    }
 }

@@ -69,6 +69,7 @@ Route::middleware('auth')->group(function () {
 
     //View My Groups
     Route::get('/my-groups',[GroupController::class,'myGroups'])->name('groups');
+    Route::get('/my-groups/{group}/view',[GroupController::class,'viewGroup'])->name('group.view');
 });
 
 Route::middleware('student')->group(function(){
