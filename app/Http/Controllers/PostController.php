@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Group;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -13,16 +14,21 @@ class PostController extends Controller
 
     public function index()
     {
-        $posts = Post::with('categories')->with('user')->latest()->paginate(4);
-
+        $posts = Post::with('categories')
+                    ->with('user')
+                    ->with('group')->latest()
+                    ->paginate(4);
         return view('home',compact('posts'));
     }
 
     public function create()
     {
         $categories = Category::where('status',1)->get();
+        $groups = Group::where('deleted_at',NULL)->whereHas('users', function ($query) {
+            $query->where('user_id', Auth::id());
+        })->get();
 
-        return view('post-create', ['categories' => $categories]);
+        return view('post-create', ['categories' => $categories, 'groups' => $groups]);
     }
     
     public function store(Request $request)
@@ -32,6 +38,7 @@ class PostController extends Controller
             'content' => 'required',
             'categories' => 'nullable|array',
             'categories.*' => 'exists:categories,id',
+            'group_id' => 'required|exists:groups,id'
         ]);
         // dd($request);
         DB::beginTransaction();
@@ -41,6 +48,7 @@ class PostController extends Controller
             $post->title = $request->title;
             $post->content = $request->content;
             $post->user_id = Auth::user()->id;
+            $post->group_id = $request->group_id;
             $posted = $post->save();
             if(!$posted)
             {
@@ -113,6 +121,7 @@ class PostController extends Controller
     public function detail(Post $post)
     {
         $categories = Category::all();
+        $post->load('group');
         return view('post-detail',['post'=>$post,'categories'=>$categories]);
     }
 }

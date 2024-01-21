@@ -22,7 +22,15 @@
             <div class="post bg-grey-200 dark:bg-gray-800 shadow-sm sm:rounded-lg border border-gray-400">
                 <div class="flex flex-row bg-gray-300 dark:bg-gray-800 justify-between border border-dotted border-gray-300 p-4 rounded-md">
                     <div class="flex flex-col flex-grow">
-                        <h2 class="text-xl text-green-600 dark:text-green-400 font-semibold">{{ $post->user->name }}</h2>
+                        <div class="flex flex-row justify-between w-1/4">
+                            <h2 class="text-xl text-green-600 dark:text-green-400 font-semibold">
+                                {{ $post->user->name }}
+                            </h2>
+                            <span class="text-lg text-black dark:text-white">‣‣</span>
+                            <p class="text-black dark:text-white italic">
+                                {{$post->group->name}}
+                            </p>
+                        </div>
                         <br>
                         <h3 class="text-lg font-bold dark:text-white mb-2">{{ $post->title }}</h3>
                         <p class="text-black dark:text-gray-300 mb-4">{{ $post->content }}</p>

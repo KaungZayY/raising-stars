@@ -26,4 +26,9 @@ class Group extends Model
     {
         return $this->belongsToMany(User::class,'user_group')->withPivot('created_at');
     }
+
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
+    }
 }

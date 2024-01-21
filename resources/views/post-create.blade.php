@@ -41,6 +41,17 @@
                         </select>
                     </div>
 
+                    <!-- Group -->
+                    <div class="mb-4">
+                        <label for="group_id" class="block dark:text-white text-lg font-bold mb-2">Upload to </label>
+                        <select name="group_id" id="group_id" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-blue-500" required>
+                            <option value="">-- Select Group --</option>
+                            @foreach($groups as $group)
+                                <option value="{{ $group->id }}">{{ $group->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
                     <!-- Submit Button -->
                     <div class="flex flex-row justify-between">
                         <div class="flex w-1/2 justify-center">
