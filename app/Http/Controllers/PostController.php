@@ -14,9 +14,12 @@ class PostController extends Controller
 
     public function index()
     {
-        $posts = Post::with('categories')
-                    ->with('user')
-                    ->with('group')->latest()
+        $user = Auth::user();
+        $posts = Post::with('categories','user','group','likes')
+                    ->whereHas('group', function ($query) use ($user) {
+                        $query->whereIn('id', $user->groups->pluck('id'));
+                    })//only display posts from group, that user is in
+                    ->latest()
                     ->paginate(4);
         return view('home',compact('posts'));
     }
