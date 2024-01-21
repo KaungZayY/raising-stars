@@ -23,7 +23,7 @@
                         </svg>
                     </button>
                 </form>
-                <a href="{{route('group.create')}}" class="bg-green-500 text-white px-2 py-1 mb-6 rounded-md">Add New Course</a>
+                <a href="{{route('group.create')}}" class="bg-green-500 text-white px-2 py-1 mb-6 rounded-md">Create New Group</a>
             </div>
             <div class="overflow-x-auto">
                 <table class="min-w-full bg-white border border-gray-300 border-separate">
