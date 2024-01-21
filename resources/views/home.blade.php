@@ -27,9 +27,9 @@
                                         <h2 class="text-xl text-green-600 dark:text-green-400 font-semibold">
                                             {{ $post->user->name }}
                                         </h2>
+                                        <span class="text-lg text-black dark:text-white">‣‣</span>
                                         <p class="text-black dark:text-white">
-                                            <span class="text-sm">>></span>
-                                        Grade 10 Discussion
+                                            Grade 10 Discussion
                                         </p>
                                     </div>
                                     
