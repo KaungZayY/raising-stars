@@ -14,7 +14,7 @@
     </x-slot>
 
     <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div class="max-w-3xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg p-6">
                 <form action="{{ route('post.store') }}" method="POST">
                     @csrf
@@ -43,12 +43,16 @@
 
                     <!-- Submit Button -->
                     <div class="flex flex-row justify-between">
-                        <x-button-cancel :cancelRoute="route('home')">
-                            {{__('Cancel')}}
-                        </x-button-cancel>
-                        <x-button class="ms-4">
-                            {{ __('Post') }}
-                        </x-button>                                            
+                        <div class="flex w-1/2 justify-center">
+                            <x-button-cancel :cancelRoute="route('home')">
+                                {{__('Cancel')}}
+                            </x-button-cancel>
+                        </div>
+                        <div class="flex w-1/2 justify-center">
+                            <x-button>
+                                {{ __('Post') }}
+                            </x-button>       
+                        </div>                            
                     </div>
                     
                 </form>
