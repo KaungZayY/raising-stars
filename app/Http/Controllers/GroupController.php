@@ -356,6 +356,7 @@ class GroupController extends Controller
 
     public function viewGroup(Group $group)
     {
-        dd($group);
+        $posts = $group->posts()->latest()->get();
+        dd($posts);
     }
 }
