@@ -30,7 +30,7 @@
                 <div id="posts-container" class="text-white scrolling-pagination">
                     @if ($posts->count())
                         @foreach($posts as $post)
-                        <div class="post bg-grey-200 dark:bg-gray-800 shadow-sm sm:rounded-lg border border-gray-400">
+                        <div class="post bg-grey-200 dark:bg-gray-800 shadow-sm sm:rounded-lg border border-gray-400 mb-3 mt-3">
                             <x-post-card :post="$post">
                             </x-post-card>
                         </div>
