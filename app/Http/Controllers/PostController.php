@@ -21,7 +21,7 @@ class PostController extends Controller
                     })//only display posts from group, that user is in
                     ->latest()
                     ->paginate(4);
-        return view('home',compact('posts'));
+        return view('posts.home',compact('posts'));
     }
 
     public function create()
@@ -31,7 +31,7 @@ class PostController extends Controller
             $query->where('user_id', Auth::id());
         })->get();
 
-        return view('post-create', ['categories' => $categories, 'groups' => $groups]);
+        return view('posts.post-create', ['categories' => $categories, 'groups' => $groups]);
     }
     
     public function store(Request $request)
@@ -72,7 +72,7 @@ class PostController extends Controller
     {
         $this->authorize('isOwner',$post);
         $categories = Category::all();
-        return view('post-edit',['post'=>$post,'categories'=>$categories]);
+        return view('posts.post-edit',['post'=>$post,'categories'=>$categories]);
     }
 
     public function update(Request $request, Post $post)
@@ -125,6 +125,6 @@ class PostController extends Controller
     {
         $categories = Category::all();
         $post->load('group');
-        return view('post-detail',['post'=>$post,'categories'=>$categories]);
+        return view('posts.post-detail',['post'=>$post,'categories'=>$categories]);
     }
 }
