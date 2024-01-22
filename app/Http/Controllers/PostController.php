@@ -24,14 +24,24 @@ class PostController extends Controller
         return view('posts.home',compact('posts'));
     }
 
-    public function create()
+    public function create($group_id = null)
     {
         $categories = Category::where('status',1)->get();
-        $groups = Group::where('deleted_at',NULL)->whereHas('users', function ($query) {
-            $query->where('user_id', Auth::id());
-        })->get();
+        $groups = null;
 
-        return view('posts.post-create', ['categories' => $categories, 'groups' => $groups]);
+        if ($group_id !== null) {
+            $groups = null;
+            $group = Group::findOrFail($group_id);
+        } 
+        else 
+        {
+            $groups = Group::where('deleted_at', null)->whereHas('users', function ($query) {
+                $query->where('user_id', Auth::id());
+            })->get();
+            $group = null;
+        }
+
+        return view('posts.post-create', ['categories' => $categories, 'groups' => $groups, 'group' => $group]);
     }
     
     public function store(Request $request)
@@ -59,6 +69,11 @@ class PostController extends Controller
             }
             $post->categories()->sync($request->input('categories', []));
             DB::commit();
+            if ($request->group) 
+            {
+                return redirect()->route('group.view',$request->group)->with('success', 'Your Post has Uploaded');
+            } 
+            
             return redirect()->route('home')->with('success', 'Your Post has Uploaded');
         }
         catch(\Exception $e)
@@ -124,7 +139,68 @@ class PostController extends Controller
     public function detail(Post $post)
     {
         $categories = Category::all();
-        $post->load('group');
+        $post->load('group','comments.user');
         return view('posts.post-detail',['post'=>$post,'categories'=>$categories]);
+    }
+
+    public function groupEdit(Post $post)
+    {
+        $this->authorize('isOwner',$post);
+        $categories = Category::all();
+        return view('posts.group-post-edit',['post'=>$post,'categories'=>$categories]);
+    }
+
+    public function groupUpdate(Request $request, Post $post)
+    {
+        $this->authorize('isOwner',$post);
+        // dd($request);
+        $request->validate([
+            'title' => 'required',
+            'content' => 'required',
+            'categories' => 'nullable|array',
+            'categories.*' => 'exists:categories,id',
+        ]);
+        DB::beginTransaction();
+        try
+        {
+            $post->title = $request->title;
+            $post->content = $request->content;
+            $posted = $post->save();
+            if(!$posted)
+            {
+                throw new \Exception('Error Updating Post.');
+            }
+            $post->categories()->sync($request->input('categories', []));
+            DB::commit();
+            return redirect()->route('group.view',$post->group->id)->with('success', 'Your Post has Updated');
+        }
+        catch(\Exception $e)
+        {
+            DB::rollBack();
+            return redirect()->back()->with('error','Post Update Failed');
+        }
+    }
+
+    public function groupDelete(Post $post)
+    {
+        $group_id = $post->group->id;
+        $this->authorize('isOwnerOrAdmin',$post);
+        $deleted = $post->delete();
+        if(!$deleted)
+        {
+            DB::rollBack();
+            return redirect()->route('group.view',$group_id)->with('error','Cannot Delete this Post');
+        }
+        else
+        {
+            return redirect()->route('group.view',$group_id)->with('success', 'You had Deleted the Post'); 
+        }
+    }
+
+    public function groupDetail(Post $post)
+    {
+        $categories = Category::all();
+        $post->load('group','comments.user');
+        return view('posts.group-post-detail',['post'=>$post,'categories'=>$categories]);
     }
 }

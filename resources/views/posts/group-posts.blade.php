@@ -18,20 +18,20 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Home') }}
+            "{{$group->name}}" Group Discussion
         </h2>
     </x-slot>
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="flex flex-row justify-end">
-                <a href="{{ route('post.create') }}" class="bg-green-500 text-white px-2 py-1 mb-6 rounded-md">Create Post</a>
+                <a href="{{ route('post.create',$group->id) }}" class="bg-green-500 text-white px-2 py-1 mb-6 rounded-md">Create Post</a>
             </div>
             <div class="overflow-hidden shadow-sm sm:rounded-lg p-6">
                 <div id="posts-container" class="text-white scrolling-pagination">
                     @if ($posts->count())
                         @foreach($posts as $post)
                         <div class="post bg-grey-200 dark:bg-gray-800 shadow-sm sm:rounded-lg border border-gray-400 mb-3 mt-3">
-                            <x-post-card :post="$post" :showGpName="true">
+                            <x-post-card :post="$post" :showGpName="false">
                             </x-post-card>
                         </div>
                         @endforeach

@@ -46,12 +46,16 @@ Route::middleware('auth')->group(function () {
 
     //post
     Route::get('/',[PostController::class, 'index'])->name('home');
-    Route::get('/post', [PostController::class, 'create'])->name('post.create');
-    Route::post('/post',[PostController::class,'store'])->name('post.store');
+    Route::get('/post/create/{group_id?}', [PostController::class, 'create'])->name('post.create');
+    Route::post('/post/save',[PostController::class,'store'])->name('post.store');
     Route::get('/post/edit{post}', [PostController::class, 'edit'])->name('post.edit');
-    Route::post('/post/edit{post}', [PostController::class, 'update'])->name('post.update');
+    Route::post('/post/update{post}', [PostController::class, 'update'])->name('post.update');
     Route::delete('/post/delete{post}', [PostController::class, 'destroy'])->name('post.delete');
     Route::get('/post/detail{post}', [PostController::class, 'detail'])->name('post.detail');
+    Route::get('/group/post/edit{post}', [PostController::class, 'groupEdit'])->name('grouppost.edit');
+    Route::post('/group/post/update{post}', [PostController::class, 'groupUpdate'])->name('grouppost.update');
+    Route::delete('/group/post/delete{post}', [PostController::class, 'groupDelete'])->name('grouppost.delete');
+    Route::get('/group/post/detail{post}', [PostController::class, 'groupDetail'])->name('grouppost.detail');
 
     //like
     Route::post('/like',[LikeController::class,'postLiked'])->name('post.like');

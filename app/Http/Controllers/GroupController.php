@@ -356,7 +356,7 @@ class GroupController extends Controller
 
     public function viewGroup(Group $group)
     {
-        $posts = $group->posts()->latest()->get();
-        dd($posts);
+        $posts = $group->posts()->with('categories','user','likes')->latest()->paginate(4);
+        return view('posts.group-posts',compact('group','posts'));
     }
 }

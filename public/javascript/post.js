@@ -18,9 +18,6 @@ document.addEventListener('click', function (event) {
     });
 });
 
-function postDetail(route_url) {
-    window.location.href = route_url;
-}
 
 //like post
 function postLiked(post_id) {

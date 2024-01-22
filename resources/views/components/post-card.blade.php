@@ -1,13 +1,15 @@
 <div class="flex flex-row bg-gray-300 dark:bg-gray-800 justify-between border border-dotted border-gray-300 p-4 rounded-md">
-    <div class="flex flex-col flex-grow" onclick="postDetail('{{ route('post.detail', $post) }}')">
+    <div class="flex flex-col flex-grow" onclick="postDetail('{{ $showGpName? route('post.detail', $post) : route('grouppost.detail',$post) }}')">
         <div class="flex flex-row justify-between items-center w-1/4">
             <h2 class="text-xl text-green-600 dark:text-green-400 font-semibold">
                 {{ $post->user->name }}
             </h2>
-            <span class="text-lg text-black dark:text-white">‣‣</span>
-            <p class="text-black dark:text-white italic flex-shrink-0 md:flex-grow md:flex-shrink">
-                {{$post->group->name}}
-            </p>
+            @if ($showGpName == true)
+                <span class="text-lg text-black dark:text-white">‣‣</span>
+                <p class="text-black dark:text-white italic flex-shrink-0 md:flex-grow md:flex-shrink">
+                    {{$post->group->name}}
+                </p>
+            @endif
         </div>        
         
         <br>
@@ -36,15 +38,31 @@
             </button>
             <div class="hidden flex-row-reverse">
                 @can('isOwner', $post)
-                    <form action="{{route('post.edit',$post->id)}}" method="GET">
-                        <button class="bg-green-500 text-white px-2 py-1 mb-2 rounded-md w-full">Edit</button>
-                    </form>
+                    @if ($showGpName == true)
+                        <form action="{{route('post.edit',$post->id)}}" method="GET">
+                            <button class="bg-green-500 text-white px-2 py-1 mb-2 rounded-md w-full">Edit</button>
+                        </form>
+                    @else
+                        <form action="{{route('grouppost.edit',$post->id)}}" method="GET">
+                            <button class="bg-green-500 text-white px-2 py-1 mb-2 rounded-md w-full">Edit</button>
+                        </form>
+                    @endif
+                    
                 @endcan
-                <form action="{{route('post.delete',$post->id)}}" method="POST">
-                    @csrf
-                    @method('DELETE')
-                    <button class="bg-red-500 text-white px-2 py-1 mb-2 rounded-md w-full">Delete</button>
-                </form>
+                @if ($showGpName == true)
+                    <form action="{{route('post.delete',$post->id)}}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button class="bg-red-500 text-white px-2 py-1 mb-2 rounded-md w-full">Delete</button>
+                    </form>
+                    @else
+                        <form action="{{route('grouppost.delete',$post->id)}}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button class="bg-red-500 text-white px-2 py-1 mb-2 rounded-md w-full">Delete</button>
+                        </form>
+                    @endif
+                
             </div>
         @endcan
     </div>
