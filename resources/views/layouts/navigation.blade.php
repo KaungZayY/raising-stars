@@ -45,8 +45,6 @@
                             <span class="separator"></span>
                             <a href="{{route('student')}}"> Students </a>
                             <span class="separator"></span>
-                            <a href="{{route('group')}}"> Groups </a>
-                            <span class="separator"></span>
                             <a href="{{route('subject')}}"> Subjects </a>
                             <span class="separator"></span>
                             <a href="{{route('room')}}"> Rooms </a>
@@ -65,6 +63,13 @@
 
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ms-6">
+                @can('viewModeratorContent', App\Models\User::class)
+                <div class="mr-8">
+                    <x-nav-link :href="route('group')" :active="request()->routeIs('group')">
+                        {{ __('User Groups') }}
+                    </x-nav-link>
+                </div>
+                @endcan
                 @can('viewAdminContent', App\Models\User::class)
                     <x-nav-link :href="route('pending')" :active="request()->routeIs('pending')">
                         {{ __('Pending Forms') }}

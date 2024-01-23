@@ -21,4 +21,9 @@ class UserPolicy
     {
         return $user->role_id === 1;
     }
+
+    public function viewModeratorContent(User $user)
+    {
+        return $user->role_id >= 3;
+    }
 }
