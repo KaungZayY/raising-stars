@@ -29,9 +29,11 @@
                     <x-nav-link-parent :href="'#'" :active="request()->routeIs('padron.*')">
                         <x-slot name="name">Admin Control</x-slot>
                         <x-slot name="children">
-                            <a href="#"> Announcements </a>
-                            <span class="separator"></span>
-                            <a href="{{route('discussion.report')}}"> Discussion </a>
+                            {{-- <a href="#"> Announcements </a>
+                            <span class="separator"></span> --}}
+                            {{-- <a href="{{route('discussion.report')}}"> Discussion </a>
+                            <span class="separator"></span> --}}
+                            <a href="{{route('category')}}"> Categories </a>
                             <span class="separator"></span>
                             <a href="{{route('module')}}"> Modules </a>
                             <span class="separator"></span>
