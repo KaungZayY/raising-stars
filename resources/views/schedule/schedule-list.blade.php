@@ -58,7 +58,7 @@
                         <td class="py-2 px-4 border-b text-center">{{$schedule->course->course}}</td>
                         <td class="py-2 px-4 border-b text-center">{{$schedule->session}}</td>
                         <td class="py-2 px-4 border-b text-center">
-                            <div class="inline-block">
+                            {{-- <div class="inline-block">
                                 <form action="#" method="GET">
                                     <button>
                                         <svg xmlns="http://www.w3.org/2000/svg" height="16" width="16" viewBox="0 0 512 512">
@@ -67,7 +67,7 @@
                                     </button>
                                 </form>
                             </div>
-                            <span class="ml-2 mr-2">|</span>
+                            <span class="ml-2 mr-2">|</span> --}}
                             <div class="inline-block">
                                 <form action="{{route('schedule.edit',$schedule->id)}}" method="GET">
                                     <button>
