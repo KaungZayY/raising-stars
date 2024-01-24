@@ -8,6 +8,7 @@ use App\Models\Schedule;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class CourseController extends Controller
 {
@@ -94,13 +95,25 @@ class CourseController extends Controller
 
     public function destroy(Course $course)
     {
-        // dd($course);
-        $deleted = $course->delete();
-        if(!$deleted)
+        try {
+            // Check if there are related records in the schedules table
+            if ($course->schedules()->exists()) {
+                return redirect()->route('course')->with('error', 'Cannot remove this course. It has related schedules.');
+            }
+
+            // Soft delete the course
+            $deleted = $course->delete();
+
+            if (!$deleted) {
+                return redirect()->route('course')->with('error', 'Cannot remove this course.');
+            }
+
+            return redirect()->route('course')->with('success', 'Course archived successfully.');
+        } 
+        catch (ModelNotFoundException $e) 
         {
-            return redirect()->route('course')->with('error','Cannot Remove this Course');
+            return redirect()->route('course')->with('error', 'Course not found.');
         }
-        return redirect()->route('course')->with('success','Course Archived');
     }
 
     public function archives()
