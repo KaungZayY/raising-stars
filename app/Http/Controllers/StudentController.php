@@ -11,7 +11,7 @@ class StudentController extends Controller
 {
     public function index()
     {
-        $students = User::where('role_id',1)->autosort()->get();
+        $students = User::where('role_id',1)->autosort()->with('studentInfo')->get();
         return view('student.student-list',['students'=>$students]);
     }
 
@@ -100,7 +100,14 @@ class StudentController extends Controller
         if($request->ajax())
         {
             $output="";
-            $students=DB::table('users')->whereNull('deleted_at')->where('role_id',1)->where('name','LIKE','%'.$request->search."%")->get();
+            $students=DB::table('users')
+                    ->whereNull('deleted_at')
+                    ->leftJoin('student_infos', 'users.id', '=', 'student_infos.user_id')
+                    ->where('role_id',1)
+                    ->where('name','LIKE','%'.$request->search."%")
+                    ->select('users.*', 'student_infos.id AS studentInfoExists')
+                    ->get();
+
             if($students)
             {
                 $counter = 1;
@@ -112,7 +119,10 @@ class StudentController extends Controller
                         '<td class="py-2 px-4 border-b text-center">'.$student->email.'</td>'.
                         '<td class="py-2 px-4 border-b text-center">'.$student->phone_number.'</td>'.
                         '<td class="py-2 px-4 border-b text-center">'.$student->address.'</td>'.
-                        '<td class="py-2 px-4 border-b text-center">'.
+                        '<td class="py-2 px-4 border-b text-center">';
+                    if($student->studentInfoExists)
+                    {
+                        $output .= 
                             '<div class="inline-block">'.
                                 '<form action="'.route('student.info',$student->id).'" method="GET">'.
                                     '<button>
@@ -122,8 +132,9 @@ class StudentController extends Controller
                                     </button>'.
                                 '</form>'.
                             '</div>
-                            <span class="ml-2 mr-2">|</span>'.
-                            '<div class="inline-block">'.
+                            <span class="ml-2 mr-2">|</span>';
+                    }
+                $output .=  '<div class="inline-block">'.
                                 '<form action="'.route('student.edit',$student->id).'" method="GET">'.
                                     '<button>
                                         <svg xmlns="http://www.w3.org/2000/svg" height="16" width="16" viewBox="0 0 512 512">
