@@ -9,12 +9,16 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Create a New Post') }}
+            @if ($groups !== null)
+                {{ __('Create a New Post') }}
+            @else
+                {{ __('Create post to ') }}{{$group->name}}
+            @endif
         </h2>
     </x-slot>
 
     <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div class="max-w-3xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg p-6">
                 <form action="{{ route('post.store') }}" method="POST">
                     @csrf
@@ -41,14 +45,40 @@
                         </select>
                     </div>
 
+                    <!-- Group -->
+                    @if ($groups != null)
+                        <div class="mb-4">
+                            <label for="group_id" class="block dark:text-white text-lg font-bold mb-2">Upload to </label>
+                            <select name="group_id" id="group_id" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-blue-500" required>
+                                <option value="">-- Select Group --</option>
+                                @foreach($groups as $group)
+                                    <option value="{{ $group->id }}">{{ $group->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    @else
+                        <input type="hidden" name="group_id" id="group_id" value="{{$group->id}}" required>
+                        <input type="hidden" name="group" id="group" value="{{$group->id}}" required>
+                    @endif
+
                     <!-- Submit Button -->
                     <div class="flex flex-row justify-between">
-                        <x-button-cancel :cancelRoute="route('home')">
-                            {{__('Cancel')}}
-                        </x-button-cancel>
-                        <x-button class="ms-4">
-                            {{ __('Post') }}
-                        </x-button>                                            
+                        <div class="flex w-1/2 justify-center">
+                            @if ($groups != null)
+                                <x-button-cancel :cancelRoute="route('home')">
+                                    {{__('Cancel')}}
+                                </x-button-cancel>
+                            @else
+                                <x-button-cancel :cancelRoute="route('group.view',$group->id)">
+                                    {{__('Cancel')}}
+                                </x-button-cancel>
+                            @endif
+                        </div>
+                        <div class="flex w-1/2 justify-center">
+                            <x-button>
+                                {{ __('Post') }}
+                            </x-button>       
+                        </div>                            
                     </div>
                     
                 </form>

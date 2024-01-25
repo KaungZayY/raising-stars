@@ -80,4 +80,9 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Schedule::class,'schedule_student');
     }
+
+    public function groups()
+    {
+        return $this->belongsToMany(Group::class,'user_group')->withPivot('created_at');
+    }
 }

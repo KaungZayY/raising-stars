@@ -6,6 +6,7 @@ use App\Models\Subject;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class SubjectController extends Controller
 {
@@ -92,16 +93,24 @@ class SubjectController extends Controller
 
     public function destroy(Subject $subject)
     {
-        // dd($subject);
-        $deleted = $subject->delete();
-        if(!$deleted)
+        try {
+            // Check if there are related records in the modules table
+            if ($subject->modules()->exists()) {
+                return redirect()->route('subject')->with('error', 'Cannot delete this subject. It has related modules.');
+            }
+
+            // Soft delete the subject
+            $deleted = $subject->delete();
+
+            if (!$deleted) {
+                return redirect()->route('subject')->with('error', 'Cannot delete this subject.');
+            }
+
+            return redirect()->route('subject')->with('success', 'Subject deleted successfully.');
+        } 
+        catch (ModelNotFoundException $e) 
         {
-            DB::rollBack();
-            return redirect()->route('subject')->with('error','Cannot Delete this Subject');
-        }
-        else
-        {
-            return redirect()->route('subject')->with('success', 'You had Deleted the Subject'); 
+            return redirect()->route('subject')->with('error', 'Subject not found.');
         }
     }
 

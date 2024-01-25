@@ -28,6 +28,7 @@ class DatabaseSeeder extends Seeder
             CourseSeeder::class,
             ModuleCourseSeeder::class,
             ScheduleSeeder::class,
+            GroupSeeder::class,
         ]);
     }
 }

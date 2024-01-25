@@ -15,4 +15,9 @@ class Subject extends Model
         'id',
         'subject',
     ];
+
+    public function modules()
+    {
+        return $this->hasMany(Module::class);
+    }
 }

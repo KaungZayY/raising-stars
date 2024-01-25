@@ -20,14 +20,20 @@
                         {{ __('Available Courses') }}
                     </x-nav-link>
 
+                    <x-nav-link :href="route('groups')" :active="request()->routeIs('groups')">
+                        {{ __('My Groups') }}
+                    </x-nav-link>
+
                     <!-- Admin Control Drop List -->
                     @can('viewAdminContent', App\Models\User::class)
                     <x-nav-link-parent :href="'#'" :active="request()->routeIs('padron.*')">
                         <x-slot name="name">Admin Control</x-slot>
                         <x-slot name="children">
-                            <a href="#"> Announcements </a>
-                            <span class="separator"></span>
-                            <a href="{{route('discussion.report')}}"> Discussion </a>
+                            {{-- <a href="#"> Announcements </a>
+                            <span class="separator"></span> --}}
+                            {{-- <a href="{{route('discussion.report')}}"> Discussion </a>
+                            <span class="separator"></span> --}}
+                            <a href="{{route('category')}}"> Categories </a>
                             <span class="separator"></span>
                             <a href="{{route('module')}}"> Modules </a>
                             <span class="separator"></span>
@@ -57,6 +63,13 @@
 
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ms-6">
+                @can('viewModeratorContent', App\Models\User::class)
+                <div class="mr-8">
+                    <x-nav-link :href="route('group')" :active="request()->routeIs('group')">
+                        {{ __('User Groups') }}
+                    </x-nav-link>
+                </div>
+                @endcan
                 @can('viewAdminContent', App\Models\User::class)
                     <x-nav-link :href="route('pending')" :active="request()->routeIs('pending')">
                         {{ __('Pending Forms') }}
@@ -121,11 +134,11 @@
 
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
-        <div class="pt-2 pb-3 space-y-1">
+        {{-- <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
-        </div>
+        </div> --}}
 
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200 dark:border-gray-600">

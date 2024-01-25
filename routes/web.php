@@ -4,6 +4,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\DiscussionReportController;
+use App\Http\Controllers\GroupController;
 use App\Http\Controllers\LecturerController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\ModeratorController;
@@ -30,13 +31,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -44,13 +45,17 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     //post
-    Route::get('/home',[PostController::class, 'index'])->name('home');
-    Route::get('/post', [PostController::class, 'create'])->name('post.create');
-    Route::post('/post',[PostController::class,'store'])->name('post.store');
+    Route::get('/',[PostController::class, 'index'])->name('home');
+    Route::get('/post/create/{group_id?}', [PostController::class, 'create'])->name('post.create');
+    Route::post('/post/save',[PostController::class,'store'])->name('post.store');
     Route::get('/post/edit{post}', [PostController::class, 'edit'])->name('post.edit');
-    Route::post('/post/edit{post}', [PostController::class, 'update'])->name('post.update');
+    Route::post('/post/update{post}', [PostController::class, 'update'])->name('post.update');
     Route::delete('/post/delete{post}', [PostController::class, 'destroy'])->name('post.delete');
     Route::get('/post/detail{post}', [PostController::class, 'detail'])->name('post.detail');
+    Route::get('/group/post/edit{post}', [PostController::class, 'groupEdit'])->name('grouppost.edit');
+    Route::post('/group/post/update{post}', [PostController::class, 'groupUpdate'])->name('grouppost.update');
+    Route::delete('/group/post/delete{post}', [PostController::class, 'groupDelete'])->name('grouppost.delete');
+    Route::get('/group/post/detail{post}', [PostController::class, 'groupDetail'])->name('grouppost.detail');
 
     //like
     Route::post('/like',[LikeController::class,'postLiked'])->name('post.like');
@@ -65,6 +70,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/courses',[CourseController::class,'availableCourses'])->name('courses');
     Route::get('/courses{course}/sessions',[CourseController::class,'courseSession'])->name('course.session');
     Route::get('/courses{course}/{session}/schedules',[CourseController::class,'courseBySession'])->name('courses.bysession');
+
+    //View My Groups
+    Route::get('/my-groups',[GroupController::class,'myGroups'])->name('groups');
+    Route::get('/my-groups/{group}/view',[GroupController::class,'viewGroup'])->name('group.view');
 });
 
 Route::middleware('student')->group(function(){
@@ -216,6 +225,30 @@ Route::middleware('admin')->group(function(){
     Route::post('/pending/{id}/approve',[PendingController::class,'approve'])->name('pending.approve');
     Route::post('/pending/{id}/reject',[PendingController::class,'reject'])->name('pending.reject');
 
+});
+
+Route::middleware('moderator')->group(function(){
+    
+    //Group
+    Route::get('/groups',[GroupController::class,'index'])->name('group');
+    Route::get('/group/create',[GroupController::class,'create'])->name('group.create');
+    Route::post('/group/save',[GroupController::class,'store'])->name('group.store');
+    Route::get('/group/edit{group}', [GroupController::class, 'edit'])->name('group.edit');
+    Route::post('/group/edit{group}', [GroupController::class, 'update'])->name('group.update');
+    Route::delete('/group/delete{group}', [GroupController::class, 'destroy'])->name('group.delete');
+    Route::get('/group/archives',[GroupController::class,'archives'])->name('group.archives');
+    Route::patch('/group/restore/{group}', [GroupController::class, 'restore'])->name('group.restore');
+    Route::delete('/group/force-delete{group}', [GroupController::class, 'forcedelete'])->name('group.forcedelete');
+    //Group Members
+    Route::get('/group/{group}/members',[GroupController::class,'members'])->name('group.members');
+    Route::get('/group/{group}/member/add',[GroupController::class,'addMember'])->name('group.addMember');
+    Route::post('/group/member/add',[GroupController::class,'ajaxAdd'])->name('group.ajaxAdd');
+    Route::delete('/group/member/add',[GroupController::class,'ajaxRemove'])->name('group.ajaxRemove');
+    Route::delete('/group/{groupId}/member/{userId}/remove', [GroupController::class, 'removeMember'])->name('group.removeMember');
+    //Group Search
+    Route::get('/group/search',[GroupController::class,'search'])->name('group.search');
+    Route::get('/group/{group}/members/search',[GroupController::class,'searchMember'])->name('group.searchMember');
+    Route::get('/group/{group}/member/add/search',[GroupController::class,'searchNonMember'])->name('group.searchNonMember');
 });
 
 require __DIR__.'/auth.php';

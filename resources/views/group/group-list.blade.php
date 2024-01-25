@@ -7,58 +7,56 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Lecturer List') }}
+            {{ __('Groups') }}
         </h2>
     </x-slot>
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="mb-3 flex flex-row justify-center">
-                <input type="text" name="search" id="search" class="w-1/3 px-4 py-2 border rounded-md focus:outline-none focus:border-blue-500" placeholder="Search by Name... &#x1F50E;&#xFE0F; "/>
+                <input type="text" name="search" id="search" class="w-1/3 px-4 py-2 border rounded-md focus:outline-none focus:border-blue-500" placeholder="Search...&#x1F50E;&#xFE0F; "/>
             </div>
             <div class="flex flex-row justify-between">
-                <form action="{{route('lecturer.archives')}}" method="GET">
+                <form action="{{route('group.archives')}}" method="GET">
                     <button>
                         <svg xmlns="http://www.w3.org/2000/svg" height="32" width="24" viewBox="0 0 448 512">
                             <path fill="#fde047" d="M163.8 0H284.2c12.1 0 23.2 6.8 28.6 17.7L320 32h96c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 96 0 81.7 0 64S14.3 32 32 32h96l7.2-14.3C140.6 6.8 151.7 0 163.8 0zM32 128H416V448c0 35.3-28.7 64-64 64H96c-35.3 0-64-28.7-64-64V128zm192 64c-6.4 0-12.5 2.5-17 7l-80 80c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l39-39V408c0 13.3 10.7 24 24 24s24-10.7 24-24V273.9l39 39c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-80-80c-4.5-4.5-10.6-7-17-7z"/>
                         </svg>
                     </button>
                 </form>
-                <a href="{{route('lecturer.create')}}" class="bg-green-500 text-white px-2 py-1 mb-6 rounded-md">Add New Lecturer</a>
+                <a href="{{route('group.create')}}" class="bg-green-500 text-white px-2 py-1 mb-6 rounded-md">Create New Group</a>
             </div>
             <div class="overflow-x-auto">
                 <table class="min-w-full bg-white border border-gray-300 border-separate">
                   <thead class="with-larasort">
                     <tr>
-                        <th class="py-2 px-4 border-b bg-green-300">No</th>
-                        <th class="py-2 px-4 border-b bg-green-300">@sortableLink('name', 'Name')</th>
-                        <th class="py-2 px-4 border-b bg-green-300">@sortableLink('email', 'Email')</th>
-                        <th class="py-2 px-4 border-b bg-green-300">@sortableLink('phone_number', 'Phone Number')</th>
-                        <th class="py-2 px-4 border-b bg-green-300">@sortableLink('address', 'Address')</th>
-                        <th class="py-2 px-4 border-b bg-green-300">Action</th>
+                        <th class="py-2 px-4 border-b bg-indigo-400">No</th>
+                        <th class="py-2 px-4 border-b bg-indigo-400">@sortableLink('name', 'Group Name')</th>
+                        <th class="py-2 px-4 border-b bg-indigo-400">Member Count</th>
+                        <th class="py-2 px-4 border-b bg-indigo-400">@sortableLink('description', 'Description')</th>
+                        <th class="py-2 px-4 border-b bg-indigo-400">Action</th>
                     </tr>
                   </thead>
                   <tbody>
-                @if ($lecturers->count())
-                    @foreach ($lecturers as $lecturer)
+                @if ($groups->count())
+                    @foreach ($groups as $group)
                     <tr>
                         <td class="py-2 px-4 border-b text-center">{{$loop->iteration}}</td>
-                        <td class="py-2 px-4 border-b text-center">{{$lecturer->name}}</td>
-                        <td class="py-2 px-4 border-b text-center">{{$lecturer->email}}</td>
-                        <td class="py-2 px-4 border-b text-center">{{$lecturer->phone_number}}</td>
-                        <td class="py-2 px-4 border-b text-center">{{$lecturer->address}}</td>
+                        <td class="py-2 px-4 border-b text-center">{{$group->name}}</td>
+                        <td class="py-2 px-4 border-b text-center">{{$group->users_count}}</td>
+                        <td class="py-2 px-4 border-b text-center">{{$group->description}}</td>
                         <td class="py-2 px-4 border-b text-center">
-                            {{-- <div class="inline-block">
-                                <form action="#" method="GET">
+                            <div class="inline-block">
+                                <form action="{{route('group.members',$group->id)}}" method="GET">
                                     <button>
-                                        <svg xmlns="http://www.w3.org/2000/svg" height="16" width="16" viewBox="0 0 512 512">
-                                            <path fill="#000000" d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM216 336h24V272H216c-13.3 0-24-10.7-24-24s10.7-24 24-24h48c13.3 0 24 10.7 24 24v88h8c13.3 0 24 10.7 24 24s-10.7 24-24 24H216c-13.3 0-24-10.7-24-24s10.7-24 24-24zm40-208a32 32 0 1 1 0 64 32 32 0 1 1 0-64z"/>
+                                        <svg xmlns="http://www.w3.org/2000/svg" height="16" width="20" viewBox="0 0 640 512">
+                                            <path d="M96 128a128 128 0 1 1 256 0A128 128 0 1 1 96 128zM0 482.3C0 383.8 79.8 304 178.3 304h91.4C368.2 304 448 383.8 448 482.3c0 16.4-13.3 29.7-29.7 29.7H29.7C13.3 512 0 498.7 0 482.3zM609.3 512H471.4c5.4-9.4 8.6-20.3 8.6-32v-8c0-60.7-27.1-115.2-69.8-151.8c2.4-.1 4.7-.2 7.1-.2h61.4C567.8 320 640 392.2 640 481.3c0 17-13.8 30.7-30.7 30.7zM432 256c-31 0-59-12.6-79.3-32.9C372.4 196.5 384 163.6 384 128c0-26.8-6.6-52.1-18.3-74.3C384.3 40.1 407.2 32 432 32c61.9 0 112 50.1 112 112s-50.1 112-112 112z"/>
                                         </svg>
                                     </button>
                                 </form>
                             </div>
-                            <span class="ml-2 mr-2">|</span> --}}
+                            <span class="ml-2 mr-2">|</span>
                             <div class="inline-block">
-                                <form action="{{route('lecturer.edit',$lecturer)}}" method="GET">
+                                <form action="{{route('group.edit',$group->id)}}" method="GET">
                                     <button>
                                         <svg xmlns="http://www.w3.org/2000/svg" height="16" width="16" viewBox="0 0 512 512">
                                             <path fill="#22C55E" d="M362.7 19.3L314.3 67.7 444.3 197.7l48.4-48.4c25-25 25-65.5 0-90.5L453.3 19.3c-25-25-65.5-25-90.5 0zm-71 71L58.6 323.5c-10.4 10.4-18 23.3-22.2 37.4L1 481.2C-1.5 489.7 .8 498.8 7 505s15.3 8.5 23.7 6.1l120.3-35.4c14.1-4.2 27-11.8 37.4-22.2L421.7 220.3 291.7 90.3z"/>
@@ -68,7 +66,7 @@
                             </div>
                             <span class="ml-2 mr-2">|</span>
                             <div class="inline-block">
-                                <form action="{{route('lecturer.delete',$lecturer->id)}}" method="POST" onsubmit="return confirm('Move this Data to Archives?');">
+                                <form action="{{route('group.delete',$group->id)}}" method="POST" onsubmit="return confirm('Move this Data to Archives?');">
                                     @csrf
                                     @method('DELETE')
                                     <button>
@@ -83,23 +81,13 @@
                     @endforeach
                 @else
                     <tr>
-                        <td class="py-2 px-4 text-center" colspan="6">No Data found</td>
+                        <td class="py-2 px-4 text-center" colspan="5">No Data found</td>
                     </tr>
                 @endif
                   </tbody>
                 </table>
-            </div>
-            <div class="flex flex-row justify-end mt-3">
-                <form action="{{route('lecturer.export')}}" method="GET">
-                    <button class="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-blue-500 hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-300 active:bg-blue-800">
-                        <svg xmlns="http://www.w3.org/2000/svg" height="24" width="18" viewBox="0 0 384 512" class="mr-2">
-                            <path fill="#ffffff" d="M64 0C28.7 0 0 28.7 0 64V448c0 35.3 28.7 64 64 64H320c35.3 0 64-28.7 64-64V160H256c-17.7 0-32-14.3-32-32V0H64zM256 0V128H384L256 0zM155.7 250.2L192 302.1l36.3-51.9c7.6-10.9 22.6-13.5 33.4-5.9s13.5 22.6 5.9 33.4L221.3 344l46.4 66.2c7.6 10.9 5 25.8-5.9 33.4s-25.8 5-33.4-5.9L192 385.8l-36.3 51.9c-7.6 10.9-22.6 13.5-33.4 5.9s-13.5-22.6-5.9-33.4L162.7 344l-46.4-66.2c-7.6-10.9-5-25.8 5.9-33.4s25.8-5 33.4 5.9z"/>
-                        </svg>
-                        Excel Download
-                    </button>
-                </form>
-            </div>
-            
+              </div>
+
         </div>
     </div>
 </x-app-layout>
@@ -108,7 +96,7 @@
     $('#search').on('keyup',function(){
         $value = $(this).val();
         $.ajax({
-            url: "{{route('lecturer.search')}}",
+            url: "{{route('group.search')}}",
             method: 'GET',
             data: {
                 '_token': '{{ csrf_token() }}',
