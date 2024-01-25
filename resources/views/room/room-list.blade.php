@@ -71,7 +71,7 @@
                     @endforeach
                 @else
                     <tr>
-                        <td class="py-2 px-4 text-center" colspan="4">No Data found</td>
+                        <td class="py-2 px-4 text-center" colspan="5">No Data found</td>
                     </tr>
                 @endif
                   </tbody>
