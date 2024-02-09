@@ -100,8 +100,9 @@
         </div>
         <div class="max-w-5xl mx-auto sm:px-6 lg:px-8 bg-gray-200 dark:bg-gray-700 rounded-lg">
             <div class="flex flex-row flex-grow justify-center">
-                <img src="{{ url('/storage/' . $pending[0]->receipt) }}" class="mt-4 mb-4 w-auto" alt="receipt vouncher">
+                <!-- <img src="{{ url('/storage/' . $pending[0]->receipt) }}" class="mt-4 mb-4 w-auto" alt="receipt vouncher"> changed to store in db -->
                 <!-- Since working with sail, needed to run sail artisan storage:link, then implement as above -->
+                <img src="data:image/jpeg;base64,{{ $image }}" class="mt-4 mb-4 w-auto" alt="receipt vouncher">
             </div>
             <div class="flex flex-row">
                 <div class="flex flex-row flex-grow mb-2 mt-2 items">

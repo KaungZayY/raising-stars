@@ -15,7 +15,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('schedule_id')->constrained()->onDelete('cascade');
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->string('receipt')->nullable(false);
+            // $table->string('receipt')->nullable(false);
+            $table->binary('receipt')->nullable(false);//store image directly in db, based on requirements
             $table->string('status')->default('pending');
             $table->timestamps();
             $table->unique(['schedule_id','user_id']);

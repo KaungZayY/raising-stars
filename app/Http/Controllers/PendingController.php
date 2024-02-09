@@ -79,8 +79,9 @@ class PendingController extends Controller
         'student_infos.*','schedule_student.receipt','schedule_student.created_at as submit_date','schedule_student.id as pending_id')
         ->get();
         // dd($pending);
+        $image = base64_encode($pending[0]->receipt);
 
-        return view('pending.pending-detail',compact('pending'));
+        return view('pending.pending-detail',compact('pending','image'));
     }
 
     public function approve($id)
