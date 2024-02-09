@@ -73,12 +73,15 @@ class ScheduleApplyController extends Controller
         {
             //Store to Schedule_student tbl
             try {
-                $schedule->users()->attach(Auth::user()->id, ['receipt' => '-','created_at' => now()]);
+                // $schedule->users()->attach(Auth::user()->id, ['receipt' => '-','created_at' => now()]);//store to file
+                $image  = file_get_contents($request->file('receipt')->path());//prepare to store image to db
+                $schedule->users()->attach(Auth::user()->id, ['receipt' => $image,'created_at' => now()]);
             } catch (\Exception $e) {
                 return redirect()->back()->with('error', 'Action Failed');
             }
-            $imagePath = $request->file('receipt')->store('images/receipts', 'public');
-            $schedule->users()->updateExistingPivot(Auth::user()->id, ['receipt' => $imagePath]);
+            // ** store to file
+            // $imagePath = $request->file('receipt')->store('images/receipts', 'public');
+            // $schedule->users()->updateExistingPivot(Auth::user()->id, ['receipt' => $imagePath]);
 
             return redirect()->route('courses.bysession', [
                 'course' => $schedule->course->id,

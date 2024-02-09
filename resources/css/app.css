@@ -1,3 +1,5 @@
+@import url('/public/vendor/larasort/css/larasort.css');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

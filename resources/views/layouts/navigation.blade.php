@@ -60,6 +60,15 @@
                     @endcan
                 </div>
             </div>
+            <!-- sun & moon icons -->
+            <div class="ml-auto flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" height="20" width="20" viewBox="0 0 512 512" class="inline-block" id="sun" style="display-none">
+                    <path fill="#F43F5E" d="M361.5 1.2c5 2.1 8.6 6.6 9.6 11.9L391 121l107.9 19.8c5.3 1 9.8 4.6 11.9 9.6s1.5 10.7-1.6 15.2L446.9 256l62.3 90.3c3.1 4.5 3.7 10.2 1.6 15.2s-6.6 8.6-11.9 9.6L391 391 371.1 498.9c-1 5.3-4.6 9.8-9.6 11.9s-10.7 1.5-15.2-1.6L256 446.9l-90.3 62.3c-4.5 3.1-10.2 3.7-15.2 1.6s-8.6-6.6-9.6-11.9L121 391 13.1 371.1c-5.3-1-9.8-4.6-11.9-9.6s-1.5-10.7 1.6-15.2L65.1 256 2.8 165.7c-3.1-4.5-3.7-10.2-1.6-15.2s6.6-8.6 11.9-9.6L121 121 140.9 13.1c1-5.3 4.6-9.8 9.6-11.9s10.7-1.5 15.2 1.6L256 65.1 346.3 2.8c4.5-3.1 10.2-3.7 15.2-1.6zM160 256a96 96 0 1 1 192 0 96 96 0 1 1 -192 0zm224 0a128 128 0 1 0 -256 0 128 128 0 1 0 256 0z"/>
+                </svg>
+                <svg xmlns="http://www.w3.org/2000/svg" height="22" width="16" viewBox="0 0 384 512" class="inline-block" id="moon" style="display-none">
+                    <path fill="#FACC14" d="M223.5 32C100 32 0 132.3 0 256S100 480 223.5 480c60.6 0 115.5-24.2 155.8-63.4c5-4.9 6.3-12.5 3.1-18.7s-10.1-9.7-17-8.5c-9.8 1.7-19.8 2.6-30.1 2.6c-96.9 0-175.5-78.8-175.5-176c0-65.8 36-123.1 89.3-153.3c6.1-3.5 9.2-10.5 7.7-17.3s-7.3-11.9-14.3-12.5c-6.3-.5-12.6-.8-19-.8z"/>
+                </svg>
+            </div>
 
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ms-6">
@@ -80,14 +89,6 @@
                         {{ __('Form Requests') }}
                     </x-nav-link>
                 @endcan
-                    <div class="mr-6 ml-6">
-                    <svg xmlns="http://www.w3.org/2000/svg" height="20" width="20" viewBox="0 0 512 512" class="inline-block" id="sun" style="display-none">
-                        <path fill="#F43F5E" d="M361.5 1.2c5 2.1 8.6 6.6 9.6 11.9L391 121l107.9 19.8c5.3 1 9.8 4.6 11.9 9.6s1.5 10.7-1.6 15.2L446.9 256l62.3 90.3c3.1 4.5 3.7 10.2 1.6 15.2s-6.6 8.6-11.9 9.6L391 391 371.1 498.9c-1 5.3-4.6 9.8-9.6 11.9s-10.7 1.5-15.2-1.6L256 446.9l-90.3 62.3c-4.5 3.1-10.2 3.7-15.2 1.6s-8.6-6.6-9.6-11.9L121 391 13.1 371.1c-5.3-1-9.8-4.6-11.9-9.6s-1.5-10.7 1.6-15.2L65.1 256 2.8 165.7c-3.1-4.5-3.7-10.2-1.6-15.2s6.6-8.6 11.9-9.6L121 121 140.9 13.1c1-5.3 4.6-9.8 9.6-11.9s10.7-1.5 15.2 1.6L256 65.1 346.3 2.8c4.5-3.1 10.2-3.7 15.2-1.6zM160 256a96 96 0 1 1 192 0 96 96 0 1 1 -192 0zm224 0a128 128 0 1 0 -256 0 128 128 0 1 0 256 0z"/>
-                    </svg>
-                    <svg xmlns="http://www.w3.org/2000/svg" height="22" width="16" viewBox="0 0 384 512" class="inline-block" id="moon" style="display-none">
-                        <path fill="#FACC14" d="M223.5 32C100 32 0 132.3 0 256S100 480 223.5 480c60.6 0 115.5-24.2 155.8-63.4c5-4.9 6.3-12.5 3.1-18.7s-10.1-9.7-17-8.5c-9.8 1.7-19.8 2.6-30.1 2.6c-96.9 0-175.5-78.8-175.5-176c0-65.8 36-123.1 89.3-153.3c6.1-3.5 9.2-10.5 7.7-17.3s-7.3-11.9-14.3-12.5c-6.3-.5-12.6-.8-19-.8z"/>
-                    </svg>
-                </div>
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
                         <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
@@ -133,12 +134,70 @@
     </div>
 
     <!-- Responsive Navigation Menu -->
+    <!-- Menu which is hidden on mobile screen sizes -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
-        {{-- <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                {{ __('Dashboard') }}
+        <div class="pt-2 pb-3 space-y-1">
+            <x-responsive-nav-link :href="route('home')" :active="request()->routeIs('home')">
+                 {{ __('Home') }}
             </x-responsive-nav-link>
-        </div> --}}
+
+            <x-responsive-nav-link :href="route('courses')" :active="request()->routeIs('courses')">
+                {{ __('Available Courses') }}
+            </x-responsive-nav-link>
+
+            <x-responsive-nav-link :href="route('groups')" :active="request()->routeIs('groups')">
+                {{ __('My Groups') }}
+            </x-responsive-nav-link>
+
+            @can('viewAdminContent', App\Models\User::class)
+                <x-responsive-nav-link-parent :href="'#'" :active="request()->routeIs('padron.*')">
+                    <x-slot name="name">Admin Control</x-slot>
+                    <x-slot name="children">
+                        {{-- <a href="#"> Announcements </a>
+                        <span class="separator"></span> --}}
+                        {{-- <a href="{{route('discussion.report')}}"> Discussion </a>
+                        <span class="separator"></span> --}}
+                        <a href="{{route('category')}}"> Categories </a>
+                        <span class="separator"></span>
+                        <a href="{{route('module')}}"> Modules </a>
+                        <span class="separator"></span>
+                        <a href="{{route('course')}}"> Courses </a>
+                        <span class="separator"></span>
+                        <a href="{{route('lecturer')}}"> Lecturers </a>
+                        <span class="separator"></span>
+                        <a href="{{route('moderator')}}"> Moderators </a>
+                        <span class="separator"></span>
+                        <a href="{{route('student')}}"> Students </a>
+                        <span class="separator"></span>
+                        <a href="{{route('subject')}}"> Subjects </a>
+                        <span class="separator"></span>
+                        <a href="{{route('room')}}"> Rooms </a>
+                        <span class="separator"></span>
+                        <a href="{{route('schedule')}}"> Schedule </a>
+                    </x-slot>
+                </x-responsive-nav-link-parent>
+            @endcan
+            @can('viewStudentContent', App\Models\User::class)
+                <x-responsive-nav-link :href="route('myCourses')" :active="request()->routeIs('myCourses')">
+                    {{ __('My Courses') }}
+                </x-responsive-nav-link>
+            @endcan
+            @can('viewModeratorContent', App\Models\User::class)
+                <x-responsive-nav-link :href="route('group')" :active="request()->routeIs('group')">
+                    {{ __('User Groups') }}
+                </x-responsive-nav-link>
+            @endcan
+            @can('viewAdminContent', App\Models\User::class)
+                <x-responsive-nav-link :href="route('pending')" :active="request()->routeIs('pending')">
+                    {{ __('Pending Forms') }}
+                </x-responsive-nav-link>
+            @endcan
+            @can('viewStudentContent', App\Models\User::class)
+                <x-responsive-nav-link :href="route('request')" :active="request()->routeIs('request')">
+                    {{ __('Form Requests') }}
+                </x-responsive-nav-link>
+            @endcan
+        </div>
 
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200 dark:border-gray-600">
